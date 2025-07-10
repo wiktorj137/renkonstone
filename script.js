@@ -101,7 +101,7 @@ function initSmoothScrolling() {
  */
 function updateActiveNavLink(targetId) {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    const uslugiButton = document.querySelector('nav button:contains("Usługi")');
+    const uslugiButton = document.querySelector('nav .group button');
     
     // Reset all nav links
     navLinks.forEach(link => {
@@ -116,7 +116,7 @@ function updateActiveNavLink(targetId) {
     
     // Handle services section specifically
     if (targetId === '#services') {
-        // Reset uslugi button
+        // Highlight uslugi button
         if (uslugiButton) {
             uslugiButton.classList.remove('text-white');
             uslugiButton.classList.add('text-renkon-orange');
@@ -461,22 +461,6 @@ function updateNavigationOnScroll() {
             updateActiveNavLink(`#${sectionId}`);
         }
     });
-    
-    // Special handling for services section - check if we're in the services area
-    const servicesSection = document.getElementById('services');
-    if (servicesSection) {
-        const servicesTop = servicesSection.offsetTop;
-        const servicesHeight = servicesSection.offsetHeight;
-        
-        if (scrollPos >= servicesTop && scrollPos < servicesTop + servicesHeight) {
-            // Highlight the "Usługi" dropdown button
-            const uslugiButton = document.querySelector('nav button:contains("Usługi")');
-            if (uslugiButton) {
-                uslugiButton.classList.add('text-renkon-orange');
-                uslugiButton.classList.remove('text-white');
-            }
-        }
-    }
 }
 
 /**
@@ -519,4 +503,119 @@ document.addEventListener('click', (e) => {
             target_section: e.target.getAttribute('href')
         });
     }
-}); 
+});
+
+/**
+ * PDF Modal functionality
+ */
+function openPdfModal(pdfFileName) {
+    // Create modal overlay
+    const modal = document.createElement('div');
+    modal.id = 'pdf-modal';
+    modal.className = 'fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4';
+    
+    // Create modal content
+    const modalContent = document.createElement('div');
+    modalContent.className = 'bg-renkon-dark-3 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden';
+    
+    // Create modal header
+    const modalHeader = document.createElement('div');
+    modalHeader.className = 'flex items-center justify-between p-6 border-b border-renkon-dark-4';
+    modalHeader.innerHTML = `
+        <h3 class="text-xl font-semibold text-white">Dokument referencyjny</h3>
+        <button onclick="closePdfModal()" class="text-renkon-beige hover:text-white transition-colors">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+    `;
+    
+    // Create modal body with PDF viewer
+    const modalBody = document.createElement('div');
+    modalBody.className = 'p-6';
+    modalBody.innerHTML = `
+        <div class="bg-renkon-dark-4 rounded-lg p-4 mb-4">
+            <p class="text-renkon-beige text-sm">
+                <i class="fas fa-info-circle text-renkon-orange mr-2"></i>
+                Dokument PDF: <strong>${pdfFileName}</strong>
+            </p>
+        </div>
+        <div class="bg-white rounded-lg h-96 flex items-center justify-center">
+            <div class="text-center">
+                <i class="fas fa-file-pdf text-6xl text-gray-400 mb-4"></i>
+                <p class="text-gray-600 mb-4">Podgląd dokumentu PDF</p>
+                <p class="text-sm text-gray-500 mb-4">Aby zobaczyć pełny dokument, kliknij poniższy przycisk</p>
+                <a href="assets/documents/${pdfFileName}" target="_blank" class="bg-renkon-orange hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 inline-block">
+                    <i class="fas fa-external-link-alt mr-2"></i>
+                    Otwórz dokument PDF
+                </a>
+            </div>
+        </div>
+    `;
+    
+    // Assemble modal
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modal.appendChild(modalContent);
+    
+    // Add to page
+    document.body.appendChild(modal);
+    
+    // Prevent body scroll
+    document.body.classList.add('overflow-hidden');
+    
+    // Track PDF view
+    trackEvent('pdf_view', {
+        document: pdfFileName
+    });
+}
+
+function closePdfModal() {
+    const modal = document.getElementById('pdf-modal');
+    if (modal) {
+        document.body.removeChild(modal);
+        document.body.classList.remove('overflow-hidden');
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'pdf-modal') {
+        closePdfModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closePdfModal();
+    }
+});
+
+/**
+ * Toggle testimonial text (show more/less)
+ */
+function toggleTestimonial(button) {
+    const card = button.closest('.testimonial-card');
+    const shortText = card.querySelector('.short-text');
+    const fullText = card.querySelector('.full-text');
+    const showMoreText = button.querySelector('.show-more-text');
+    const showLessText = button.querySelector('.show-less-text');
+    const icon = button.querySelector('i');
+    
+    if (fullText.classList.contains('hidden')) {
+        // Show full text
+        shortText.classList.add('hidden');
+        fullText.classList.remove('hidden');
+        showMoreText.classList.add('hidden');
+        showLessText.classList.remove('hidden');
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        // Show short text
+        shortText.classList.remove('hidden');
+        fullText.classList.add('hidden');
+        showMoreText.classList.remove('hidden');
+        showLessText.classList.add('hidden');
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+} 

@@ -42,6 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -96,6 +97,36 @@
         .lazy-load.loaded {
             opacity: 1;
         }
+        
+        /* Line clamp styles for testimonial text */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .testimonial-text {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* When container has 'expanded' class, remove line clamp restriction */
+        .expanded .testimonial-text {
+            -webkit-line-clamp: unset;
+            line-clamp: unset;
+        }
+        
+        /* Ensure consistent height for testimonial content area */
+        .testimonial-content {
+            min-height: 120px; /* Minimalna wysokość dla sekcji z tekstem opinii */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Ensure consistent spacing for read more button */
+        .read-more-btn {
+            margin-top: auto; /* Wypycha przycisk na dół sekcji */
+        }
     </style>
 </head>
 
@@ -136,6 +167,7 @@
                     </div>
                     
                     <a href="#about" class="nav-link text-white hover:text-renkon-orange">O Nas</a>
+                    <a href="#references" class="nav-link text-white hover:text-renkon-orange">Referencje</a>
                     <a href="#contact" class="nav-link text-white hover:text-renkon-orange">Kontakt</a>
                 </div>
                 
@@ -152,6 +184,7 @@
                 <a href="#home" class="block py-2 text-white hover:text-renkon-orange transition-colors">Strona Główna</a>
                 <a href="#services" class="block py-2 text-white hover:text-renkon-orange transition-colors">Usługi</a>
                 <a href="#about" class="block py-2 text-white hover:text-renkon-orange transition-colors">O Nas</a>
+                <a href="#references" class="block py-2 text-white hover:text-renkon-orange transition-colors">Referencje</a>
                 <a href="#contact" class="block py-2 text-white hover:text-renkon-orange transition-colors">Kontakt</a>
             </div>
         </div>
@@ -333,8 +366,348 @@
         </div>
     </section>
 
+    <!-- References Section -->
+    <section id="references" class="py-20 bg-renkon-dark-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Referencje Klientów</h3>
+                <p class="text-xl text-renkon-beige max-w-3xl mx-auto">
+                    Opinie naszych zadowolonych klientów o jakości wykonanych usług
+                </p>
+            </div>
+            
+            <!-- Grid container -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Reference Card 1: Zamek Wawel -->
+                <div class="flex flex-col bg-renkon-dark-3 p-6 rounded-xl border border-renkon-dark-4 transition-all duration-300 testimonial-card">
+                    <!-- Card Header -->
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-crown text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <div class="mb-4 testimonial-content">
+                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3">
+                            "Prace zostały wykonane w terminie, z należytą starannością. Właściciel firmy bardzo profesjonalny i kompetentny. Polecam wszystkim, którzy szukają solidnej firmy do renowacji marmuru."
+                        </p>
+                        <button class="text-renkon-orange font-semibold text-sm mt-2 hover:underline read-more-btn">Pokaż więcej</button>
+                    </div>
+
+                    <!-- Separator -->
+                    <hr class="border-renkon-dark-4 my-2"/>
+
+                    <!-- Client Info -->
+                    <div class="mb-4">
+                        <h5 class="text-white font-semibold">Daniel H.</h5>
+                        <p class="text-sm text-renkon-beige">Zastępca dyrektora ds. inwestycyjno-technicznych</p>
+                        <p class="text-sm text-renkon-orange font-medium mt-1">Zamek Królewski na Wawelu</p>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="bg-renkon-dark-4 p-4 rounded-lg text-sm text-renkon-beige">
+                        <strong>Renowacja 200m² posadzki marmurowej:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            <li>Polerowanie istniejącej posadzki</li>
+                            <li>Krystalizacja/impregnacja posadzki</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Card Footer (pushed to the bottom) -->
+                    <div class="mt-auto pt-6">
+                         <button onclick="openPdfModal('Zamek_Wawel.PDF')" class="w-full bg-renkon-orange hover:bg-orange-600 text-white px-4 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Zobacz referencje (PDF)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reference Card 2: Urząd Miasta Krakowa -->
+                <div class="flex flex-col bg-renkon-dark-3 p-6 rounded-xl border border-renkon-dark-4 transition-all duration-300 testimonial-card">
+                     <!-- Card Header -->
+                     <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-building text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <div class="mb-4 testimonial-content">
+                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3">
+                            "Usługi zostały wykonane profesjonalnie, terminowo i z należytą starannością. Efekt końcowy przeszedł nasze najśmielsze oczekiwania. Na pewno skorzystamy ponownie z usług tej firmy."
+                        </p>
+                        <button class="text-renkon-orange font-semibold text-sm mt-2 hover:underline read-more-btn">Pokaż więcej</button>
+                    </div>
+
+                    <!-- Separator -->
+                    <hr class="border-renkon-dark-4 my-2"/>
+
+                    <!-- Client Info -->
+                    <div class="mb-4">
+                        <h5 class="text-white font-semibold">Jacek F.</h5>
+                        <p class="text-sm text-renkon-beige">Z-ca Dyrektora Wydziału Obsługi Urzędu</p>
+                        <p class="text-sm text-renkon-orange font-medium mt-1">Urząd Miasta Krakowa</p>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="bg-renkon-dark-4 p-4 rounded-lg text-sm text-renkon-beige">
+                        <strong>Renowacja 500m² posadzki lastrykowej:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            <li>Budynek Urzędu Miasta Krakowa</li>
+                            <li>Umowa nr W/I3332/OU/65/2020</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Card Footer (pushed to the bottom) -->
+                    <div class="mt-auto pt-6">
+                        <button onclick="openPdfModal('Wielopole.pdf')" class="w-full bg-renkon-orange hover:bg-orange-600 text-white px-4 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Zobacz referencje (PDF)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reference Card 3: Bartosz K. -->
+                <div class="flex flex-col bg-renkon-dark-3 p-6 rounded-xl border border-renkon-dark-4 transition-all duration-300 testimonial-card">
+                     <!-- Card Header -->
+                     <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <div class="mb-4 testimonial-content">
+                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3">
+                            "Kolejny raz renowacja marmuru wykonana perfekcyjnie. Polecam wszystkim zainteresowanym renowacją naturalnego kamienia."
+                        </p>
+                        <button class="text-renkon-orange font-semibold text-sm mt-2 hover:underline read-more-btn">Pokaż więcej</button>
+                    </div>
+
+                    <!-- Separator -->
+                    <hr class="border-renkon-dark-4 my-2"/>
+
+                    <!-- Client Info -->
+                    <div class="mb-4">
+                        <h5 class="text-white font-semibold">Bartosz K.</h5>
+                        <p class="text-sm text-renkon-beige">Klient indywidualny</p>
+                        <p class="text-sm text-renkon-orange font-medium mt-1">Renowacja marmuru</p>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="bg-renkon-dark-4 p-4 rounded-lg text-sm text-renkon-beige">
+                        <strong>Usługi wykonane:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            <li>Renowacja posadzki marmurowej</li>
+                            <li>Polerowanie i krystalizacja</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Card Footer (pushed to the bottom) -->
+                    <div class="mt-auto pt-6">
+                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
+                    </div>
+                </div>
+
+                <!-- Reference Card 4: Aleksander M. (dłuższy tekst dla demonstracji) -->
+                <div class="flex flex-col bg-renkon-dark-3 p-6 rounded-xl border border-renkon-dark-4 transition-all duration-300 testimonial-card">
+                     <!-- Card Header -->
+                     <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Testimonial Content -->
+                    <div class="mb-4 testimonial-content">
+                         <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3">
+                             "Jestem bardzo zadowolony z efektów. Wstępna wycena pokryła się z końcową. Właściciel bardzo kontaktowy, zasugerował dobre rozwiązania i zostawił kilka wskazówek jak dbać o takie schody w przyszłości. Polecam współpracę z firmą Renkon Stone. To prawdziwi profesjonaliści, którzy znają się na swojej pracy i podchodzą do klienta z pełnym zaangażowaniem. Schody wyglądają jak nowe!"
+                        </p>
+                        <button class="text-renkon-orange font-semibold text-sm mt-2 hover:underline read-more-btn">Pokaż więcej</button>
+                    </div>
+
+                    <!-- Separator -->
+                    <hr class="border-renkon-dark-4 my-2"/>
+
+                    <!-- Client Info -->
+                    <div class="mb-4">
+                        <h5 class="text-white font-semibold">Aleksander M.</h5>
+                        <p class="text-sm text-renkon-beige">Klient indywidualny</p>
+                        <p class="text-sm text-renkon-orange font-medium mt-1">Naprawa i renowacja schodów</p>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="bg-renkon-dark-4 p-4 rounded-lg text-sm text-renkon-beige">
+                        <strong>Usługi wykonane (marzec 2023):</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            <li>Naprawa schodów lastryko</li>
+                            <li>Renowacja i polerowanie</li>
+                            <li>Konsultacja i wskazówki</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Card Footer (pushed to the bottom) -->
+                    <div class="mt-auto pt-6">
+                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
+                    </div>
+                </div>
+
+                <!-- Reference Card 5: Piotr G. -->
+                <div class="flex flex-col bg-renkon-dark-3 p-6 rounded-xl border border-renkon-dark-4 transition-all duration-300 testimonial-card">
+                     <!-- Card Header -->
+                     <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <div class="mb-4 testimonial-content">
+                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3">
+                            "Solidnia robota w dobrej cenie. Polecam wszystkim szukającym profesjonalnej renowacji."
+                        </p>
+                        <button class="text-renkon-orange font-semibold text-sm mt-2 hover:underline read-more-btn">Pokaż więcej</button>
+                    </div>
+
+                    <!-- Separator -->
+                    <hr class="border-renkon-dark-4 my-2"/>
+
+                    <!-- Client Info -->
+                    <div class="mb-4">
+                        <h5 class="text-white font-semibold">Piotr G.</h5>
+                        <p class="text-sm text-renkon-beige">Klient indywidualny</p>
+                        <p class="text-sm text-renkon-orange font-medium mt-1">Usługi renowacyjne</p>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="bg-renkon-dark-4 p-4 rounded-lg text-sm text-renkon-beige">
+                        <strong>Kluczowe zalety:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            <li>Solidna jakość wykonania</li>
+                            <li>Konkurencyjna cena</li>
+                            <li>Profesjonalne podejście</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Card Footer (pushed to the bottom) -->
+                    <div class="mt-auto pt-6">
+                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
+                    </div>
+                </div>
+
+                <!-- Reference Card 6: Damian W. -->
+                <div class="flex flex-col bg-renkon-dark-3 p-6 rounded-xl border border-renkon-dark-4 transition-all duration-300 testimonial-card">
+                     <!-- Card Header -->
+                     <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                                <i class="fas fa-star text-renkon-orange"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <div class="mb-4 testimonial-content">
+                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3">
+                            "Fachowo za rozsądną cenę. Profesjonalne podejście i terminowość wykonania."
+                        </p>
+                        <button class="text-renkon-orange font-semibold text-sm mt-2 hover:underline read-more-btn">Pokaż więcej</button>
+                    </div>
+
+                    <!-- Separator -->
+                    <hr class="border-renkon-dark-4 my-2"/>
+
+                    <!-- Client Info -->
+                    <div class="mb-4">
+                        <h5 class="text-white font-semibold">Damian W.</h5>
+                        <p class="text-sm text-renkon-beige">Klient indywidualny</p>
+                        <p class="text-sm text-renkon-orange font-medium mt-1">Usługi fachowe</p>
+                    </div>
+
+                    <!-- Project Info -->
+                    <div class="bg-renkon-dark-4 p-4 rounded-lg text-sm text-renkon-beige">
+                        <strong>Kluczowe zalety:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                            <li>Fachowe wykonanie</li>
+                            <li>Rozsądna cena</li>
+                            <li>Profesjonalizm</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Card Footer (pushed to the bottom) -->
+                    <div class="mt-auto pt-6">
+                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <p class="text-renkon-beige mb-6">
+                    Dołącz do grona zadowolonych klientów RENKON STONE
+                </p>
+                <a href="#contact" class="bg-renkon-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 inline-block">
+                    Zamów Bezpłatną Wycenę
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Before/After Gallery Section -->
-    <section class="py-20 bg-renkon-dark-2">
+    <section class="py-20 bg-renkon-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Nasze Realizacje</h3>
@@ -396,7 +769,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-renkon-dark">
+    <section id="contact" class="py-20 bg-renkon-dark-2">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Skontaktuj się z nami</h3>
@@ -514,7 +887,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-renkon-dark-4 border-t border-renkon-dark-3 py-12">
+    <footer class="bg-renkon-dark border-t border-renkon-dark-3 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Company Info -->
@@ -569,5 +942,42 @@
 
     <!-- JavaScript -->
     <script src="script.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+
+        testimonialCards.forEach(card => {
+            const textElement = card.querySelector('.testimonial-text');
+            const readMoreBtn = card.querySelector('.read-more-btn');
+
+            if (readMoreBtn) {
+                // Sprawdź czy tekst faktycznie jest obcięty po załadowaniu strony
+                setTimeout(() => {
+                    // Sprawdzamy czy tekst jest obcięty (scrollHeight > clientHeight)
+                    const isTextTruncated = textElement.scrollHeight > textElement.clientHeight;
+                    
+                    if (!isTextTruncated) {
+                        // Jeśli tekst się mieści, ukryj przycisk "Pokaż więcej"
+                        readMoreBtn.style.display = 'none';
+                    }
+                }, 100); // Małe opóźnienie, aby upewnić się, że strona się załadowała
+
+                readMoreBtn.addEventListener('click', () => {
+                    const textContainer = textElement.parentElement;
+                    
+                    // Przełączamy klasę, która kontroluje wyświetlanie tekstu
+                    textContainer.classList.toggle('expanded');
+
+                    if (textContainer.classList.contains('expanded')) {
+                        readMoreBtn.textContent = 'Pokaż mniej';
+                    } else {
+                        readMoreBtn.textContent = 'Pokaż więcej';
+                    }
+                });
+            }
+        });
+    });
+    </script>
 </body>
 </html> 
