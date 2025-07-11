@@ -20,6 +20,8 @@ function initializeWebsite() {
     initScrollIndicator();
     initTooltips();
     initImagePreloader();
+    initMobileCarousel();
+    initMobileTestimonials();
 }
 
 /**
@@ -617,5 +619,493 @@ function toggleTestimonial(button) {
         showLessText.classList.add('hidden');
         icon.classList.remove('fa-chevron-up');
         icon.classList.add('fa-chevron-down');
+    }
+}
+
+/**
+ * Mobile Carousel Functionality
+ */
+function initMobileCarousel() {
+    // Wait a bit for DOM to be fully ready
+    setTimeout(() => {
+        initServicesCarousel();
+        initTestimonialsCarousel();
+    }, 200);
+}
+
+/**
+ * Initialize services carousel
+ */
+function initServicesCarousel() {
+    const carousel = document.getElementById('services-carousel');
+    const dotsContainer = document.getElementById('services-dots');
+    
+    if (!carousel || !dotsContainer) {
+        return;
+    }
+    
+    const cards = carousel.querySelectorAll('.snap-start');
+    const dots = dotsContainer.querySelectorAll('.service-dot');
+    
+    if (cards.length === 0 || dots.length === 0) {
+        return;
+    }
+    
+    let currentIndex = 0;
+    let isScrolling = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let isDragging = false;
+    
+    // Calculate card width including gap
+    function getCardWidth() {
+        const card = cards[0];
+        const cardWidth = card.offsetWidth;
+        const gap = parseInt(window.getComputedStyle(carousel).gap) || 16;
+        return cardWidth + gap;
+    }
+    
+    // Update active dot
+    function updateActiveDot(index) {
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active', 'bg-renkon-orange');
+                dot.classList.remove('bg-renkon-dark-5');
+            } else {
+                dot.classList.remove('active', 'bg-renkon-orange');
+                dot.classList.add('bg-renkon-dark-5');
+            }
+        });
+    }
+    
+    // Scroll to specific card
+    function scrollToCard(index) {
+        if (index < 0 || index >= cards.length) return;
+        
+        isScrolling = true;
+        const cardWidth = getCardWidth();
+        const scrollPosition = index * cardWidth;
+        
+        carousel.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+        
+        currentIndex = index;
+        updateActiveDot(index);
+        
+        // Reset scrolling flag after animation
+        setTimeout(() => {
+            isScrolling = false;
+        }, 500);
+    }
+    
+    // Handle scroll events
+    function handleScroll() {
+        if (isScrolling) return;
+        
+        const scrollLeft = carousel.scrollLeft;
+        const cardWidth = getCardWidth();
+        const newIndex = Math.round(scrollLeft / cardWidth);
+        
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < cards.length) {
+            currentIndex = newIndex;
+            updateActiveDot(newIndex);
+        }
+    }
+    
+    // Add click handlers to dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToCard(index);
+        });
+    });
+    
+    // Add scroll event listener with throttling
+    let scrollTimeout;
+    carousel.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(handleScroll, 50);
+    }, { passive: true });
+    
+    // Mouse drag support for desktop testing
+    carousel.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        startScrollLeft = carousel.scrollLeft;
+        isDragging = true;
+        carousel.style.cursor = 'grabbing';
+    });
+    
+    carousel.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const currentX = e.clientX;
+        const diff = startX - currentX;
+        carousel.scrollLeft = startScrollLeft + diff;
+    });
+    
+    carousel.addEventListener('mouseup', () => {
+        isDragging = false;
+        startX = 0;
+        startScrollLeft = 0;
+        carousel.style.cursor = 'grab';
+        
+        setTimeout(() => {
+            handleScroll();
+        }, 100);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+            isDragging = false;
+            startX = 0;
+            startScrollLeft = 0;
+            carousel.style.cursor = 'grab';
+        }
+    });
+    
+    // Keyboard navigation
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            scrollToCard(Math.max(0, currentIndex - 1));
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            scrollToCard(Math.min(cards.length - 1, currentIndex + 1));
+        }
+    });
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) {
+            clearTimeout(resizeTimeout);
+        }
+        resizeTimeout = setTimeout(() => {
+            scrollToCard(currentIndex);
+        }, 250);
+    });
+    
+    // Initialize
+    updateActiveDot(0);
+    
+    // Make carousel focusable for keyboard navigation
+    carousel.setAttribute('tabindex', '0');
+    carousel.style.cursor = 'grab';
+}
+
+// Test function for debugging - can be called from browser console
+function testMobileCarousel() {
+    const carouselContainer = document.querySelector('.lg\\:hidden .flex.overflow-x-auto');
+    const navigationDotsContainer = document.querySelector('.lg\\:hidden .flex.justify-center.space-x-2');
+    
+    if (carouselContainer && navigationDotsContainer) {
+        const navigationDots = navigationDotsContainer.querySelectorAll('div');
+        const cards = carouselContainer.querySelectorAll('.snap-start');
+        
+        // Test clicking the second dot
+        if (navigationDots.length > 1) {
+            navigationDots[1].click();
+        }
+    }
+}
+
+/**
+ * Mobile Testimonials Functionality
+ */
+function initMobileTestimonials() {
+    // Wait for DOM to be fully ready
+    setTimeout(() => {
+        // Initialize expand/collapse functionality for mobile testimonials
+        initMobileTestimonialExpand();
+        
+        // Initialize mobile testimonial carousel
+        initMobileTestimonialCarousel();
+    }, 200);
+}
+
+/**
+ * Initialize expand/collapse functionality for mobile testimonials
+ */
+function initMobileTestimonialExpand() {
+    const mobileReadMoreButtons = document.querySelectorAll('.read-more-btn-mobile');
+    
+    mobileReadMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const card = this.closest('.testimonial-card-mobile');
+            const testimonialText = card.querySelector('.testimonial-text-mobile');
+            
+            if (card.classList.contains('expanded')) {
+                // Collapse
+                card.classList.remove('expanded');
+                this.textContent = 'Pokaż więcej';
+                testimonialText.style.webkitLineClamp = '3';
+                testimonialText.style.lineClamp = '3';
+            } else {
+                // Expand
+                card.classList.add('expanded');
+                this.textContent = 'Pokaż mniej';
+                testimonialText.style.webkitLineClamp = 'unset';
+                testimonialText.style.lineClamp = 'unset';
+            }
+            
+            // Track interaction
+            trackEvent('testimonial_expand', {
+                action: card.classList.contains('expanded') ? 'expand' : 'collapse',
+                testimonial: card.querySelector('h5')?.textContent || 'Unknown'
+            });
+        });
+    });
+}
+
+/**
+ * Initialize mobile testimonial carousel
+ */
+function initMobileTestimonialCarousel() {
+    const carousel = document.getElementById('testimonial-carousel');
+    const dotsContainer = document.getElementById('testimonial-dots');
+    
+    if (!carousel || !dotsContainer) {
+        return;
+    }
+    
+    const cards = carousel.querySelectorAll('.testimonial-card-mobile');
+    const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+    
+    if (cards.length === 0 || dots.length === 0) {
+        return;
+    }
+    
+    let currentIndex = 0;
+    let isScrolling = false;
+    
+    // Calculate card width including gap
+    function getCardWidth() {
+        const card = cards[0];
+        const cardStyle = window.getComputedStyle(card);
+        const cardWidth = card.offsetWidth;
+        const gap = parseInt(window.getComputedStyle(carousel).gap) || 16;
+        return cardWidth + gap;
+    }
+    
+    // Update active dot
+    function updateActiveDot(index) {
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active', 'bg-renkon-orange');
+                dot.classList.remove('bg-renkon-dark-5');
+            } else {
+                dot.classList.remove('active', 'bg-renkon-orange');
+                dot.classList.add('bg-renkon-dark-5');
+            }
+        });
+    }
+    
+    // Scroll to specific card
+    function scrollToCard(index) {
+        if (index < 0 || index >= cards.length) return;
+        
+        isScrolling = true;
+        const cardWidth = getCardWidth();
+        const scrollPosition = index * cardWidth;
+        
+        carousel.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+        
+        currentIndex = index;
+        updateActiveDot(index);
+        
+        // Reset scrolling flag after animation
+        setTimeout(() => {
+            isScrolling = false;
+        }, 500);
+    }
+    
+    // Handle scroll events
+    function handleScroll() {
+        if (isScrolling) return;
+        
+        const scrollLeft = carousel.scrollLeft;
+        const cardWidth = getCardWidth();
+        const newIndex = Math.round(scrollLeft / cardWidth);
+        
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < cards.length) {
+            currentIndex = newIndex;
+            updateActiveDot(newIndex);
+        }
+    }
+    
+    // Add scroll event listener with throttling
+    let scrollTimeout;
+    carousel.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(handleScroll, 50);
+    });
+    
+    // Add click handlers to dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToCard(index);
+        });
+    });
+    
+    // Touch gesture support with improved handling
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startScrollLeft = carousel.scrollLeft;
+        isDragging = true;
+        
+        // Prevent default to avoid conflicts
+        e.preventDefault();
+    }, { passive: false });
+    
+    carousel.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        carousel.scrollLeft = startScrollLeft + diff;
+        
+        // Prevent default to avoid conflicts
+        e.preventDefault();
+    }, { passive: false });
+    
+    carousel.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        startX = 0;
+        startScrollLeft = 0;
+        
+        // Snap to nearest card
+        setTimeout(() => {
+            handleScroll();
+        }, 100);
+    });
+    
+    // Mouse drag support for desktop testing
+    carousel.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        startScrollLeft = carousel.scrollLeft;
+        isDragging = true;
+        carousel.style.cursor = 'grabbing';
+    });
+    
+    carousel.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const currentX = e.clientX;
+        const diff = startX - currentX;
+        carousel.scrollLeft = startScrollLeft + diff;
+    });
+    
+    carousel.addEventListener('mouseup', () => {
+        isDragging = false;
+        startX = 0;
+        startScrollLeft = 0;
+        carousel.style.cursor = 'grab';
+        
+        setTimeout(() => {
+            handleScroll();
+        }, 100);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+        if (isDragging) {
+            isDragging = false;
+            startX = 0;
+            startScrollLeft = 0;
+            carousel.style.cursor = 'grab';
+        }
+    });
+    
+    // Keyboard navigation
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            scrollToCard(Math.max(0, currentIndex - 1));
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            scrollToCard(Math.min(cards.length - 1, currentIndex + 1));
+        }
+    });
+    
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) {
+            clearTimeout(resizeTimeout);
+        }
+        resizeTimeout = setTimeout(() => {
+            scrollToCard(currentIndex);
+        }, 250);
+    });
+    
+    // Initialize
+    updateActiveDot(0);
+    
+    // Make carousel focusable for keyboard navigation
+    carousel.setAttribute('tabindex', '0');
+}
+
+// Test function for mobile testimonials - can be called from browser console
+function testMobileTestimonials() {
+    const carousel = document.getElementById('testimonial-carousel');
+    const dotsContainer = document.getElementById('testimonial-dots');
+    
+    if (carousel && dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+        const cards = carousel.querySelectorAll('.testimonial-card-mobile');
+        
+        // Test clicking the second dot
+        if (dots.length > 1) {
+            dots[1].click();
+        }
+        
+        // Test expand/collapse functionality
+        const readMoreButtons = document.querySelectorAll('.read-more-btn-mobile');
+        
+        if (readMoreButtons.length > 0) {
+            readMoreButtons[0].click();
+        }
+        
+        // Test keyboard navigation
+        carousel.focus();
+    }
+}
+
+// Test function for services carousel - can be called from browser console
+function testServicesCarousel() {
+    const carousel = document.getElementById('services-carousel');
+    const dotsContainer = document.getElementById('services-dots');
+    
+    if (carousel && dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.service-dot');
+        const cards = carousel.querySelectorAll('.snap-start');
+        
+        // Test clicking the second dot
+        if (dots.length > 1) {
+            dots[1].click();
+        }
+        
+        // Test touch simulation
+        const touchEvent = new TouchEvent('touchstart', {
+            touches: [{ clientX: 100, clientY: 100 }]
+        });
+        carousel.dispatchEvent(touchEvent);
+        
+        // Test keyboard navigation
+        carousel.focus();
     }
 } 

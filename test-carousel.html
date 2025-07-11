@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Test - Renkon Stone</title>
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- TailwindCSS Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'renkon-orange': '#dd9933',
+                        'renkon-dark-orange': '#e47813',
+                        'renkon-black': '#000000',
+                        'renkon-gray': '#3a3a3a',
+                        'renkon-dark': '#1a1a1a',
+                        'renkon-dark-2': '#2a2a2a',
+                        'renkon-dark-3': '#333333',
+                        'renkon-dark-4': '#444444',
+                        'renkon-dark-5': '#555555',
+                        'renkon-beige': '#f5f5dc'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">Carousel Dots Navigation Test</h1>
+        
+        <!-- Test Carousel -->
+        <div class="mb-12">
+            <h2 class="text-xl font-semibold mb-4">Reviews Carousel Test</h2>
+            
+            <!-- Mobile Container -->
+            <div class="lg:hidden">
+                <!-- Mobile Compact Testimonials Carousel -->
+                <div class="relative">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide">
+                        <!-- Test Card 1 -->
+                        <div class="snap-start flex-shrink-0 w-80 group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5">
+                            <h3 class="text-xl font-bold text-white mb-4">Test Card 1</h3>
+                            <p class="text-renkon-beige">This is the first test card for the carousel.</p>
+                        </div>
+                        
+                        <!-- Test Card 2 -->
+                        <div class="snap-start flex-shrink-0 w-80 group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5">
+                            <h3 class="text-xl font-bold text-white mb-4">Test Card 2</h3>
+                            <p class="text-renkon-beige">This is the second test card for the carousel.</p>
+                        </div>
+                        
+                        <!-- Test Card 3 -->
+                        <div class="snap-start flex-shrink-0 w-80 group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5">
+                            <h3 class="text-xl font-bold text-white mb-4">Test Card 3</h3>
+                            <p class="text-renkon-beige">This is the third test card for the carousel.</p>
+                        </div>
+                        
+                        <!-- Test Card 4 -->
+                        <div class="snap-start flex-shrink-0 w-80 group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5">
+                            <h3 class="text-xl font-bold text-white mb-4">Test Card 4</h3>
+                            <p class="text-renkon-beige">This is the fourth test card for the carousel.</p>
+                        </div>
+                        
+                        <!-- Test Card 5 -->
+                        <div class="snap-start flex-shrink-0 w-80 group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5">
+                            <h3 class="text-xl font-bold text-white mb-4">Test Card 5</h3>
+                            <p class="text-renkon-beige">This is the fifth test card for the carousel.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Navigation Dots -->
+                    <div class="flex justify-center space-x-2 mt-6">
+                        <div class="w-3 h-3 bg-renkon-orange rounded-full transition-all duration-300"></div>
+                        <div class="w-3 h-3 bg-renkon-dark-5 rounded-full transition-all duration-300"></div>
+                        <div class="w-3 h-3 bg-renkon-dark-5 rounded-full transition-all duration-300"></div>
+                        <div class="w-3 h-3 bg-renkon-dark-5 rounded-full transition-all duration-300"></div>
+                        <div class="w-3 h-3 bg-renkon-dark-5 rounded-full transition-all duration-300"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop View -->
+            <div class="hidden lg:block">
+                <div class="bg-renkon-dark-3 p-8 rounded-2xl text-center">
+                    <p class="text-renkon-beige">Desktop view - carousel is hidden on desktop</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Controls -->
+        <div class="bg-renkon-dark-3 p-6 rounded-2xl">
+            <h3 class="text-lg font-semibold mb-4">Test Controls</h3>
+            <div class="space-y-4">
+                <button onclick="testCarousel()" class="bg-renkon-orange text-white px-4 py-2 rounded-lg hover:bg-renkon-dark-orange transition-colors">
+                    Test Carousel Functionality
+                </button>
+                <button onclick="scrollToCard(1)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Scroll to Card 2
+                </button>
+                <button onclick="scrollToCard(2)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Scroll to Card 3
+                </button>
+                <button onclick="scrollToCard(3)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Scroll to Card 4
+                </button>
+                <button onclick="scrollToCard(4)" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    Scroll to Card 5
+                </button>
+            </div>
+        </div>
+        
+        <!-- Debug Info -->
+        <div class="mt-8 bg-renkon-dark-3 p-6 rounded-2xl">
+            <h3 class="text-lg font-semibold mb-4">Debug Information</h3>
+            <div id="debug-info" class="text-sm text-renkon-beige">
+                <p>Click "Test Carousel Functionality" to see debug information.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple carousel functionality for testing
+        function testCarousel() {
+            const carouselContainer = document.querySelector('.flex.overflow-x-auto');
+            const navigationDots = document.querySelectorAll('.flex.justify-center.space-x-2 div');
+            const cards = document.querySelectorAll('.snap-start');
+            
+            let debugInfo = `
+                <p><strong>Carousel Container:</strong> ${carouselContainer ? 'Found' : 'Not found'}</p>
+                <p><strong>Navigation Dots:</strong> ${navigationDots.length}</p>
+                <p><strong>Cards:</strong> ${cards.length}</p>
+                <p><strong>Current Scroll Position:</strong> ${carouselContainer ? carouselContainer.scrollLeft : 'N/A'}</p>
+            `;
+            
+            document.getElementById('debug-info').innerHTML = debugInfo;
+            
+            // Test dot functionality
+            if (navigationDots.length > 0 && cards.length > 0) {
+                navigationDots.forEach((dot, index) => {
+                    dot.style.cursor = 'pointer';
+                    dot.addEventListener('click', () => {
+                        const cardWidth = cards[0].offsetWidth + 16;
+                        const scrollPosition = index * cardWidth;
+                        
+                        carouselContainer.scrollTo({
+                            left: scrollPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update dots
+                        navigationDots.forEach((d, i) => {
+                            if (i === index) {
+                                d.classList.remove('bg-renkon-dark-5');
+                                d.classList.add('bg-renkon-orange');
+                            } else {
+                                d.classList.remove('bg-renkon-orange');
+                                d.classList.add('bg-renkon-dark-5');
+                            }
+                        });
+                    });
+                });
+                
+                // Add scroll listener
+                carouselContainer.addEventListener('scroll', () => {
+                    const scrollLeft = carouselContainer.scrollLeft;
+                    const cardWidth = cards[0].offsetWidth + 16;
+                    const currentIndex = Math.round(scrollLeft / cardWidth);
+                    
+                    navigationDots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.remove('bg-renkon-dark-5');
+                            dot.classList.add('bg-renkon-orange');
+                        } else {
+                            dot.classList.remove('bg-renkon-orange');
+                            dot.classList.add('bg-renkon-dark-5');
+                        }
+                    });
+                });
+                
+                debugInfo += '<p><strong>Status:</strong> Carousel functionality initialized successfully!</p>';
+            } else {
+                debugInfo += '<p><strong>Status:</strong> Failed to initialize carousel - missing elements</p>';
+            }
+            
+            document.getElementById('debug-info').innerHTML = debugInfo;
+        }
+        
+        function scrollToCard(index) {
+            const carouselContainer = document.querySelector('.flex.overflow-x-auto');
+            const cards = document.querySelectorAll('.snap-start');
+            
+            if (carouselContainer && cards[index]) {
+                const cardWidth = cards[0].offsetWidth + 16;
+                const scrollPosition = index * cardWidth;
+                
+                carouselContainer.scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(testCarousel, 500);
+        });
+    </script>
+</body>
+</html> 

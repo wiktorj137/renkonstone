@@ -127,6 +127,133 @@
         .read-more-btn {
             margin-top: auto; /* Wypycha przycisk na dół sekcji */
         }
+        
+        /* Mobile carousel scrollbar hiding */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
+        }
+        
+        /* Mobile carousel smooth scrolling */
+        .snap-x {
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Ensure snap points work */
+        .snap-start {
+            scroll-snap-align: start;
+        }
+        
+        /* Mobile card hover effects */
+        @media (max-width: 1023px) {
+            .group:hover {
+                transform: scale(1.02);
+            }
+        }
+        
+        /* Disable ALL orange decorative elements that block touch */
+        .absolute.top-0.right-0.bg-gradient-to-br {
+            pointer-events: none !important;
+        }
+        
+        /* Specifically target all orange decorative circles */
+        .absolute.top-0.right-0[class*="from-renkon-orange"] {
+            pointer-events: none !important;
+        }
+        
+        /* Additional coverage for any orange gradient backgrounds */
+        .absolute[class*="from-renkon-orange"][class*="to-transparent"] {
+            pointer-events: none !important;
+        }
+        
+        /* Simple mobile fix - just hide hover arrows */
+        @media (max-width: 1023px) {
+            .group:hover .opacity-0.group-hover\:opacity-100 {
+                opacity: 0 !important;
+            }
+        }
+        
+        /* Mobile testimonial styles */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .testimonial-text-mobile {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* When container has 'expanded' class, remove line clamp restriction */
+        .expanded .testimonial-text-mobile {
+            -webkit-line-clamp: unset;
+            line-clamp: unset;
+        }
+        
+        /* Mobile testimonial card animations */
+        .testimonial-card-mobile {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card-mobile:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Featured testimonial mobile styles */
+        .featured-testimonial {
+            border: 2px solid transparent;
+            background: linear-gradient(to bottom right, #3f3f3f, #2d2d2d);
+            position: relative;
+        }
+        
+        .featured-testimonial::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(221, 133, 0, 0.1), transparent);
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .featured-testimonial:hover::before {
+            opacity: 1;
+        }
+        
+        /* Mobile carousel scrollbar hiding */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
+        }
+        
+        /* Mobile carousel smooth scrolling */
+        .snap-x {
+            scroll-behavior: smooth;
+        }
+        
+        /* Contact button - always white text */
+        .contact-btn,
+        .contact-btn:hover,
+        .contact-btn:focus,
+        .contact-btn:active {
+            color: white !important;
+        }
+        
+        .contact-btn i {
+            color: white !important;
+        }
     </style>
 </head>
 
@@ -137,8 +264,8 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Enhanced Logo and Company Name -->
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-gem text-white text-xl"></i>
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                        <img src="assets/images/renkon-logo.jpg" alt="RENKON STONE Logo" class="w-full h-full object-cover">
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold text-white tracking-tight">RENKON STONE</h1>
@@ -192,7 +319,7 @@
                     <a href="#projects" class="nav-link text-white hover:text-renkon-orange px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50">Realizacje</a>
                     
                     <!-- Enhanced Contact Button -->
-                    <a href="#contact" class="bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl ml-4">
+                    <a href="#contact" class="contact-btn bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white hover:text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl ml-4">
                         <i class="fas fa-phone mr-2"></i>
                         Kontakt
                     </a>
@@ -245,58 +372,59 @@
         </div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-            <div class="flex flex-col lg:flex-row gap-20 items-center">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-20 items-center">
                 <!-- Content Section -->
-                <div class="animate-fade-in flex-1 flex flex-col justify-center min-h-[calc(100vh-4rem)] lg:min-h-0">
+                <div class="animate-fade-in flex-1 flex flex-col justify-center min-h-[calc(100vh-6rem)] lg:min-h-0 w-full">
                     <!-- Professional Badge -->
-                    <div class="inline-flex items-center space-x-3 bg-renkon-dark-3/50 text-renkon-orange px-6 py-3 rounded-lg text-sm font-medium mb-8 border border-renkon-dark-4">
+                    <div class="inline-flex items-center space-x-2 sm:space-x-3 bg-renkon-dark-3/50 text-renkon-orange px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-renkon-dark-4">
                         <i class="fas fa-award text-renkon-orange"></i>
-                        <span>Certyfikowany specjalista z 15+ lat doświadczenia</span>
+                        <span class="hidden sm:inline">Certyfikowany specjalista z 15+ lat doświadczenia</span>
+                        <span class="sm:hidden">15+ lat doświadczenia</span>
                     </div>
                     
                     <!-- Main Heading -->
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 leading-tight">
                         Profesjonalne
                         <span class="text-renkon-orange">Szlifowanie</span>
-                        <br>i Renowacja Marmuru
+                        <br class="hidden sm:block">i Renowacja Marmuru
                     </h2>
                     
                     <!-- Business Subtitle -->
-                    <p class="text-lg md:text-xl text-renkon-beige mb-10 leading-relaxed max-w-2xl">
+                    <p class="text-base sm:text-lg md:text-xl text-renkon-beige mb-8 sm:mb-10 leading-relaxed max-w-2xl">
                         Specjalizujemy się w kompleksowej renowacji i konserwacji powierzchni kamiennych. 
                         Oferujemy usługi dla firm, instytucji publicznych oraz klientów indywidualnych.
                     </p>
                     
                     <!-- Professional Credentials -->
-                    <div class="grid md:grid-cols-2 gap-8 mb-12">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-globe text-renkon-orange"></i>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-globe text-renkon-orange text-sm sm:text-base"></i>
                             </div>
                             <div>
-                                <h4 class="text-white font-semibold mb-1">Doświadczenie Międzynarodowe</h4>
-                                <p class="text-renkon-beige text-sm">Polska, Anglia, Irlandia</p>
+                                <h4 class="text-white font-semibold mb-1 text-sm sm:text-base">Doświadczenie Międzynarodowe</h4>
+                                <p class="text-renkon-beige text-xs sm:text-sm">Polska, Anglia, Irlandia</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-certificate text-renkon-orange"></i>
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-certificate text-renkon-orange text-sm sm:text-base"></i>
                             </div>
                             <div>
-                                <h4 class="text-white font-semibold mb-1">Certyfikowane Usługi</h4>
-                                <p class="text-renkon-beige text-sm">Najwyższe standardy jakości</p>
+                                <h4 class="text-white font-semibold mb-1 text-sm sm:text-base">Certyfikowane Usługi</h4>
+                                <p class="text-renkon-beige text-xs sm:text-sm">Najwyższe standardy jakości</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Professional CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="bg-renkon-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all text-center shadow-lg hover:shadow-xl flex items-center justify-center space-x-3">
-                            <i class="fas fa-phone mr-2"></i>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <a href="#contact" class="bg-renkon-orange hover:bg-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all text-center shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 sm:space-x-3">
+                            <i class="fas fa-phone mr-1 sm:mr-2"></i>
                             <span>Zamów Wycenę</span>
                         </a>
-                        <a href="#services" class="border-2 border-renkon-orange text-renkon-orange hover:bg-renkon-orange hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all text-center flex items-center justify-center space-x-3">
-                            <i class="fas fa-list mr-2"></i>
+                        <a href="#services" class="border-2 border-renkon-orange text-renkon-orange hover:bg-renkon-orange hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-all text-center flex items-center justify-center space-x-2 sm:space-x-3">
+                            <i class="fas fa-list mr-1 sm:mr-2"></i>
                             <span>Zobacz Usługi</span>
                         </a>
                     </div>
@@ -344,290 +472,443 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-gradient-to-br from-renkon-dark-2 via-renkon-dark to-renkon-dark-2 relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-5">
-            <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 25% 25%, #dd8500 2px, transparent 2px), radial-gradient(circle at 75% 75%, #dd8500 2px, transparent 2px); background-size: 60px 60px;"></div>
+    <section id="services" class="py-32 bg-gradient-to-br from-renkon-dark via-renkon-dark-2 to-renkon-dark relative overflow-hidden">
+        <!-- Subtle Background Pattern -->
+        <div class="absolute inset-0 opacity-3">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: linear-gradient(90deg, transparent 98%, #dd8500 100%), linear-gradient(0deg, transparent 98%, #dd8500 100%); background-size: 100px 100px;"></div>
         </div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <!-- Section Header -->
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-renkon-orange/10 rounded-2xl mb-6">
-                    <i class="fas fa-cogs text-renkon-orange text-2xl"></i>
+            <div class="text-center mb-24">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-renkon-orange/5 to-renkon-orange/10 rounded-3xl mb-8 border border-renkon-orange/10">
+                    <i class="fas fa-gem text-renkon-orange text-3xl"></i>
                 </div>
-                <h3 class="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-                    Nasze <span class="text-renkon-orange">Usługi</span>
-                </h3>
-                <div class="w-24 h-1 bg-gradient-to-r from-renkon-orange to-orange-600 mx-auto mb-8"></div>
-                <p class="text-xl text-renkon-beige max-w-4xl mx-auto leading-relaxed">
+                <h1 class="text-5xl md:text-6xl font-light text-white mb-8 tracking-tight">
+                    Nasze <span class="text-renkon-orange font-medium">Usługi</span>
+                </h1>
+                <div class="w-32 h-px bg-gradient-to-r from-transparent via-renkon-orange to-transparent mx-auto mb-10"></div>
+                <p class="text-xl text-renkon-beige/90 max-w-3xl mx-auto leading-relaxed font-light">
                     Specjalizujemy się w kompleksowej renowacji i konserwacji powierzchni kamiennych, 
                     wykorzystując najnowocześniejsze technologie i ponad 15-letnie doświadczenie międzynarodowe.
                 </p>
             </div>
-            
-            <!-- Services Grid -->
-            <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                <!-- Service 1: Szlifowanie Marmuru -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <div class="relative">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-hammer text-white text-xl"></i>
+
+            <!-- Desktop Layout (Hidden on mobile) -->
+            <div class="hidden lg:block">
+                <!-- All Services Grid -->
+                <div class="grid grid-cols-3 gap-10">
+                    <!-- Service 1: Szlifowanie Marmuru -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-gem text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="text-5xl font-light text-renkon-orange/10 group-hover:text-renkon-orange/20 transition-colors duration-500">01</div>
                             </div>
-                            <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <i class="fas fa-arrow-right text-lg"></i>
-                            </div>
-                        </div>
-                        
-                        <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-renkon-orange transition-colors duration-300">
-                            Szlifowanie Marmuru
-                        </h4>
-                        
-                        <p class="text-renkon-beige mb-6 leading-relaxed">
-                            Profesjonalne szlifowanie marmuru przywracające naturalny blask i gładkość powierzchni. 
-                            Wykorzystujemy specjalistyczne maszyny i materiały najwyższej jakości.
-                        </p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Przywracanie pierwotnego wyglądu</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Usuwanie zarysowań i przebarwień</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Przygotowanie do krystalizacji</span>
-                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Szlifowanie Marmuru</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                Profesjonalne szlifowanie marmuru przywracające naturalny blask i gładkość powierzchni.
+                            </p>
+                            <ul class="space-y-2 text-sm text-renkon-beige/75">
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Przywracanie pierwotnego wyglądu</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Usuwanie zarysowań i przebarwień</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Przygotowanie do krystalizacji</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Service 2: Szlifowanie Lastryko -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <div class="relative">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-tools text-white text-xl"></i>
+
+                    <!-- Service 2: Szlifowanie Lastryko -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-layer-group text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="text-5xl font-light text-renkon-orange/10 group-hover:text-renkon-orange/20 transition-colors duration-500">02</div>
                             </div>
-                            <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <i class="fas fa-arrow-right text-lg"></i>
-                            </div>
-                        </div>
-                        
-                        <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-renkon-orange transition-colors duration-300">
-                            Szlifowanie Lastryko
-                        </h4>
-                        
-                        <p class="text-renkon-beige mb-6 leading-relaxed">
-                            Specjalistyczne szlifowanie lastryko z wykorzystaniem nowoczesnych technologii. 
-                            Oferujemy kompleksowe rozwiązania dla budynków komercyjnych i mieszkalnych.
-                        </p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Odnawianie posadzek lastrykowych</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Usuwanie warstw wosku i lakieru</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Przygotowanie do impregnacji</span>
-                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Szlifowanie Lastryko</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                Specjalistyczne szlifowanie lastryko z wykorzystaniem nowoczesnych technologii.
+                            </p>
+                            <ul class="space-y-2 text-sm text-renkon-beige/75">
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Odnawianie posadzek lastrykowych</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Usuwanie warstw wosku i lakieru</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Przygotowanie do impregnacji</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Service 3: Kompleksowa Renowacja Lastryko -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <div class="relative">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-sync-alt text-white text-xl"></i>
+
+                    <!-- Service 3: Kompleksowa Renowacja -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-hammer text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="text-5xl font-light text-renkon-orange/10 group-hover:text-renkon-orange/20 transition-colors duration-500">03</div>
                             </div>
-                            <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <i class="fas fa-arrow-right text-lg"></i>
-                            </div>
-                        </div>
-                        
-                        <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-renkon-orange transition-colors duration-300">
-                            Kompleksowa Renowacja
-                        </h4>
-                        
-                        <p class="text-renkon-beige mb-6 leading-relaxed">
-                            Pełna renowacja lastryko - od naprawy po wykończenie. Obejmuje wszystkie etapy 
-                            procesu renowacyjnego z gwarancją jakości.
-                        </p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Kompleksowe przywrócenie funkcjonalności</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Naprawa uszkodzeń strukturalnych</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Finalne wykończenie i zabezpieczenie</span>
-                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Kompleksowa Renowacja</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                Pełna renowacja lastryko - od naprawy po wykończenie z gwarancją jakości.
+                            </p>
+                            <ul class="space-y-2 text-sm text-renkon-beige/75">
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Kompleksowe przywrócenie funkcjonalności</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Naprawa uszkodzeń strukturalnych</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Finalne wykończenie i zabezpieczenie</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Service 4: Krystalizacja i Impregnacja -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <div class="relative">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-shield-alt text-white text-xl"></i>
+
+                    <!-- Service 4: Krystalizacja i Impregnacja -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-shield-alt text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="text-5xl font-light text-renkon-orange/10 group-hover:text-renkon-orange/20 transition-colors duration-500">04</div>
                             </div>
-                            <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <i class="fas fa-arrow-right text-lg"></i>
-                            </div>
-                        </div>
-                        
-                        <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-renkon-orange transition-colors duration-300">
-                            Krystalizacja i Impregnacja
-                        </h4>
-                        
-                        <p class="text-renkon-beige mb-6 leading-relaxed">
-                            Ochrona powierzchni kamiennych przed uszkodzeniami i zabrudzeniami. 
-                            Stosujemy najwyższej jakości środki ochronne.
-                        </p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Długotrwała ochrona powierzchni</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Odporność na wilgoć i zabrudzenia</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Zachowanie naturalnego wyglądu</span>
-                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Krystalizacja i Impregnacja</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                Ochrona powierzchni kamiennych przed uszkodzeniami i zabrudzeniami.
+                            </p>
+                            <ul class="space-y-2 text-sm text-renkon-beige/75">
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Długotrwała ochrona powierzchni</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Odporność na wilgoć i zabrudzenia</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Zachowanie naturalnego wyglądu</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Service 5: Naprawa Ubytków -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <div class="relative">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-band-aid text-white text-xl"></i>
+
+                    <!-- Service 5: Naprawa Ubytków -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-tools text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="text-5xl font-light text-renkon-orange/10 group-hover:text-renkon-orange/20 transition-colors duration-500">05</div>
                             </div>
-                            <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <i class="fas fa-arrow-right text-lg"></i>
-                            </div>
-                        </div>
-                        
-                        <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-renkon-orange transition-colors duration-300">
-                            Naprawa Ubytków
-                        </h4>
-                        
-                        <p class="text-renkon-beige mb-6 leading-relaxed">
-                            Profesjonalna naprawa uszkodzeń w marmurze i lastryko. 
-                            Wykorzystujemy specjalistyczne materiały naprawcze.
-                        </p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Przywracanie integralności powierzchni</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Naprawa pęknięć i ubytków</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Dopasowanie kolorystyczne</span>
-                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Naprawa Ubytków</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                Profesjonalna naprawa ubytków w posadzkach lastrykowych i marmurowych.
+                            </p>
+                            <ul class="space-y-2 text-sm text-renkon-beige/75">
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Uzupełnianie pęknięć i szczelin</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Naprawa krawędzi i narożników</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Przywracanie integralności struktury</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Service 6: Groszkowanie Pasków -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <div class="relative">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-grip-lines text-white text-xl"></i>
+
+                    <!-- Service 6: Paski Antypoślizgowe -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-shoe-prints text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="text-5xl font-light text-renkon-orange/10 group-hover:text-renkon-orange/20 transition-colors duration-500">06</div>
                             </div>
-                            <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <i class="fas fa-arrow-right text-lg"></i>
-                            </div>
-                        </div>
-                        
-                        <h4 class="text-2xl font-bold text-white mb-4 group-hover:text-renkon-orange transition-colors duration-300">
-                            Paski Antypoślizgowe
-                        </h4>
-                        
-                        <p class="text-renkon-beige mb-6 leading-relaxed">
-                            Wykonywanie pasków antypoślizgowych dla bezpieczeństwa użytkowników. 
-                            Zapewniamy zgodność z normami bezpieczeństwa.
-                        </p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Bezpieczeństwo w ruchu pieszym</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Zgodność z normami BHP</span>
-                            </div>
-                            <div class="flex items-center text-sm text-renkon-beige">
-                                <div class="w-2 h-2 bg-renkon-orange rounded-full mr-3"></div>
-                                <span>Trwałe i estetyczne rozwiązanie</span>
-                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Paski Antypoślizgowe</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                Wykonywanie pasków antypoślizgowych dla bezpieczeństwa użytkowników.
+                            </p>
+                            <ul class="space-y-2 text-sm text-renkon-beige/75">
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Bezpieczeństwo w ruchu pieszym</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Zgodność z normami BHP</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Trwałe i estetyczne rozwiązanie</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Call to Action -->
-            <div class="text-center mt-20">
-                <div class="bg-gradient-to-r from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5">
-                    <h4 class="text-2xl font-bold text-white mb-4">Potrzebujesz profesjonalnej renowacji?</h4>
-                    <p class="text-renkon-beige mb-6 max-w-2xl mx-auto">
-                        Skontaktuj się z nami, aby otrzymać bezpłatną wycenę i doradztwo techniczne. 
-                        Nasze doświadczenie to gwarancja najwyższej jakości wykonania.
-                    </p>
-                    <a href="#contact" class="inline-flex items-center bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-                        <i class="fas fa-phone mr-3"></i>
-                        Zamów Bezpłatną Wycenę
-                    </a>
+
+            <!-- Mobile Carousel (Visible only on mobile) -->
+            <div class="lg:hidden">
+                <div id="services-carousel" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 -mx-4 px-4">
+                    <!-- Service 1: Szlifowanie Marmuru -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-gem text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="text-4xl font-light text-renkon-orange/10">01</div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Szlifowanie Marmuru</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    Profesjonalne szlifowanie marmuru przywracające naturalny blask i gładkość powierzchni.
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Przywracanie pierwotnego wyglądu</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Usuwanie zarysowań</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Przygotowanie do krystalizacji</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Szlifowanie Lastryko -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5 transition-all duration-300 h-full">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-renkon-orange/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-layer-group text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="text-3xl font-bold text-renkon-orange/20">02</div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Szlifowanie Lastryko</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    Specjalistyczne szlifowanie lastryko z wykorzystaniem nowoczesnych technologii.
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Odnawianie posadzek lastrykowych</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Usuwanie warstw wosku</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Przygotowanie do impregnacji</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Kompleksowa Renowacja -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5 transition-all duration-300 h-full">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-renkon-orange/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-hammer text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="text-3xl font-bold text-renkon-orange/20">03</div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Kompleksowa Renowacja</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    Pełna renowacja lastryko - od naprawy po wykończenie z gwarancją jakości.
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Kompleksowe przywrócenie funkcjonalności</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Naprawa uszkodzeń strukturalnych</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Finalne wykończenie</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Krystalizacja i Impregnacja -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5 transition-all duration-300 h-full">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-renkon-orange/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-shield-alt text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="text-3xl font-bold text-renkon-orange/20">04</div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Krystalizacja i Impregnacja</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    Ochrona powierzchni kamiennych przed uszkodzeniami i zabrudzeniami.
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Długotrwała ochrona powierzchni</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Odporność na wilgoć</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Zachowanie naturalnego wyglądu</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 5: Naprawa Ubytków -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5 transition-all duration-300 h-full">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-renkon-orange/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-wrench text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="text-3xl font-bold text-renkon-orange/20">05</div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Naprawa Ubytków</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    Profesjonalna naprawa uszkodzeń w marmurze i lastryko.
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Przywracanie integralności powierzchni</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Naprawa pęknięć i ubytków</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Dopasowanie kolorystyczne</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 6: Paski Antypoślizgowe -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-6 rounded-2xl border border-renkon-dark-5 transition-all duration-300 h-full">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-renkon-orange/10 to-transparent rounded-full -translate-y-12 translate-x-12"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-shoe-prints text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="text-3xl font-bold text-renkon-orange/20">06</div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Paski Antypoślizgowe</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    Wykonywanie pasków antypoślizgowych dla bezpieczeństwa użytkowników.
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Bezpieczeństwo w ruchu pieszym</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Zgodność z normami BHP</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Trwałe i estetyczne rozwiązanie</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Carousel Indicators -->
+                <div id="services-indicators" class="flex justify-center space-x-2 mt-8">
+                    <div class="indicator-dot w-2 h-2 bg-renkon-orange rounded-full transition-all duration-300 cursor-pointer" data-index="0"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="1"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="2"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="3"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="4"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="5"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-gradient-to-br from-renkon-dark via-renkon-dark-2 to-renkon-dark relative overflow-hidden">
+    <section id="about" class="py-32 bg-gradient-to-br from-renkon-dark via-renkon-dark-2 to-renkon-dark relative overflow-hidden">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 25% 25%, #dd8500 2px, transparent 2px), radial-gradient(circle at 75% 75%, #dd8500 2px, transparent 2px); background-size: 60px 60px;"></div>
@@ -635,123 +916,114 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <!-- Section Header -->
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-renkon-orange/10 rounded-2xl mb-6">
-                    <i class="fas fa-building text-renkon-orange text-2xl"></i>
+            <div class="text-center mb-16 md:mb-24">
+                <div class="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-renkon-orange/15 to-renkon-orange/25 rounded-2xl md:rounded-3xl mb-6 md:mb-8 border border-renkon-orange/20 shadow-lg">
+                    <i class="fas fa-building text-renkon-orange text-2xl md:text-3xl"></i>
                 </div>
-                <h3 class="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-                    O Firmie <span class="text-renkon-orange">RENKON STONE</span>
-                </h3>
-                <div class="w-24 h-1 bg-gradient-to-r from-renkon-orange to-orange-600 mx-auto mb-8"></div>
-                <p class="text-xl text-renkon-beige max-w-4xl mx-auto leading-relaxed">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 md:mb-8 tracking-tight">
+                    O Firmie <span class="text-renkon-orange font-medium">RENKON STONE</span>
+                </h1>
+                <div class="w-24 md:w-32 h-px bg-gradient-to-r from-transparent via-renkon-orange to-transparent mx-auto mb-8 md:mb-10"></div>
+                <p class="text-lg md:text-xl text-renkon-beige max-w-3xl mx-auto leading-relaxed font-light px-4">
                     Specjaliści z ponad 15-letnim doświadczeniem międzynarodowym w renowacji i konserwacji powierzchni kamiennych
                 </p>
             </div>
             
             <!-- Main Content Grid -->
-            <div class="grid lg:grid-cols-12 gap-12 items-start">
+            <div class="grid lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-start">
                 <!-- Left Column: Content (8 columns) -->
-                <div class="lg:col-span-8 space-y-12">
+                <div class="lg:col-span-8 space-y-12 md:space-y-16">
                     <!-- Opening Statement Section -->
-                    <div class="relative">
-                        <div class="absolute -left-6 top-0 w-2 h-full bg-gradient-to-b from-renkon-orange via-orange-500 to-transparent rounded-full"></div>
-                        <div class="pl-8">
-                            <div class="flex items-center space-x-4 mb-6">
-                                <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
-                                    <i class="fas fa-crown text-renkon-orange text-xl"></i>
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-4/60 to-renkon-dark-5/40 p-6 md:p-8 lg:p-12 rounded-2xl md:rounded-3xl border border-renkon-dark-5/70 hover:border-renkon-orange/30 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-32 md:w-40 lg:w-48 h-32 md:h-40 lg:h-48 bg-gradient-to-br from-renkon-orange/8 to-transparent rounded-full -translate-y-16 md:-translate-y-20 lg:-translate-y-24 translate-x-16 md:translate-x-20 lg:translate-x-24 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/3 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 md:space-x-6 mb-6 md:mb-8">
+                                <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/20 shadow-lg">
+                                    <i class="fas fa-crown text-renkon-orange text-lg md:text-2xl"></i>
                                 </div>
-                                <h4 class="text-3xl font-bold text-white leading-tight">
-                                    Profesjonalizm w <span class="text-renkon-orange">każdym szczególe</span>
-                                </h4>
+                                <h2 class="text-2xl sm:text-3xl md:text-4xl font-light text-white leading-tight">
+                                    Profesjonalizm w <span class="text-renkon-orange font-medium">każdym szczególe</span>
+                                </h2>
                             </div>
-                            <p class="text-xl text-renkon-beige leading-relaxed font-light">
-                                <span class="font-semibold text-white">RENKON STONE</span> to firma specjalizująca się w profesjonalnym szlifowaniu, renowacji i konserwacji marmuru oraz lastryko. 
+                            <p class="text-base md:text-lg lg:text-xl text-renkon-beige leading-relaxed font-light">
+                                <span class="font-medium text-white">RENKON STONE</span> to firma specjalizująca się w profesjonalnym szlifowaniu, renowacji i konserwacji marmuru oraz lastryko. 
                                 Nasze doświadczenie obejmuje realizacje w Polsce, Anglii i Irlandii, gdzie zdobyliśmy uznanie wśród najbardziej wymagających klientów.
                             </p>
                         </div>
                     </div>
                     
-                    <!-- Founder Story Section -->
-                    <div class="relative">
-                        <div class="bg-gradient-to-r from-renkon-dark-3/40 via-renkon-dark-3/20 to-transparent p-8 rounded-2xl border-l-4 border-renkon-orange shadow-lg">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-user-tie text-renkon-orange text-xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="text-xl font-semibold text-white mb-3">O Założycielu</h5>
-                                    <p class="text-lg text-renkon-beige leading-relaxed">
-                                        <span class="font-semibold text-white">Jacek Jarosz</span>, założyciel i główny specjalista firmy, to ekspert z wieloletnim doświadczeniem, 
-                                        który swoją wiedzę zdobywał pracując z renomowanymi firmami w Europie Zachodniej oraz realizując 
-                                        projekty dla instytucji publicznych i prywatnych.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- Key Metrics Section -->
-                    <div class="space-y-8">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
-                                <i class="fas fa-chart-line text-renkon-orange text-lg"></i>
+                    <div class="space-y-8 md:space-y-12">
+                        <div class="flex items-center space-x-4 md:space-x-6">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-xl md:rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-chart-line text-renkon-orange text-lg md:text-xl"></i>
                             </div>
-                            <h4 class="text-2xl font-semibold text-white">Nasze Osiągnięcia</h4>
+                            <h3 class="text-2xl md:text-3xl font-light text-white">Nasze Osiągnięcia</h3>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-300 hover:shadow-xl hover:shadow-renkon-orange/10 hover:-translate-y-1">
-                                <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-10 translate-x-10"></div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+                            <div class="group relative bg-gradient-to-br from-renkon-dark-4/60 to-renkon-dark-5/40 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-renkon-dark-5/70 hover:border-renkon-orange/30 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                                <div class="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-renkon-orange/8 to-transparent rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
                                 <div class="text-center relative z-10">
-                                    <div class="text-6xl font-bold text-renkon-orange mb-3 group-hover:scale-110 transition-transform duration-300">15+</div>
-                                    <div class="text-renkon-beige font-semibold text-xl">Lat Doświadczenia</div>
-                                    <div class="text-sm text-renkon-beige/70 mt-2 font-medium">Międzynarodowe</div>
+                                    <div class="text-5xl md:text-6xl lg:text-7xl font-light text-renkon-orange mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-500">15+</div>
+                                    <div class="text-renkon-beige font-medium text-lg md:text-xl mb-2">Lat Doświadczenia</div>
+                                    <div class="text-sm text-renkon-beige/80 font-light">Międzynarodowe</div>
                                 </div>
                             </div>
-                            <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-300 hover:shadow-xl hover:shadow-renkon-orange/10 hover:-translate-y-1">
-                                <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-10 translate-x-10"></div>
+                            <div class="group relative bg-gradient-to-br from-renkon-dark-4/60 to-renkon-dark-5/40 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-renkon-dark-5/70 hover:border-renkon-orange/30 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                                <div class="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-renkon-orange/8 to-transparent rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
                                 <div class="text-center relative z-10">
-                                    <div class="text-6xl font-bold text-renkon-orange mb-3 group-hover:scale-110 transition-transform duration-300">3</div>
-                                    <div class="text-renkon-beige font-semibold text-xl">Kraje Działalności</div>
-                                    <div class="text-sm text-renkon-beige/70 mt-2 font-medium">PL, UK, IE</div>
+                                    <div class="text-5xl md:text-6xl lg:text-7xl font-light text-renkon-orange mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-500">3</div>
+                                    <div class="text-renkon-beige font-medium text-lg md:text-xl mb-2">Kraje Działalności</div>
+                                    <div class="text-sm text-renkon-beige/80 font-light">PL, UK, IE</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Core Values Section -->
-                    <div class="space-y-8">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center">
-                                <i class="fas fa-star text-renkon-orange text-lg"></i>
+                    <div class="space-y-8 md:space-y-12">
+                        <div class="flex items-center space-x-4 md:space-x-6">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-xl md:rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-star text-renkon-orange text-lg md:text-xl"></i>
                             </div>
-                            <h4 class="text-2xl font-semibold text-white">Nasze Wartości</h4>
+                            <h3 class="text-2xl md:text-3xl font-light text-white">Nasze Wartości</h3>
                         </div>
-                        <div class="grid md:grid-cols-1 gap-6">
-                            <div class="group flex items-start space-x-6 p-6 bg-gradient-to-r from-renkon-dark-3/50 via-renkon-dark-3/30 to-renkon-dark-3/10 rounded-2xl hover:bg-renkon-dark-3/70 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                                <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-globe text-renkon-orange text-xl"></i>
+                        <div class="grid gap-6 md:gap-8">
+                            <div class="group relative bg-gradient-to-br from-renkon-dark-4/60 to-renkon-dark-5/40 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-renkon-dark-5/70 hover:border-renkon-orange/30 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                                <div class="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-renkon-orange/8 to-transparent rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                                <div class="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 relative z-10">
+                                    <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/20 shadow-lg">
+                                        <i class="fas fa-globe text-renkon-orange text-lg md:text-2xl"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-white font-semibold text-xl mb-2 group-hover:text-renkon-orange transition-colors duration-300">Doświadczenie międzynarodowe</h5>
-                                    <p class="text-renkon-beige/90 leading-relaxed text-lg">Wiedza zdobyta w trzech krajach, różnorodne projekty i międzynarodowe standardy jakości</p>
+                                        <h4 class="text-xl md:text-2xl font-light text-white mb-3 md:mb-4 group-hover:text-renkon-orange transition-colors duration-500">Doświadczenie międzynarodowe</h4>
+                                        <p class="text-base md:text-lg text-renkon-beige leading-relaxed font-light">Wiedza zdobyta w trzech krajach, różnorodne projekty i międzynarodowe standardy jakości</p>
                                 </div>
                             </div>
-                            <div class="group flex items-start space-x-6 p-6 bg-gradient-to-r from-renkon-dark-3/50 via-renkon-dark-3/30 to-renkon-dark-3/10 rounded-2xl hover:bg-renkon-dark-3/70 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                                <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-cogs text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="group relative bg-gradient-to-br from-renkon-dark-4/60 to-renkon-dark-5/40 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-renkon-dark-5/70 hover:border-renkon-orange/30 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                                <div class="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-renkon-orange/8 to-transparent rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                                <div class="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 relative z-10">
+                                    <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/20 shadow-lg">
+                                        <i class="fas fa-cogs text-renkon-orange text-lg md:text-2xl"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-white font-semibold text-xl mb-2 group-hover:text-renkon-orange transition-colors duration-300">Nowoczesne technologie</h5>
-                                    <p class="text-renkon-beige/90 leading-relaxed text-lg">Najwyższej jakości sprzęt, innowacyjne materiały i sprawdzone metody pracy</p>
+                                        <h4 class="text-xl md:text-2xl font-light text-white mb-3 md:mb-4 group-hover:text-renkon-orange transition-colors duration-500">Nowoczesne technologie</h4>
+                                        <p class="text-base md:text-lg text-renkon-beige leading-relaxed font-light">Najwyższej jakości sprzęt, innowacyjne materiały i sprawdzone metody pracy</p>
                                 </div>
                             </div>
-                            <div class="group flex items-start space-x-6 p-6 bg-gradient-to-r from-renkon-dark-3/50 via-renkon-dark-3/30 to-renkon-dark-3/10 rounded-2xl hover:bg-renkon-dark-3/70 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                                <div class="w-12 h-12 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fas fa-handshake text-renkon-orange text-xl"></i>
+                            </div>
+                            <div class="group relative bg-gradient-to-br from-renkon-dark-4/60 to-renkon-dark-5/40 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-renkon-dark-5/70 hover:border-renkon-orange/30 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                                <div class="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-renkon-orange/8 to-transparent rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                                <div class="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 relative z-10">
+                                    <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/20 shadow-lg">
+                                        <i class="fas fa-handshake text-renkon-orange text-lg md:text-2xl"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <h5 class="text-white font-semibold text-xl mb-2 group-hover:text-renkon-orange transition-colors duration-300">Indywidualne podejście</h5>
-                                    <p class="text-renkon-beige/90 leading-relaxed text-lg">Dostosowanie do potrzeb każdego klienta, personalizowane rozwiązania i pełne wsparcie</p>
+                                        <h4 class="text-xl md:text-2xl font-light text-white mb-3 md:mb-4 group-hover:text-renkon-orange transition-colors duration-500">Indywidualne podejście</h4>
+                                        <p class="text-base md:text-lg text-renkon-beige leading-relaxed font-light">Dostosowanie do potrzeb każdego klienta, personalizowane rozwiązania i pełne wsparcie</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -759,104 +1031,103 @@
                 </div>
                 
                 <!-- Right Column: Visual Elements (4 columns) -->
-                <div class="lg:col-span-4 relative">
+                <div class="lg:col-span-4 relative mt-12 lg:mt-0">
                     <!-- Sticky Container -->
-                    <div class="lg:sticky lg:top-24 space-y-8">
-                        <!-- Main Image Container -->
-                        <div class="relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 rounded-2xl p-8 shadow-2xl border border-renkon-dark-5 overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                            <div class="h-80 bg-gradient-to-br from-renkon-dark-4 to-renkon-dark-5 rounded-xl flex items-center justify-center relative overflow-hidden">
+                    <div class="lg:sticky lg:top-24 space-y-6 md:space-y-8">
+                        <!-- Founder Profile Card -->
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/30 to-renkon-dark-4/20 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 md:w-40 h-32 md:h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 md:-translate-y-20 translate-x-16 md:translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                            <div class="relative z-10">
+                                <div class="h-48 md:h-64 lg:h-80 bg-gradient-to-br from-renkon-dark-4/50 to-renkon-dark-5/30 rounded-xl md:rounded-2xl flex items-center justify-center relative overflow-hidden mb-6 md:mb-8 border border-renkon-dark-5/50">
                                 <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/5 to-transparent"></div>
-                                <i class="fas fa-user-tie text-6xl text-renkon-beige relative z-10"></i>
+                                    <i class="fas fa-user-tie text-4xl md:text-5xl lg:text-6xl text-renkon-beige/60 relative z-10"></i>
                             </div>
-                            <div class="mt-8 text-center">
-                                <h4 class="text-2xl font-semibold text-white mb-3">Jacek Jarosz</h4>
-                                <p class="text-renkon-beige text-base mb-2">Założyciel i Główny Specjalista</p>
-                                <p class="text-renkon-orange text-sm font-semibold">RENKON STONE</p>
+                                <div class="text-center">
+                                    <h4 class="text-xl md:text-2xl font-light text-white mb-2 md:mb-3">Jacek Jarosz</h4>
+                                    <p class="text-renkon-beige/85 text-sm md:text-base mb-2 font-light">Założyciel i Główny Specjalista</p>
+                                    <p class="text-renkon-orange text-xs md:text-sm font-medium">RENKON STONE</p>
+                                </div>
                             </div>
                         </div>
                         
                         <!-- Experience Badge -->
-                        <div class="absolute -top-4 -left-4 bg-gradient-to-r from-renkon-orange to-orange-600 text-white px-6 py-3 rounded-full text-base font-semibold shadow-xl">
+                        <div class="absolute -top-2 md:-top-4 -left-2 md:-left-4 bg-gradient-to-r from-renkon-orange to-orange-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base font-medium shadow-xl">
                             <i class="fas fa-award mr-2"></i>
                             Ekspert
                         </div>
                         
-                        <!-- Floating Elements -->
-                        <div class="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-renkon-orange/10 to-transparent rounded-full blur-2xl"></div>
-                        <div class="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-renkon-beige/10 to-transparent rounded-full blur-2xl"></div>
-                        
                         <!-- Additional Info Card -->
-                        <div class="bg-gradient-to-r from-renkon-dark-3/50 to-renkon-dark-3/20 p-6 rounded-xl border border-renkon-dark-4">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <i class="fas fa-lightbulb text-renkon-orange text-lg"></i>
-                                <h5 class="text-white font-semibold">Dlaczego RENKON STONE?</h5>
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/30 to-renkon-dark-4/20 p-6 md:p-8 rounded-2xl md:rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16 group-hover:scale-150 transition-transform duration-700"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center space-x-3 md:space-x-4 mb-4 md:mb-6">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                        <i class="fas fa-lightbulb text-renkon-orange text-lg md:text-xl"></i>
                             </div>
-                            <ul class="space-y-2 text-sm text-renkon-beige">
-                                <li class="flex items-center space-x-2">
-                                    <i class="fas fa-check text-renkon-orange text-xs"></i>
-                                    <span>Ponad 15 lat doświadczenia</span>
+                                    <h5 class="text-lg md:text-xl font-light text-white">Dlaczego RENKON STONE?</h5>
+                                </div>
+                                <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-renkon-beige/85">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Ponad 15 lat doświadczenia</span>
                                 </li>
-                                <li class="flex items-center space-x-2">
-                                    <i class="fas fa-check text-renkon-orange text-xs"></i>
-                                    <span>Miedzynarodowe standardy</span>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Międzynarodowe standardy</span>
                                 </li>
-                                <li class="flex items-center space-x-2">
-                                    <i class="fas fa-check text-renkon-orange text-xs"></i>
-                                    <span>Gwarancja jakości</span>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Gwarancja jakości</span>
                                 </li>
-                                <li class="flex items-center space-x-2">
-                                    <i class="fas fa-check text-renkon-orange text-xs"></i>
-                                    <span>Indywidualne podejście</span>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Indywidualne podejście</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Bottom CTA -->
-            <div class="text-center mt-24">
-                <div class="relative bg-gradient-to-r from-renkon-dark-3 to-renkon-dark-4 p-10 rounded-2xl border border-renkon-dark-5 max-w-5xl mx-auto overflow-hidden">
-                    <!-- Background Pattern -->
-                    <div class="absolute inset-0 opacity-5">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-renkon-orange rounded-full -translate-y-16 translate-x-16"></div>
-                        <div class="absolute bottom-0 left-0 w-24 h-24 bg-renkon-beige rounded-full translate-y-12 -translate-x-12"></div>
                     </div>
                     
+            <!-- Bottom CTA -->
+            <div class="text-center mt-16 md:mt-20 lg:mt-24">
+                <div class="group relative bg-gradient-to-br from-renkon-dark-3/30 to-renkon-dark-4/20 p-6 md:p-8 lg:p-12 rounded-2xl md:rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm max-w-5xl mx-auto">
+                    <div class="absolute top-0 right-0 w-32 md:w-40 lg:w-48 h-32 md:h-40 lg:h-48 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 md:-translate-y-20 lg:-translate-y-24 translate-x-16 md:translate-x-20 lg:translate-x-24 group-hover:scale-150 transition-transform duration-700"></div>
                     <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-renkon-orange/20 rounded-2xl mb-6">
-                            <i class="fas fa-shield-alt text-renkon-orange text-2xl"></i>
+                        <div class="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl md:rounded-3xl mb-6 md:mb-8 border border-renkon-orange/10">
+                            <i class="fas fa-shield-alt text-renkon-orange text-2xl md:text-3xl"></i>
                         </div>
-                        <h4 class="text-3xl font-bold text-white mb-6 leading-tight">
-                            Dlaczego warto nam <span class="text-renkon-orange">zaufać?</span>
-                        </h4>
-                        <div class="w-24 h-1 bg-gradient-to-r from-renkon-orange to-orange-600 mx-auto mb-8"></div>
-                        <p class="text-xl text-renkon-beige mb-8 max-w-3xl mx-auto leading-relaxed">
-                            Łączymy <span class="font-semibold text-white">wieloletnie doświadczenie</span> z najnowocześniejszymi technologiami, 
-                            aby zapewnić <span class="font-semibold text-white">najwyższą jakość</span> każdej realizacji.
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-6 md:mb-8 leading-tight">
+                            Dlaczego warto nam <span class="text-renkon-orange font-medium">zaufać?</span>
+                        </h3>
+                        <div class="w-24 md:w-32 h-px bg-gradient-to-r from-transparent via-renkon-orange to-transparent mx-auto mb-8 md:mb-10"></div>
+                        <p class="text-base md:text-lg lg:text-xl text-renkon-beige/85 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed font-light px-4">
+                            Łączymy <span class="font-medium text-white">wieloletnie doświadczenie</span> z najnowocześniejszymi technologiami, 
+                            aby zapewnić <span class="font-medium text-white">najwyższą jakość</span> każdej realizacji.
                         </p>
                         
                         <!-- Trust Indicators -->
-                        <div class="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
-                            <div class="flex items-center justify-center space-x-3 text-renkon-beige">
-                                <i class="fas fa-check-circle text-renkon-orange text-xl"></i>
-                                <span class="font-medium">Gwarancja jakości</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12 max-w-4xl mx-auto">
+                            <div class="flex items-center justify-center space-x-3 text-renkon-beige/85">
+                                <i class="fas fa-check-circle text-renkon-orange text-lg md:text-xl"></i>
+                                <span class="font-medium text-sm md:text-base">Gwarancja jakości</span>
                             </div>
-                            <div class="flex items-center justify-center space-x-3 text-renkon-beige">
-                                <i class="fas fa-clock text-renkon-orange text-xl"></i>
-                                <span class="font-medium">Terminowość</span>
+                            <div class="flex items-center justify-center space-x-3 text-renkon-beige/85">
+                                <i class="fas fa-clock text-renkon-orange text-lg md:text-xl"></i>
+                                <span class="font-medium text-sm md:text-base">Terminowość</span>
                             </div>
-                            <div class="flex items-center justify-center space-x-3 text-renkon-beige">
-                                <i class="fas fa-users text-renkon-orange text-xl"></i>
-                                <span class="font-medium">Zadowoleni klienci</span>
+                            <div class="flex items-center justify-center space-x-3 text-renkon-beige/85">
+                                <i class="fas fa-users text-renkon-orange text-lg md:text-xl"></i>
+                                <span class="font-medium text-sm md:text-base">Zadowoleni klienci</span>
                             </div>
                         </div>
                         
-                        <a href="#contact" class="group inline-flex items-center bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-5 rounded-xl text-xl font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-renkon-orange/20">
-                            <i class="fas fa-phone mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
-                            Skontaktuj się z Ekspertem
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
+                        <a href="#contact" class="group inline-flex items-center bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 md:px-12 py-4 md:py-6 rounded-xl md:rounded-2xl text-lg md:text-xl font-medium transition-all transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-renkon-orange/20">
+                            <i class="fas fa-phone mr-2 md:mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                            <span class="hidden sm:inline">Skontaktuj się</span>
+                            <span class="sm:hidden">Kontakt</span>
+                            <i class="fas fa-arrow-right ml-2 md:ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
                         </a>
                     </div>
                 </div>
@@ -865,427 +1136,534 @@
     </section>
 
     <!-- References Section -->
-    <section id="references" class="py-24 bg-gradient-to-br from-renkon-dark-2 via-renkon-dark to-renkon-dark-2 relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-5">
-            <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 25% 25%, #dd8500 2px, transparent 2px), radial-gradient(circle at 75% 75%, #dd8500 2px, transparent 2px); background-size: 60px 60px;"></div>
+    <section id="references" class="py-32 bg-gradient-to-br from-renkon-dark via-renkon-dark-2 to-renkon-dark relative overflow-hidden">
+        <!-- Subtle Background Pattern -->
+        <div class="absolute inset-0 opacity-3">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: linear-gradient(90deg, transparent 98%, #dd8500 100%), linear-gradient(0deg, transparent 98%, #dd8500 100%); background-size: 100px 100px;"></div>
         </div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <!-- Section Header -->
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-renkon-orange/10 rounded-2xl mb-6">
-                    <i class="fas fa-quote-right text-renkon-orange text-2xl"></i>
+            <div class="text-center mb-24">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-renkon-orange/5 to-renkon-orange/10 rounded-3xl mb-8 border border-renkon-orange/10">
+                    <i class="fas fa-star text-renkon-orange text-3xl"></i>
                 </div>
-                <h3 class="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-                    Referencje <span class="text-renkon-orange">Klientów</span>
-                </h3>
-                <div class="w-24 h-1 bg-gradient-to-r from-renkon-orange to-orange-600 mx-auto mb-8"></div>
-                <p class="text-xl text-renkon-beige max-w-4xl mx-auto leading-relaxed">
+                <h1 class="text-5xl md:text-6xl font-light text-white mb-8 tracking-tight">
+                    <span class="text-renkon-orange font-medium">Referencje</span> Klientów
+                </h1>
+                <div class="w-32 h-px bg-gradient-to-r from-transparent via-renkon-orange to-transparent mx-auto mb-10"></div>
+                <p class="text-xl text-renkon-beige/90 max-w-3xl mx-auto leading-relaxed font-light">
                     Opinie naszych zadowolonych klientów o jakości wykonanych usług. 
                     Każdy projekt to historia sukcesu i zaufania.
                 </p>
             </div>
-            
-            <!-- Grid container -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <!-- Reference Card 1: Zamek Wawel -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 testimonial-card flex flex-col h-full">
-                    <!-- Background Pattern -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <!-- Card Header -->
-                    <div class="relative flex items-start justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-crown text-renkon-orange text-xl"></i>
+            <!-- Desktop Layout (Hidden on mobile) -->
+            <div class="hidden lg:block">
+                <!-- All References Grid -->
+                <div class="grid grid-cols-3 gap-10">
+                    <!-- Reference 1: Zamek Wawel -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-crown text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                </div>
                             </div>
-                            <div class="flex items-center space-x-1">
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Zamek Królewski na Wawelu</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                "Prace zostały wykonane w terminie i z należytą starannością."
+                            </p>
+                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Państwowe Zbiory Sztuki</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">200m² posadzki marmurowej</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Polerowanie + Krystalizacja</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Budynek nr 5 na Wawelu</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-quote-right text-lg"></i>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial Content -->
-                    <div class="relative mb-6 testimonial-content">
-                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3 text-lg">
-                            "Prace zostały wykonane w terminie, z należytą starannością. Właściciel firmy bardzo profesjonalny i kompetentny. Polecam wszystkim, którzy szukają solidnej firmy do renowacji marmuru."
-                        </p>
-                        <button class="text-renkon-orange font-semibold text-sm mt-3 hover:underline read-more-btn group-hover:text-orange-400 transition-colors duration-300">Pokaż więcej</button>
-                    </div>
-
-                    <!-- Separator -->
-                    <hr class="border-renkon-dark-4 my-4"/>
-
-                    <!-- Client Info -->
-                    <div class="mb-6">
-                        <h5 class="text-white font-semibold text-lg mb-1">Daniel H.</h5>
-                        <p class="text-sm text-renkon-beige mb-2">Zastępca dyrektora ds. inwestycyjno-technicznych</p>
-                        <p class="text-sm text-renkon-orange font-semibold">Zamek Królewski na Wawelu</p>
-                    </div>
-
-                    <!-- Project Info -->
-                    <div class="bg-gradient-to-r from-renkon-dark-4/50 to-renkon-dark-4/20 p-5 rounded-xl text-sm text-renkon-beige mb-6">
-                        <strong class="text-white">Renowacja 200m² posadzki marmurowej:</strong>
-                        <ul class="list-disc list-inside mt-2 space-y-1">
-                            <li>Polerowanie istniejącej posadzki</li>
-                            <li>Krystalizacja/impregnacja posadzki</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Card Footer (pushed to the bottom) -->
-                    <div class="mt-auto pt-4">
-                         <button onclick="openPdfModal('Zamek_Wawel.PDF')" class="w-full bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl">
-                            <i class="fas fa-file-pdf text-lg"></i>
-                            <span>Zobacz referencje (PDF)</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Reference Card 2: Urząd Miasta Krakowa -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 testimonial-card flex flex-col h-full">
-                    <!-- Background Pattern -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <!-- Card Header -->
-                    <div class="relative flex items-start justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-building text-renkon-orange text-xl"></i>
-                            </div>
-                            <div class="flex items-center space-x-1">
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
+                            
+                            <!-- PDF Preview Button -->
+                            <div class="mt-6">
+                                <a href="assets/documents/Zamek_Wawel.PDF" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-4 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-sm font-medium group">
+                                    <i class="fas fa-file-pdf text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                                    <span>Zobacz referencję</span>
+                                    <i class="fas fa-external-link-alt text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-quote-right text-lg"></i>
-                        </div>
                     </div>
 
-                    <!-- Testimonial Content -->
-                    <div class="relative mb-6 testimonial-content">
-                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3 text-lg">
-                            "Usługi zostały wykonane profesjonalnie, terminowo i z należytą starannością. Efekt końcowy przeszedł nasze najśmielsze oczekiwania. Na pewno skorzystamy ponownie z usług tej firmy."
-                        </p>
-                        <button class="text-renkon-orange font-semibold text-sm mt-3 hover:underline read-more-btn group-hover:text-orange-400 transition-colors duration-300">Pokaż więcej</button>
-                    </div>
-
-                    <!-- Separator -->
-                    <hr class="border-renkon-dark-4 my-4"/>
-
-                    <!-- Client Info -->
-                    <div class="mb-6">
-                        <h5 class="text-white font-semibold text-lg mb-1">Jacek F.</h5>
-                        <p class="text-sm text-renkon-beige mb-2">Z-ca Dyrektora Wydziału Obsługi Urzędu</p>
-                        <p class="text-sm text-renkon-orange font-semibold">Urząd Miasta Krakowa</p>
-                    </div>
-
-                    <!-- Project Info -->
-                    <div class="bg-gradient-to-r from-renkon-dark-4/50 to-renkon-dark-4/20 p-5 rounded-xl text-sm text-renkon-beige mb-6">
-                        <strong class="text-white">Renowacja 500m² posadzki lastrykowej:</strong>
-                        <ul class="list-disc list-inside mt-2 space-y-1">
-                            <li>Budynek Urzędu Miasta Krakowa</li>
-                            <li>Umowa nr W/I3332/OU/65/2020</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Card Footer (pushed to the bottom) -->
-                    <div class="mt-auto pt-4">
-                        <button onclick="openPdfModal('Wielopole.pdf')" class="w-full bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl">
-                            <i class="fas fa-file-pdf text-lg"></i>
-                            <span>Zobacz referencje (PDF)</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Reference Card 3: Bartosz K. -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 testimonial-card flex flex-col h-full">
-                    <!-- Background Pattern -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <!-- Card Header -->
-                    <div class="relative flex items-start justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                    <!-- Reference 2: Urząd Miasta Krakowa -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-building text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                </div>
                             </div>
-                            <div class="flex items-center space-x-1">
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Urząd Miasta Krakowa</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                "Usługi zostały wykonane profesjonalnie, terminowo i z należytą starannością."
+                            </p>
+                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Wydział Obsługi Urzędu</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">500m² posadzki lastrykowej</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Renowacja kompleksowa</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">ul. Wielopole 17a, Kraków</span>
+                                </div>
+                            </div>
+                            
+                            <!-- PDF Preview Button -->
+                            <div class="mt-6">
+                                <a href="assets/documents/Wielopole.pdf" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-4 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-sm font-medium group">
+                                    <i class="fas fa-file-pdf text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                                    <span>Zobacz referencję</span>
+                                    <i class="fas fa-external-link-alt text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-quote-right text-lg"></i>
-                        </div>
                     </div>
 
-                    <!-- Testimonial Content -->
-                    <div class="relative mb-6 testimonial-content">
-                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3 text-lg">
-                            "Kolejny raz renowacja marmuru wykonana perfekcyjnie. Polecam wszystkim zainteresowanym renowacją naturalnego kamienia."
-                        </p>
-                        <button class="text-renkon-orange font-semibold text-sm mt-3 hover:underline read-more-btn group-hover:text-orange-400 transition-colors duration-300">Pokaż więcej</button>
-                    </div>
-
-                    <!-- Separator -->
-                    <hr class="border-renkon-dark-4 my-4"/>
-
-                    <!-- Client Info -->
-                    <div class="mb-6">
-                        <h5 class="text-white font-semibold text-lg mb-1">Bartosz K.</h5>
-                        <p class="text-sm text-renkon-beige mb-2">Klient indywidualny</p>
-                        <p class="text-sm text-renkon-orange font-semibold">Renowacja marmuru</p>
-                    </div>
-
-                    <!-- Project Info -->
-                    <div class="bg-gradient-to-r from-renkon-dark-4/50 to-renkon-dark-4/20 p-5 rounded-xl text-sm text-renkon-beige mb-6">
-                        <strong class="text-white">Usługi wykonane:</strong>
-                        <ul class="list-disc list-inside mt-2 space-y-1">
-                            <li>Renowacja posadzki marmurowej</li>
-                            <li>Polerowanie i krystalizacja</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Card Footer (pushed to the bottom) -->
-                    <div class="mt-auto pt-4">
-                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
-                    </div>
-                </div>
-
-                <!-- Reference Card 4: Aleksander M. (dłuższy tekst dla demonstracji) -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 testimonial-card flex flex-col h-full">
-                    <!-- Background Pattern -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <!-- Card Header -->
-                    <div class="relative flex items-start justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                    <!-- Reference 3: Bartosz K. -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-user text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                </div>
                             </div>
-                            <div class="flex items-center space-x-1">
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Bartosz K.</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                "Kolejny raz renowacja marmuru wykonana perfekcyjnie. Polecam wszystkim zainteresowanym renowacją naturalnego kamienia."
+                            </p>
+                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Klient indywidualny</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Renowacja posadzki marmurowej</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Polerowanie + Krystalizacja</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-quote-right text-lg"></i>
-                        </div>
                     </div>
 
-                    <!-- Testimonial Content -->
-                    <div class="relative mb-6 testimonial-content">
-                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3 text-lg">
-                            "Jestem bardzo zadowolony z efektów. Wstępna wycena pokryła się z końcową. Właściciel bardzo kontaktowy, zasugerował dobre rozwiązania i zostawił kilka wskazówek jak dbać o takie schody w przyszłości. Polecam współpracę z firmą Renkon Stone. To prawdziwi profesjonaliści, którzy znają się na swojej pracy i podchodzą do klienta z pełnym zaangażowaniem. Schody wyglądają jak nowe!"
-                        </p>
-                        <button class="text-renkon-orange font-semibold text-sm mt-3 hover:underline read-more-btn group-hover:text-orange-400 transition-colors duration-300">Pokaż więcej</button>
-                    </div>
-
-                    <!-- Separator -->
-                    <hr class="border-renkon-dark-4 my-4"/>
-
-                    <!-- Client Info -->
-                    <div class="mb-6">
-                        <h5 class="text-white font-semibold text-lg mb-1">Aleksander M.</h5>
-                        <p class="text-sm text-renkon-beige mb-2">Klient indywidualny</p>
-                        <p class="text-sm text-renkon-orange font-semibold">Naprawa i renowacja schodów</p>
-                    </div>
-
-                    <!-- Project Info -->
-                    <div class="bg-gradient-to-r from-renkon-dark-4/50 to-renkon-dark-4/20 p-5 rounded-xl text-sm text-renkon-beige mb-6">
-                        <strong class="text-white">Usługi wykonane (marzec 2023):</strong>
-                        <ul class="list-disc list-inside mt-2 space-y-1">
-                            <li>Naprawa schodów lastryko</li>
-                            <li>Renowacja i polerowanie</li>
-                            <li>Konsultacja i wskazówki</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Card Footer (pushed to the bottom) -->
-                    <div class="mt-auto pt-4">
-                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
-                    </div>
-                </div>
-
-                <!-- Reference Card 5: Piotr G. -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 testimonial-card flex flex-col h-full">
-                    <!-- Background Pattern -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <!-- Card Header -->
-                    <div class="relative flex items-start justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                    <!-- Reference 4: Aleksander M. -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-stairs text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                </div>
                             </div>
-                            <div class="flex items-center space-x-1">
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Aleksander M.</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                "Jestem bardzo zadowolony z efektów. Właściciel bardzo kontaktowy, zasugerował dobre rozwiązania. Schody wyglądają jak nowe!"
+                            </p>
+                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Klient indywidualny</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Naprawa schodów lastryko</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Renowacja + Polerowanie</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-quote-right text-lg"></i>
-                        </div>
                     </div>
 
-                    <!-- Testimonial Content -->
-                    <div class="relative mb-6 testimonial-content">
-                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3 text-lg">
-                            "Solidnia robota w dobrej cenie. Polecam wszystkim szukającym profesjonalnej renowacji."
-                        </p>
-                        <button class="text-renkon-orange font-semibold text-sm mt-3 hover:underline read-more-btn group-hover:text-orange-400 transition-colors duration-300">Pokaż więcej</button>
-                    </div>
-
-                    <!-- Separator -->
-                    <hr class="border-renkon-dark-4 my-4"/>
-
-                    <!-- Client Info -->
-                    <div class="mb-6">
-                        <h5 class="text-white font-semibold text-lg mb-1">Piotr G.</h5>
-                        <p class="text-sm text-renkon-beige mb-2">Klient indywidualny</p>
-                        <p class="text-sm text-renkon-orange font-semibold">Usługi renowacyjne</p>
-                    </div>
-
-                    <!-- Project Info -->
-                    <div class="bg-gradient-to-r from-renkon-dark-4/50 to-renkon-dark-4/20 p-5 rounded-xl text-sm text-renkon-beige mb-6">
-                        <strong class="text-white">Kluczowe zalety:</strong>
-                        <ul class="list-disc list-inside mt-2 space-y-1">
-                            <li>Solidna jakość wykonania</li>
-                            <li>Konkurencyjna cena</li>
-                            <li>Profesjonalne podejście</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Card Footer (pushed to the bottom) -->
-                    <div class="mt-auto pt-4">
-                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
-                    </div>
-                </div>
-
-                <!-- Reference Card 6: Damian W. -->
-                <div class="group relative bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-4 p-8 rounded-2xl border border-renkon-dark-5 hover:border-renkon-orange/30 transition-all duration-500 hover:shadow-2xl hover:shadow-renkon-orange/10 hover:-translate-y-2 testimonial-card flex flex-col h-full">
-                    <!-- Background Pattern -->
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                    
-                    <!-- Card Header -->
-                    <div class="relative flex items-start justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-renkon-orange/20 to-renkon-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-quote-left text-renkon-orange text-xl"></i>
+                    <!-- Reference 5: Piotr G. -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-thumbs-up text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                </div>
                             </div>
-                            <div class="flex items-center space-x-1">
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
-                                <i class="fas fa-star text-renkon-orange text-sm"></i>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Piotr G.</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                "Solidnia robota w dobrej cenie. Polecam wszystkim szukającym profesjonalnej renowacji."
+                            </p>
+                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Klient indywidualny</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Usługi renowacyjne</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Solidna jakość + Dobra cena</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-renkon-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-quote-right text-lg"></i>
+                    </div>
+
+                    <!-- Reference 6: Damian W. -->
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
+                                    <i class="fas fa-award text-renkon-orange text-xl"></i>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                    <i class="fas fa-star text-renkon-orange text-lg"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-light text-white mb-4 group-hover:text-renkon-orange transition-colors duration-500">Damian W.</h3>
+                            <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
+                                "Fachowo za rozsądną cenę. Profesjonalne podejście i terminowość wykonania."
+                            </p>
+                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Klient indywidualny</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Usługi fachowe</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
+                                    <span class="font-light">Fachowość + Terminowość</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Testimonial Content -->
-                    <div class="relative mb-6 testimonial-content">
-                        <p class="text-renkon-beige leading-relaxed testimonial-text line-clamp-3 text-lg">
-                            "Fachowo za rozsądną cenę. Profesjonalne podejście i terminowość wykonania."
-                        </p>
-                        <button class="text-renkon-orange font-semibold text-sm mt-3 hover:underline read-more-btn group-hover:text-orange-400 transition-colors duration-300">Pokaż więcej</button>
-                    </div>
-
-                    <!-- Separator -->
-                    <hr class="border-renkon-dark-4 my-4"/>
-
-                    <!-- Client Info -->
-                    <div class="mb-6">
-                        <h5 class="text-white font-semibold text-lg mb-1">Damian W.</h5>
-                        <p class="text-sm text-renkon-beige mb-2">Klient indywidualny</p>
-                        <p class="text-sm text-renkon-orange font-semibold">Usługi fachowe</p>
-                    </div>
-
-                    <!-- Project Info -->
-                    <div class="bg-gradient-to-r from-renkon-dark-4/50 to-renkon-dark-4/20 p-5 rounded-xl text-sm text-renkon-beige mb-6">
-                        <strong class="text-white">Kluczowe zalety:</strong>
-                        <ul class="list-disc list-inside mt-2 space-y-1">
-                            <li>Fachowe wykonanie</li>
-                            <li>Rozsądna cena</li>
-                            <li>Profesjonalizm</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Card Footer (pushed to the bottom) -->
-                    <div class="mt-auto pt-4">
-                        <!-- Brak przycisku PDF - układ pozostaje spójny -->
                     </div>
                 </div>
             </div>
-            
-            <!-- Bottom CTA -->
-            <div class="text-center mt-24">
-                <div class="relative bg-gradient-to-r from-renkon-dark-3 to-renkon-dark-4 p-10 rounded-2xl border border-renkon-dark-5 max-w-5xl mx-auto overflow-hidden">
-                    <!-- Background Pattern -->
-                    <div class="absolute inset-0 opacity-5">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-renkon-orange rounded-full -translate-y-16 translate-x-16"></div>
-                        <div class="absolute bottom-0 left-0 w-24 h-24 bg-renkon-beige rounded-full translate-y-12 -translate-x-12"></div>
-                    </div>
-                    
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-renkon-orange/20 rounded-2xl mb-6">
-                            <i class="fas fa-users text-renkon-orange text-2xl"></i>
+
+            <!-- Mobile Carousel (Visible only on mobile) -->
+            <div class="lg:hidden">
+                <div id="references-carousel" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 -mx-4 px-4">
+                    <!-- Reference 1: Zamek Wawel -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-crown text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Zamek Królewski na Wawelu</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    "Prace zostały wykonane w terminie, z należytą starannością. Właściciel firmy bardzo profesjonalny i kompetentny."
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Daniel H. - Zastępca dyrektora</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">200m² posadzki marmurowej</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Polerowanie + Krystalizacja</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <h4 class="text-3xl font-bold text-white mb-6 leading-tight">
-                            Dołącz do grona <span class="text-renkon-orange">zadowolonych klientów</span>
-                        </h4>
-                        <div class="w-24 h-1 bg-gradient-to-r from-renkon-orange to-orange-600 mx-auto mb-8"></div>
-                        <p class="text-xl text-renkon-beige mb-8 max-w-3xl mx-auto leading-relaxed">
-                            RENKON STONE to gwarancja najwyższej jakości i profesjonalnego podejścia. 
-                            <span class="font-semibold text-white">Dołącz do setek zadowolonych klientów</span> i przekonaj się sam.
-                        </p>
-                        
-                        <!-- Trust Indicators -->
-                        <div class="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
-                            <div class="flex items-center justify-center space-x-3 text-renkon-beige">
-                                <i class="fas fa-star text-renkon-orange text-xl"></i>
-                                <span class="font-medium">5-gwiazdkowe oceny</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-3 text-renkon-beige">
-                                <i class="fas fa-thumbs-up text-renkon-orange text-xl"></i>
-                                <span class="font-medium">100% zadowolenia</span>
-                            </div>
-                            <div class="flex items-center justify-center space-x-3 text-renkon-beige">
-                                <i class="fas fa-award text-renkon-orange text-xl"></i>
-                                <span class="font-medium">Gwarancja jakości</span>
+                    </div>
+
+                    <!-- Reference 2: Urząd Miasta Krakowa -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-building text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Urząd Miasta Krakowa</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    "Usługi zostały wykonane profesjonalnie, terminowo i z należytą starannością. Efekt końcowy przeszedł nasze najśmielsze oczekiwania."
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Jacek F. - Z-ca Dyrektora</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">500m² posadzki lastrykowej</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Renowacja kompleksowa</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        
-                        <a href="#contact" class="group inline-flex items-center bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-5 rounded-xl text-xl font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-renkon-orange/20">
-                            <i class="fas fa-phone mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
-                            Zamów Bezpłatną Wycenę
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
-                        </a>
                     </div>
+
+                    <!-- Reference 3: Bartosz K. -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-user text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Bartosz K.</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    "Kolejny raz renowacja marmuru wykonana perfekcyjnie. Polecam wszystkim zainteresowanym renowacją naturalnego kamienia."
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Klient indywidualny</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Renowacja posadzki marmurowej</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Polerowanie + Krystalizacja</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reference 4: Aleksander M. -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-stairs text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Aleksander M.</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    "Jestem bardzo zadowolony z efektów. Właściciel bardzo kontaktowy, zasugerował dobre rozwiązania. Schody wyglądają jak nowe!"
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Klient indywidualny</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Naprawa schodów lastryko</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Renowacja + Polerowanie</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reference 5: Piotr G. -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-thumbs-up text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Piotr G.</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    "Solidnia robota w dobrej cenie. Polecam wszystkim szukającym profesjonalnej renowacji."
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Klient indywidualny</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Usługi renowacyjne</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Solidna jakość + Dobra cena</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reference 6: Damian W. -->
+                    <div class="flex-shrink-0 w-80 snap-start px-2">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
+                                        <i class="fas fa-award text-renkon-orange text-xl"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                        <i class="fas fa-star text-renkon-orange text-sm"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-light text-white mb-4">Damian W.</h3>
+                                <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
+                                    "Fachowo za rozsądną cenę. Profesjonalne podejście i terminowość wykonania."
+                                </p>
+                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Klient indywidualny</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Usługi fachowe</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
+                                        <span class="font-light">Fachowość + Terminowość</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Carousel Indicators -->
+                <div id="references-indicators" class="flex justify-center space-x-2 mt-8">
+                    <div class="indicator-dot w-2 h-2 bg-renkon-orange rounded-full transition-all duration-300 cursor-pointer" data-index="0"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="1"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="2"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="3"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="4"></div>
+                    <div class="indicator-dot w-2 h-2 bg-renkon-dark-5 rounded-full transition-all duration-300 cursor-pointer" data-index="5"></div>
                 </div>
             </div>
         </div>
@@ -1573,7 +1951,7 @@
                                 </div>
                                 <div>
                                     <h5 class="text-lg font-semibold text-white mb-1">Telefon</h5>
-                                    <p class="text-renkon-beige">+48 XXX XXX XXX</p>
+                                    <p class="text-renkon-beige">+48 504 298 623</p>
                                     <p class="text-sm text-renkon-orange font-medium mt-1">Dostępny 24/7</p>
                                 </div>
                             </div>
@@ -1647,7 +2025,7 @@
                                     <label class="block text-renkon-beige mb-3 font-medium" for="phone">Telefon <span class="text-renkon-orange">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-renkon-beige/50 text-sm"></i>
-                                        <input type="tel" id="phone" name="phone" required class="w-full bg-renkon-dark-4 border border-renkon-dark-5 rounded-xl px-12 py-4 text-white focus:outline-none focus:border-renkon-orange transition-all duration-300 placeholder-renkon-beige/50" placeholder="+48 XXX XXX XXX">
+                                        <input type="tel" id="phone" name="phone" required class="w-full bg-renkon-dark-4 border border-renkon-dark-5 rounded-xl px-12 py-4 text-white focus:outline-none focus:border-renkon-orange transition-all duration-300 placeholder-renkon-beige/50" placeholder="+48 504 298 623">
                                     </div>
                                 </div>
                             </div>
@@ -1730,7 +2108,7 @@
                             </div>
                         </div>
                         
-                        <a href="tel:+48XXXXXXXXX" class="group inline-flex items-center bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-5 rounded-xl text-xl font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-renkon-orange/20">
+                        <a href="tel:+48504298623" class="group inline-flex items-center bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-5 rounded-xl text-xl font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-renkon-orange/20">
                             <i class="fas fa-phone mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
                             Zadzwoń Teraz
                             <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
@@ -1772,7 +2150,7 @@
                         <div class="space-y-3">
                             <div class="flex items-center space-x-3 text-renkon-beige">
                                 <i class="fas fa-phone text-renkon-orange text-sm"></i>
-                                <span>+48 XXX XXX XXX</span>
+                                <span>+48 504 298 623</span>
                             </div>
                             <div class="flex items-center space-x-3 text-renkon-beige">
                                 <i class="fas fa-envelope text-renkon-orange text-sm"></i>
@@ -1937,6 +2315,93 @@
     
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Services Carousel Functionality
+        const servicesCarousel = document.getElementById('services-carousel');
+        const servicesIndicatorDots = document.querySelectorAll('#services-indicators .indicator-dot');
+        
+        if (servicesCarousel && servicesIndicatorDots.length > 0) {
+            const cardWidth = 320; // w-80 = 320px
+            const totalCards = 6;
+            
+            // Function to update active indicator
+            function updateActiveIndicator() {
+                const scrollLeft = servicesCarousel.scrollLeft;
+                const currentIndex = Math.round(scrollLeft / cardWidth);
+                
+                // Update all indicators
+                servicesIndicatorDots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.remove('bg-renkon-dark-5');
+                        dot.classList.add('bg-renkon-orange');
+                    } else {
+                        dot.classList.remove('bg-renkon-orange');
+                        dot.classList.add('bg-renkon-dark-5');
+                    }
+                });
+            }
+            
+            // Add scroll event listener to carousel
+            servicesCarousel.addEventListener('scroll', updateActiveIndicator);
+            
+            // Add click event listeners to indicators
+            servicesIndicatorDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const targetScrollLeft = index * cardWidth;
+                    servicesCarousel.scrollTo({
+                        left: targetScrollLeft,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Initialize active indicator
+            updateActiveIndicator();
+        }
+
+        // References Carousel Functionality
+        const referencesCarousel = document.getElementById('references-carousel');
+        const referencesIndicatorDots = document.querySelectorAll('#references-indicators .indicator-dot');
+        
+        if (referencesCarousel && referencesIndicatorDots.length > 0) {
+            const cardWidth = 320; // w-80 = 320px
+            const totalCards = 6;
+            
+            // Function to update active indicator
+            function updateReferencesActiveIndicator() {
+                const scrollLeft = referencesCarousel.scrollLeft;
+                const currentIndex = Math.round(scrollLeft / cardWidth);
+                
+                // Update all indicators
+                referencesIndicatorDots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.remove('bg-renkon-dark-5');
+                        dot.classList.add('bg-renkon-orange');
+                    } else {
+                        dot.classList.remove('bg-renkon-orange');
+                        dot.classList.add('bg-renkon-dark-5');
+                    }
+                });
+            }
+            
+            // Add scroll event listener to carousel
+            referencesCarousel.addEventListener('scroll', updateReferencesActiveIndicator);
+            
+            // Add click event listeners to indicators
+            referencesIndicatorDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const targetScrollLeft = index * cardWidth;
+                    referencesCarousel.scrollTo({
+                        left: targetScrollLeft,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Initialize active indicator
+            updateReferencesActiveIndicator();
+        }
+
+        // Testimonial Cards Functionality
         const testimonialCards = document.querySelectorAll('.testimonial-card');
 
         testimonialCards.forEach(card => {
