@@ -2,7 +2,7 @@
 <html lang="pl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="RENKON STONE Jacek Jarosz - Specjaliści od szlifowania, renowacji i konserwacji marmuru oraz lastryko. Ponad 15 lat doświadczenia w Polsce, Anglii i Irlandii.">
     <meta name="keywords" content="szlifowanie marmuru, szlifowanie lastryko, renowacja marmuru, krystalizacja, impregnacja, naprawa ubytków">
     <meta name="author" content="RENKON STONE Jacek Jarosz">
@@ -248,6 +248,43 @@
         .contact-btn:hover,
         .contact-btn:focus,
         .contact-btn:active {
+            
+        /* Fix viewport height issues for mobile sharing */
+        @supports (-webkit-touch-callout: none) {
+            .min-h-screen {
+                min-height: -webkit-fill-available;
+            }
+        }
+        
+        /* Ensure hero section content is always visible */
+        .hero-gradient {
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height for modern browsers */
+        }
+        
+        /* Mobile-specific hero adjustments */
+        @media (max-width: 768px) {
+            .hero-gradient {
+                min-height: 100vh;
+                min-height: 100dvh;
+                padding-top: 4rem;
+                padding-bottom: 2rem;
+            }
+            
+            /* Ensure hero content is properly spaced on mobile */
+            #home .flex.flex-col.lg\:flex-row {
+                min-height: calc(100vh - 8rem);
+                min-height: calc(100dvh - 8rem);
+            }
+        }
+        
+        /* Additional safety for hero content visibility */
+        #home .animate-fade-in {
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
             color: white !important;
         }
         
@@ -371,10 +408,10 @@
             <div class="absolute top-0 left-0 w-full h-full" style="background-image: linear-gradient(rgba(221, 133, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(221, 133, 0, 0.05) 1px, transparent 1px); background-size: 80px 80px;"></div>
         </div>
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-8">
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-20 items-center">
                 <!-- Content Section -->
-                <div class="animate-fade-in flex-1 flex flex-col justify-center min-h-[calc(100vh-6rem)] lg:min-h-0 w-full">
+                <div class="animate-fade-in flex-1 flex flex-col justify-center w-full">
                     <!-- Professional Badge -->
                     <div class="inline-flex items-center space-x-2 sm:space-x-3 bg-renkon-dark-3/50 text-renkon-orange px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-renkon-dark-4">
                         <i class="fas fa-award text-renkon-orange"></i>
@@ -1163,10 +1200,10 @@
                 <!-- All References Grid -->
                 <div class="grid grid-cols-3 gap-10">
                     <!-- Reference 1: Zamek Wawel -->
-                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm flex flex-col h-full">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
                         <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div class="relative z-10">
+                        <div class="relative z-10 flex flex-col h-full">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
                                     <i class="fas fa-crown text-renkon-orange text-xl"></i>
@@ -1183,7 +1220,7 @@
                             <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
                                 "Prace zostały wykonane w terminie i z należytą starannością."
                             </p>
-                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                            <div class="space-y-3 text-sm text-renkon-beige/75 flex-grow">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
                                     <span class="font-light">Państwowe Zbiory Sztuki</span>
@@ -1203,7 +1240,7 @@
                             </div>
                             
                             <!-- PDF Preview Button -->
-                            <div class="mt-6">
+                            <div class="mt-auto pt-6">
                                 <a href="assets/documents/Zamek_Wawel.PDF" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-4 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-sm font-medium group">
                                     <i class="fas fa-file-pdf text-lg group-hover:scale-110 transition-transform duration-300"></i>
                                     <span>Zobacz referencję</span>
@@ -1214,10 +1251,10 @@
                     </div>
 
                     <!-- Reference 2: Urząd Miasta Krakowa -->
-                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm">
+                    <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-10 rounded-3xl border border-renkon-dark-5/50 hover:border-renkon-orange/20 transition-all duration-700 hover:shadow-2xl hover:shadow-renkon-orange/5 hover:-translate-y-2 overflow-hidden backdrop-blur-sm flex flex-col h-full">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-700"></div>
                         <div class="absolute inset-0 bg-gradient-to-br from-renkon-orange/2 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div class="relative z-10">
+                        <div class="relative z-10 flex flex-col h-full">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 border border-renkon-orange/10">
                                     <i class="fas fa-building text-renkon-orange text-xl"></i>
@@ -1234,7 +1271,7 @@
                             <p class="text-renkon-beige/85 leading-relaxed mb-6 text-base font-light">
                                 "Usługi zostały wykonane profesjonalnie, terminowo i z należytą starannością."
                             </p>
-                            <div class="space-y-3 text-sm text-renkon-beige/75">
+                            <div class="space-y-3 text-sm text-renkon-beige/75 flex-grow">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-1.5 h-1.5 bg-renkon-orange rounded-full"></div>
                                     <span class="font-light">Wydział Obsługi Urzędu</span>
@@ -1254,7 +1291,7 @@
                             </div>
                             
                             <!-- PDF Preview Button -->
-                            <div class="mt-6">
+                            <div class="mt-auto pt-6">
                                 <a href="assets/documents/Wielopole.pdf" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-4 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-sm font-medium group">
                                     <i class="fas fa-file-pdf text-lg group-hover:scale-110 transition-transform duration-300"></i>
                                     <span>Zobacz referencję</span>
@@ -1423,9 +1460,9 @@
                 <div id="references-carousel" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 -mx-4 px-4">
                     <!-- Reference 1: Zamek Wawel -->
                     <div class="flex-shrink-0 w-80 snap-start px-2">
-                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm flex flex-col">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                            <div class="relative z-10">
+                            <div class="relative z-10 flex flex-col h-full">
                                 <div class="flex items-center justify-between mb-6">
                                     <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
                                         <i class="fas fa-crown text-renkon-orange text-xl"></i>
@@ -1442,7 +1479,7 @@
                                 <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
                                     "Prace zostały wykonane w terminie, z należytą starannością. Właściciel firmy bardzo profesjonalny i kompetentny."
                                 </p>
-                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                <ul class="space-y-2 text-xs text-renkon-beige/75 flex-grow">
                                     <li class="flex items-center space-x-3">
                                         <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
                                         <span class="font-light">Daniel H. - Zastępca dyrektora</span>
@@ -1456,15 +1493,24 @@
                                         <span class="font-light">Polerowanie + Krystalizacja</span>
                                     </li>
                                 </ul>
+                                
+                                <!-- PDF Preview Button -->
+                                <div class="mt-auto pt-4">
+                                    <a href="assets/documents/Zamek_Wawel.PDF" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-3 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-xs font-medium group w-full justify-center">
+                                        <i class="fas fa-file-pdf text-sm group-hover:scale-110 transition-transform duration-300"></i>
+                                        <span>Zobacz referencję</span>
+                                        <i class="fas fa-external-link-alt text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Reference 2: Urząd Miasta Krakowa -->
                     <div class="flex-shrink-0 w-80 snap-start px-2">
-                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm">
+                        <div class="group relative bg-gradient-to-br from-renkon-dark-3/50 to-renkon-dark-4/30 p-8 rounded-3xl border border-renkon-dark-5/50 transition-all duration-500 h-full backdrop-blur-sm flex flex-col">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-renkon-orange/5 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
-                            <div class="relative z-10">
+                            <div class="relative z-10 flex flex-col h-full">
                                 <div class="flex items-center justify-between mb-6">
                                     <div class="w-16 h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
                                         <i class="fas fa-building text-renkon-orange text-xl"></i>
@@ -1481,7 +1527,7 @@
                                 <p class="text-renkon-beige/85 leading-relaxed mb-6 text-sm font-light">
                                     "Usługi zostały wykonane profesjonalnie, terminowo i z należytą starannością. Efekt końcowy przeszedł nasze najśmielsze oczekiwania."
                                 </p>
-                                <ul class="space-y-2 text-xs text-renkon-beige/75">
+                                <ul class="space-y-2 text-xs text-renkon-beige/75 flex-grow">
                                     <li class="flex items-center space-x-3">
                                         <div class="w-1 h-1 bg-renkon-orange rounded-full"></div>
                                         <span class="font-light">Jacek F. - Z-ca Dyrektora</span>
@@ -1495,6 +1541,15 @@
                                         <span class="font-light">Renowacja kompleksowa</span>
                                     </li>
                                 </ul>
+                                
+                                <!-- PDF Preview Button -->
+                                <div class="mt-auto pt-4">
+                                    <a href="assets/documents/Wielopole.pdf" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-3 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-xs font-medium group w-full justify-center">
+                                        <i class="fas fa-file-pdf text-sm group-hover:scale-110 transition-transform duration-300"></i>
+                                        <span>Zobacz referencję</span>
+                                        <i class="fas fa-external-link-alt text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
