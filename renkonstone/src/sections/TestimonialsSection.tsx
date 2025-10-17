@@ -9,102 +9,63 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
-  const [expanded, setExpanded] = useState(false);
-  const needsExpand = testimonial.text.length > testimonial.shortText.length;
-
   return (
     <Card
-      hover={testimonial.featured}
-      className={`p-6 md:p-8 h-full flex flex-col ${
-        testimonial.featured
-          ? 'border-2 border-renkon-orange/30 bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-2'
-          : ''
-      }`}
+      hover
+      className="p-6 md:p-8 h-full flex flex-col bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-2 border-renkon-dark-4"
     >
-      {testimonial.featured && (
-        <div className="mb-4 inline-flex items-center space-x-2 bg-renkon-orange/20 text-renkon-orange px-3 py-1 rounded-full text-xs font-semibold self-start">
-          <i className="fas fa-star" />
-          <span>Wyróżniona opinia</span>
-        </div>
-      )}
-
-      {/* Icon and Rating */}
-      <div className="flex items-center justify-between mb-6">
-        {testimonial.icon && (
-          <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-renkon-orange/10 to-renkon-orange/5 rounded-2xl flex items-center justify-center border border-renkon-orange/10">
-            <i className={`fas ${testimonial.icon} text-renkon-orange text-lg md:text-xl`} />
-          </div>
-        )}
-        {/* Rating */}
-        <div className="flex space-x-1">
-          {[...Array(testimonial.rating)].map((_, i) => (
-            <i key={i} className="fas fa-star text-renkon-orange text-sm md:text-lg" />
-          ))}
-        </div>
+      {/* Quote Icon */}
+      <div className="mb-6">
+        <i className="fas fa-quote-left text-3xl md:text-4xl text-renkon-orange/30" />
       </div>
 
       {/* Testimonial Text */}
-      <p className="text-renkon-beige/90 leading-relaxed mb-6 flex-grow text-sm md:text-base">
-        {expanded ? testimonial.text : testimonial.shortText}
+      <p className="text-base md:text-lg text-white leading-relaxed mb-6 flex-grow font-light italic">
+        "{testimonial.text}"
       </p>
 
-      {/* Details List */}
-      {testimonial.details && (
-        <ul className="space-y-2 text-xs md:text-sm text-renkon-beige/75 mb-4 flex-grow">
-          {testimonial.details.map((detail, index) => (
-            <li key={index} className="flex items-center space-x-3">
-              <div className="w-1.5 h-1.5 bg-renkon-orange rounded-full flex-shrink-0"></div>
-              <span className="font-light">{detail}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* Author Info */}
+      <div className="mb-4">
+        <h5 className="text-lg md:text-xl font-semibold text-white mb-2">{testimonial.name}</h5>
+        <p className="text-sm text-renkon-beige/80 mb-3">{testimonial.company}</p>
+        
+        {/* Details List */}
+        {testimonial.details && (
+          <ul className="space-y-2 text-sm text-renkon-beige/70 mb-4">
+            {testimonial.details.map((detail, index) => (
+              <li key={index} className="flex items-center space-x-2">
+                <i className="fas fa-check text-renkon-orange text-xs" />
+                <span>{detail}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {/* PDF Link Button */}
       {testimonial.pdfLink && (
-        <div className="mt-auto pt-4">
+        <div className="mt-auto">
           <a
             href={testimonial.pdfLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-renkon-orange/10 to-orange-600/10 hover:from-renkon-orange/20 hover:to-orange-600/20 text-renkon-orange hover:text-orange-600 px-3 md:px-4 py-2 rounded-lg border border-renkon-orange/20 hover:border-renkon-orange/40 transition-all duration-300 text-xs md:text-sm font-medium group"
+            className="inline-flex items-center justify-center space-x-2 w-full bg-renkon-orange hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition-all duration-300 text-sm font-semibold group"
           >
-            <i className="fas fa-file-pdf text-sm md:text-lg group-hover:scale-110 transition-transform duration-300"></i>
-            <span>Zobacz referencję</span>
-            <i className="fas fa-external-link-alt text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+            {testimonial.pdfLink.includes('google') ? (
+              <>
+                <i className="fab fa-google group-hover:scale-110 transition-transform duration-300"></i>
+                <span>Zobacz Opinię</span>
+              </>
+            ) : (
+              <>
+                <i className="fas fa-file-pdf group-hover:scale-110 transition-transform duration-300"></i>
+                <span>Zobacz Referencję</span>
+              </>
+            )}
+            <i className="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
           </a>
         </div>
       )}
-
-      {/* Expand Button */}
-      {needsExpand && (
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="text-renkon-orange hover:text-orange-400 text-sm font-medium mb-4 self-start transition-colors"
-        >
-          {expanded ? (
-            <>
-              Pokaż mniej <i className="fas fa-chevron-up ml-1" />
-            </>
-          ) : (
-            <>
-              Pokaż więcej <i className="fas fa-chevron-down ml-1" />
-            </>
-          )}
-        </button>
-      )}
-
-      {/* Author Info */}
-      <div className="pt-4 border-t border-renkon-dark-5">
-        <h5 className="text-white font-semibold mb-1">{testimonial.name}</h5>
-        <p className="text-sm text-renkon-beige/75">{testimonial.company}</p>
-        {testimonial.location && (
-          <p className="text-xs text-renkon-beige/60 mt-1">
-            <i className="fas fa-map-marker-alt mr-1" />
-            {testimonial.location}
-          </p>
-        )}
-      </div>
     </Card>
   );
 };
@@ -188,11 +149,11 @@ export const TestimonialsSection: React.FC = () => {
               Referencje <span className="text-renkon-orange font-medium">Klientów</span>
             </>
           }
-          subtitle="Zobacz, co mówią o nas nasi klienci - od prywatnych inwestorów po największe instytucje"
+          subtitle="Opinie naszych zadowolonych klientów o jakości wykonanych usług. Każdy projekt to historia sukcesu i zaufania."
         />
 
         {isDesktop ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
             {testimonials.map((testimonial, index) => (
               <div key={testimonial.id} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                 <TestimonialCard testimonial={testimonial} />
@@ -200,8 +161,42 @@ export const TestimonialsSection: React.FC = () => {
             ))}
           </div>
         ) : (
-          <TestimonialsCarousel />
+          <div className="mb-12">
+            <TestimonialsCarousel />
+          </div>
         )}
+
+        {/* Google Reviews CTA */}
+        <div className="max-w-3xl mx-auto">
+          <div className="relative p-8 md:p-10 rounded-2xl bg-gradient-to-br from-renkon-orange/10 via-renkon-dark-2 to-renkon-orange/5 border border-renkon-orange/30 text-center">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-renkon-orange to-transparent" />
+            
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-renkon-orange/20 rounded-2xl flex items-center justify-center">
+                <i className="fab fa-google text-renkon-orange text-3xl" />
+              </div>
+            </div>
+
+            <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+              Przeczytaj pozostałe opinie w Google
+            </h3>
+            
+            <p className="text-base md:text-lg text-renkon-beige mb-8 leading-relaxed">
+              Zobacz, co jeszcze mówią o nas nasi klienci. Ich satysfakcja jest naszą najlepszą rekomendacją.
+            </p>
+
+            <a
+              href="https://share.google/Cb3nwU8ytIxrLxpqP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-3 bg-renkon-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl transition-all duration-300 text-base font-semibold shadow-lg hover:shadow-xl hover:scale-105 group"
+            >
+              <i className="fab fa-google text-xl" />
+              <span>Zobacz Opinie</span>
+              <i className="fas fa-external-link-alt text-sm group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
+          </div>
+        </div>
       </div>
     </Section>
   );

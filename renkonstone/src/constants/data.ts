@@ -63,11 +63,10 @@ export const testimonials: Testimonial[] = [
     featured: true,
     details: [
       'Państwowe Zbiory Sztuki',
-      '200m² posadzki marmurowej',
-      'Polerowanie + Krystalizacja',
-      'Budynek nr 5 na Wawelu'
+      'Budynek nr 5 na Wawelu',
+      '200m² posadzki marmurowej'
     ],
-    pdfLink: 'assets/documents/Zamek_Wawel.PDF'
+    pdfLink: '/assets/documents/Zamek_Wawel.PDF'
   },
   {
     id: 2,
@@ -82,10 +81,9 @@ export const testimonials: Testimonial[] = [
     details: [
       'Wydział Obsługi Urzędu',
       '500m² posadzki lastrykowej',
-      'Renowacja kompleksowa',
-      'ul. Wielopole 17a, Kraków'
+      'Renowacja kompleksowa'
     ],
-    pdfLink: 'assets/documents/Wielopole.pdf'
+    pdfLink: '/assets/documents/Wielopole.pdf'
   },
   {
     id: 3,
@@ -100,52 +98,8 @@ export const testimonials: Testimonial[] = [
       'Klient indywidualny',
       'Renowacja posadzki marmurowej',
       'Polerowanie + Krystalizacja'
-    ]
-  },
-  {
-    id: 4,
-    name: 'Aleksander M.',
-    company: 'Klient indywidualny',
-    location: '',
-    icon: 'fa-stairs',
-    text: 'Jestem bardzo zadowolony z efektów. Właściciel bardzo kontaktowy, zasugerował dobre rozwiązania. Schody wyglądają jak nowe!',
-    shortText: 'Jestem bardzo zadowolony z efektów. Właściciel bardzo kontaktowy, zasugerował dobre rozwiązania. Schody wyglądają jak nowe!',
-    rating: 5,
-    details: [
-      'Klient indywidualny',
-      'Naprawa schodów lastryko',
-      'Renowacja + Polerowanie'
-    ]
-  },
-  {
-    id: 5,
-    name: 'Piotr G.',
-    company: 'Klient indywidualny',
-    location: '',
-    icon: 'fa-thumbs-up',
-    text: 'Solidnia robota w dobrej cenie. Polecam wszystkim szukającym profesjonalnej renowacji.',
-    shortText: 'Solidnia robota w dobrej cenie. Polecam wszystkim szukającym profesjonalnej renowacji.',
-    rating: 5,
-    details: [
-      'Klient indywidualny',
-      'Usługi renowacyjne',
-      'Solidna jakość + Dobra cena'
-    ]
-  },
-  {
-    id: 6,
-    name: 'Damian W.',
-    company: 'Klient indywidualny',
-    location: '',
-    icon: 'fa-award',
-    text: 'Fachowo za rozsądną cenę. Profesjonalne podejście i terminowość wykonania.',
-    shortText: 'Fachowo za rozsądną cenę. Profesjonalne podejście i terminowość wykonania.',
-    rating: 5,
-    details: [
-      'Klient indywidualny',
-      'Usługi fachowe',
-      'Fachowość + Terminowość'
-    ]
+    ],
+    pdfLink: 'https://share.google/PV8IyesIg5IZJhWGW'
   },
 ];
 
