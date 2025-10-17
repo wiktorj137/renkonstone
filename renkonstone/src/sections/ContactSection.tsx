@@ -1,261 +1,187 @@
-import React, { useState } from 'react';
-import { Section, SectionHeader, Input, TextArea, Button, Card } from '@/components/ui';
-import { ContactFormData, FormErrors } from '@/types';
-import { validateForm } from '@/utils';
-import { services } from '@/constants/data';
+import React from 'react';
+import { Section, SectionHeader, Card } from '@/components/ui';
 
 export const ContactSection: React.FC = () => {
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
-  });
-  
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate
-    const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: '',
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitSuccess(false), 5000);
-    }, 2000);
-  };
-
   return (
     <Section id="contact" gradient>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          icon="fa-envelope"
+          icon="fa-phone"
           title={
             <>
               Skontaktuj się <span className="text-renkon-orange font-medium">z Nami</span>
             </>
           }
-          subtitle="Masz pytania? Potrzebujesz wyceny? Skontaktuj się z nami - odpowiemy w ciągu 24 godzin"
+          subtitle="Oferujemy bezpłatną wycenę i doradztwo techniczne. Skontaktuj się z nami telefonicznie lub mailowo."
         />
 
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Contact Form */}
-          <div className="lg:col-span-3">
-            <Card className="p-6 md:p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Input
-                    label="Imię i Nazwisko *"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Jan Kowalski"
-                    icon="fa-user"
-                    error={errors.name}
-                    required
-                  />
-                  
-                  <Input
-                    label="Email *"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="jan@example.com"
-                    icon="fa-envelope"
-                    error={errors.email}
-                    required
-                  />
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+          
+          {/* Left Column - Contact Info */}
+          <div className="space-y-6">
+            
+            {/* Phone Contact */}
+            <Card className="p-8 hover:border-renkon-orange/30 transition-all duration-300">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-14 h-14 bg-renkon-orange/20 rounded-xl flex items-center justify-center">
+                  <i className="fas fa-phone-alt text-renkon-orange text-xl" />
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Input
-                    label="Telefon *"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+48 123 456 789"
-                    icon="fa-phone"
-                    error={errors.phone}
-                    required
-                  />
-                  
-                  <div>
-                    <label className="block text-renkon-beige mb-2 font-medium">
-                      Rodzaj usługi *
-                    </label>
-                    <div className="relative">
-                      <i className="fas fa-cogs absolute left-4 top-1/2 transform -translate-y-1/2 text-renkon-beige z-10" />
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className={`w-full bg-renkon-dark-4 border ${
-                          errors.service ? 'border-red-500' : 'border-renkon-dark-5'
-                        } rounded-lg pl-12 pr-4 py-3 text-white focus:outline-none focus:border-renkon-orange transition-colors appearance-none`}
-                        required
-                      >
-                        <option value="">Wybierz usługę</option>
-                        {services.map(service => (
-                          <option key={service.id} value={service.title}>
-                            {service.title}
-                          </option>
-                        ))}
-                      </select>
-                      <i className="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-renkon-beige pointer-events-none" />
-                    </div>
-                    {errors.service && (
-                      <p className="text-red-500 text-sm mt-1">{errors.service}</p>
-                    )}
-                  </div>
-                </div>
-
-                <TextArea
-                  label="Wiadomość *"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Opisz szczegóły projektu..."
-                  rows={6}
-                  error={errors.message}
-                  required
-                />
-
-                <div className="flex items-center justify-between flex-wrap gap-4">
-                  <p className="text-sm text-renkon-beige/60">
-                    * Pola wymagane
-                  </p>
-                  
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    icon={isSubmitting ? '' : 'fa-paper-plane'}
-                    loading={isSubmitting}
-                    disabled={isSubmitting}
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-white mb-3">Telefon</h3>
+                  <a 
+                    href="tel:+48503298623"
+                    className="text-2xl font-bold text-renkon-orange hover:text-orange-400 transition-colors inline-block mb-3 hover:scale-105 transition-transform"
                   >
-                    {isSubmitting ? 'Wysyłanie...' : 'Wyślij Zapytanie'}
-                  </Button>
+                    +48 503 298 623
+                  </a>
+                  <p className="text-renkon-beige text-sm leading-relaxed">
+                    Zadzwoń, aby umówić się na bezpłatną wycenę lub uzyskać profesjonalne doradztwo techniczne.
+                  </p>
                 </div>
-              </form>
-
-              {/* Success Message */}
-              {submitSuccess && (
-                <div className="mt-6 bg-green-600/20 border border-green-600 text-green-100 px-6 py-4 rounded-lg animate-fade-in">
-                  <i className="fas fa-check-circle mr-2" />
-                  Dziękujemy za zapytanie! Skontaktujemy się z Państwem w ciągu 24 godzin.
-                </div>
-              )}
+              </div>
             </Card>
-          </div>
 
-          {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-6">
-            <Card className="p-6 md:p-8">
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
-                <i className="fas fa-phone text-renkon-orange mr-3" />
-                Dane Kontaktowe
-              </h3>
-              
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-sm text-renkon-beige/60 mb-2">Telefon</h4>
-                  <a href="tel:+48123456789" className="text-white hover:text-renkon-orange transition-colors flex items-center space-x-2">
-                    <i className="fas fa-mobile-alt" />
-                    <span>+48 123 456 789</span>
-                  </a>
-                  <a href="tel:+48987654321" className="text-white hover:text-renkon-orange transition-colors flex items-center space-x-2 mt-2">
-                    <i className="fas fa-mobile-alt" />
-                    <span>+48 987 654 321</span>
-                  </a>
+            {/* Email Contact */}
+            <Card className="p-8 hover:border-renkon-orange/30 transition-all duration-300">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-14 h-14 bg-renkon-orange/20 rounded-xl flex items-center justify-center">
+                  <i className="fas fa-envelope text-renkon-orange text-xl" />
                 </div>
-
-                <div>
-                  <h4 className="text-sm text-renkon-beige/60 mb-2">Email</h4>
-                  <a href="mailto:kontakt@renkonstone.pl" className="text-white hover:text-renkon-orange transition-colors flex items-center space-x-2">
-                    <i className="fas fa-envelope" />
-                    <span>kontakt@renkonstone.pl</span>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-white mb-3">Email</h3>
+                  <a 
+                    href="mailto:kontakt@renkonstone.pl"
+                    className="text-xl font-semibold text-renkon-orange hover:text-orange-400 transition-colors inline-block mb-3"
+                  >
+                    kontakt@renkonstone.pl
                   </a>
+                  <p className="text-renkon-beige text-sm leading-relaxed">
+                    Napisz do nas, a odpowiemy najszybciej jak to możliwe. Standardowy czas odpowiedzi to do 24h.
+                  </p>
                 </div>
+              </div>
+            </Card>
 
-                <div>
-                  <h4 className="text-sm text-renkon-beige/60 mb-2">Obszar działalności</h4>
-                  <div className="space-y-2 text-white">
-                    <div className="flex items-center space-x-2">
-                      <i className="fas fa-map-marker-alt text-renkon-orange" />
-                      <span>Polska</span>
+            {/* Working Hours */}
+            <Card className="p-8 hover:border-renkon-orange/30 transition-all duration-300">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-14 h-14 bg-renkon-orange/20 rounded-xl flex items-center justify-center">
+                  <i className="fas fa-clock text-renkon-orange text-xl" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-white mb-4">Godziny Pracy</h3>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center py-2 border-b border-renkon-dark-4/50">
+                      <span className="text-renkon-beige">Poniedziałek - Sobota</span>
+                      <span className="text-white font-semibold">8:00 - 20:00</span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <i className="fas fa-map-marker-alt text-renkon-orange" />
-                      <span>Anglia</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <i className="fas fa-map-marker-alt text-renkon-orange" />
-                      <span>Irlandia</span>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-renkon-beige">Niedziela</span>
+                      <span className="text-white font-semibold">Zamknięte</span>
                     </div>
                   </div>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-6 md:p-8 bg-gradient-to-br from-renkon-orange/10 to-transparent">
-              <h3 className="text-lg font-semibold text-white mb-4">
-                Godziny pracy
-              </h3>
-              <div className="space-y-2 text-renkon-beige">
-                <div className="flex justify-between">
-                  <span>Poniedziałek - Piątek:</span>
-                  <span className="font-semibold text-white">8:00 - 18:00</span>
+          </div>
+
+          {/* Right Column - Why Contact Us */}
+          <div>
+            <Card className="p-8 lg:p-10 h-full bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-2 border-renkon-orange/20">
+              <div className="flex flex-col h-full">
+                
+                <div className="mb-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-renkon-orange/20 rounded-2xl mb-4">
+                    <i className="fas fa-handshake text-renkon-orange text-2xl" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-3">
+                    Dlaczego warto się z nami skontaktować?
+                  </h3>
+                  <p className="text-renkon-beige leading-relaxed">
+                    Jesteśmy do Twojej dyspozycji, aby pomóc w realizacji Twojego projektu. Gwarantujemy profesjonalne podejście na każdym etapie współpracy.
+                  </p>
                 </div>
-                <div className="flex justify-between">
-                  <span>Sobota:</span>
-                  <span className="font-semibold text-white">9:00 - 14:00</span>
+
+                {/* Benefits List */}
+                <div className="space-y-4 flex-1">
+                  <div className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center mt-1">
+                      <i className="fas fa-check text-renkon-orange text-xs" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Bezpłatna Wycena</h4>
+                      <p className="text-sm text-renkon-beige/90">
+                        Otrzymasz szczegółową wycenę bez żadnych zobowiązań w ciągu 24h
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center mt-1">
+                      <i className="fas fa-check text-renkon-orange text-xs" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Doradztwo Techniczne</h4>
+                      <p className="text-sm text-renkon-beige/90">
+                        Pomożemy dobrać najlepsze rozwiązanie dostosowane do Twojego projektu
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center mt-1">
+                      <i className="fas fa-check text-renkon-orange text-xs" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Doświadczenie i Jakość</h4>
+                      <p className="text-sm text-renkon-beige/90">
+                        Ponad 15 lat doświadczenia w renowacji marmuru i lastryka
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center mt-1">
+                      <i className="fas fa-check text-renkon-orange text-xs" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Elastyczne Terminy</h4>
+                      <p className="text-sm text-renkon-beige/90">
+                        Dostosujemy się do Twojego harmonogramu i potrzeb projektu
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center mt-1">
+                      <i className="fas fa-check text-renkon-orange text-xs" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Gwarancja Jakości</h4>
+                      <p className="text-sm text-renkon-beige/90">
+                        Każda realizacja objęta jest gwarancją na wykonane usługi
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>Niedziela:</span>
-                  <span className="font-semibold text-white">Zamknięte</span>
+
+                {/* CTA Button */}
+                <div className="mt-8 pt-8 border-t border-renkon-dark-4">
+                  <a
+                    href="tel:+48503298623"
+                    className="block w-full bg-renkon-orange hover:bg-orange-600 text-white text-center px-8 py-4 rounded-xl transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 group"
+                  >
+                    <i className="fas fa-phone mr-3 group-hover:rotate-12 transition-transform duration-300" />
+                    Zadzwoń Teraz
+                  </a>
                 </div>
+
               </div>
             </Card>
           </div>
+
         </div>
       </div>
     </Section>

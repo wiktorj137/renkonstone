@@ -1,5 +1,5 @@
 import React from 'react';
-import { navLinks } from '@/constants/data';
+import { navLinks, services } from '@/constants/data';
 import { scrollToSection } from '@/utils';
 
 export const Footer: React.FC = () => {
@@ -33,32 +33,6 @@ export const Footer: React.FC = () => {
               Profesjonalne szlifowanie i renowacja marmuru oraz lastryko.
               Ponad 15 lat doświadczenia międzynarodowego.
             </p>
-            <div className="flex space-x-3">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-renkon-dark-4 hover:bg-renkon-orange rounded-lg flex items-center justify-center text-white transition-colors"
-              >
-                <i className="fab fa-facebook-f" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-renkon-dark-4 hover:bg-renkon-orange rounded-lg flex items-center justify-center text-white transition-colors"
-              >
-                <i className="fab fa-instagram" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-renkon-dark-4 hover:bg-renkon-orange rounded-lg flex items-center justify-center text-white transition-colors"
-              >
-                <i className="fab fa-linkedin-in" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -82,12 +56,9 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Nasze Usługi</h4>
             <ul className="space-y-2 text-sm text-renkon-beige/80">
-              <li>Szlifowanie Marmuru</li>
-              <li>Szlifowanie Lastryko</li>
-              <li>Kompleksowa Renowacja</li>
-              <li>Krystalizacja</li>
-              <li>Naprawa Ubytków</li>
-              <li>Paski Antypoślizgowe</li>
+              {services.map((service) => (
+                <li key={service.id}>{service.title}</li>
+              ))}
             </ul>
           </div>
 
@@ -97,36 +68,31 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm text-renkon-beige/80">
               <li className="flex items-start space-x-3">
                 <i className="fas fa-phone text-renkon-orange mt-1" />
-                <div>
-                  <p>+48 123 456 789</p>
-                  <p>+48 987 654 321</p>
-                </div>
+                <a 
+                  href="tel:+48503298623"
+                  className="hover:text-renkon-orange transition-colors"
+                >
+                  +48 503 298 623
+                </a>
               </li>
               <li className="flex items-start space-x-3">
                 <i className="fas fa-envelope text-renkon-orange mt-1" />
-                <p>kontakt@renkonstone.pl</p>
-              </li>
-              <li className="flex items-start space-x-3">
-                <i className="fas fa-map-marker-alt text-renkon-orange mt-1" />
-                <p>Polska, Anglia, Irlandia</p>
+                <a
+                  href="mailto:kontakt@renkonstone.pl"
+                  className="hover:text-renkon-orange transition-colors"
+                >
+                  kontakt@renkonstone.pl
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-renkon-dark-4 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-renkon-beige/60 text-sm text-center md:text-left">
+        <div className="border-t border-renkon-dark-4 mt-12 pt-8">
+          <p className="text-renkon-beige/60 text-sm text-center">
             © {new Date().getFullYear()} RENKON STONE. Wszelkie prawa zastrzeżone.
           </p>
-          <div className="flex space-x-6 text-sm text-renkon-beige/60">
-            <button className="hover:text-renkon-orange transition-colors">
-              Polityka Prywatności
-            </button>
-            <button className="hover:text-renkon-orange transition-colors">
-              Regulamin
-            </button>
-          </div>
         </div>
       </div>
     </footer>
