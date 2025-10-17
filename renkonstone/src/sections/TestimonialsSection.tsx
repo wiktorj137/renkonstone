@@ -108,7 +108,7 @@ const TestimonialsCarousel: React.FC = () => {
     <>
       <div
         ref={carouselRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-8 -mx-4 px-4"
+        className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 pb-8"
       >
         {testimonials.map((testimonial) => (
           <div key={testimonial.id} className="flex-shrink-0 w-80 sm:w-96 snap-start">

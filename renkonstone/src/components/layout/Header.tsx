@@ -19,6 +19,31 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const nav = document.querySelector('nav');
+      
+      // Check if click is outside the navigation
+      if (nav && !nav.contains(target)) {
+        closeMenu();
+      }
+    };
+
+    // Add a small delay to prevent immediate closing
+    const timeoutId = setTimeout(() => {
+      document.addEventListener('click', handleClickOutside);
+    }, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen, closeMenu]);
+
   const handleNavClick = (id: string, serviceId?: number) => {
     scrollToSection(`#${id}`);
     closeMenu();
@@ -64,11 +89,11 @@ export const Header: React.FC = () => {
               onClick={() => handleNavClick('home')}
               className="flex items-center space-x-4 group"
             >
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 transition-transform">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 transition-transform">
                 <img
                   src="/renkon-logo.jpg"
                   alt="RENKON STONE Logo"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-xl"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}

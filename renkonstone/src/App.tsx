@@ -24,7 +24,7 @@ function App() {
   }, [y]);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-hidden">
       {/* Scroll Progress Bar */}
       <div className="scroll-progress fixed top-0 left-0 h-1 bg-renkon-orange z-50 transition-all duration-150" />
       
