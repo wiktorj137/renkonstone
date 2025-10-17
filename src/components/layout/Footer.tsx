@@ -1,6 +1,7 @@
 import React from 'react';
 import { navLinks, services } from '@/constants/data';
 import { scrollToSection } from '@/utils';
+import logo from '/renkon-logo.jpg';
 
 export const Footer: React.FC = () => {
   const handleNavClick = (id: string) => {
@@ -16,7 +17,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg overflow-hidden">
                 <img
-                  src="/renkon-logo.jpg"
+                  src={logo}
                   alt="RENKON STONE Logo"
                   className="w-full h-full object-cover"
                   onError={(e) => {

@@ -1,4 +1,5 @@
 import { Service, Testimonial, Stat, Project } from '@/types';
+import { getAssetPath } from '@/utils/helpers';
 
 export const services: Service[] = [
   {
@@ -66,7 +67,7 @@ export const testimonials: Testimonial[] = [
       'Budynek nr 5 na Wawelu',
       '200m² posadzki marmurowej'
     ],
-    pdfLink: '/assets/documents/Zamek_Wawel.PDF'
+    pdfLink: getAssetPath('assets/documents/Zamek_Wawel.PDF')
   },
   {
     id: 2,
@@ -83,7 +84,7 @@ export const testimonials: Testimonial[] = [
       '500m² posadzki lastrykowej',
       'Renowacja kompleksowa'
     ],
-    pdfLink: '/assets/documents/Wielopole.pdf'
+    pdfLink: getAssetPath('assets/documents/Wielopole.pdf')
   },
   {
     id: 3,

@@ -3,6 +3,7 @@ import { navLinks, services } from '@/constants/data';
 import { scrollToSection } from '@/utils';
 import { useMobileMenu } from '@/hooks';
 import { Button } from '@/components/ui';
+import logo from '/renkon-logo.jpg';
 
 export const Header: React.FC = () => {
   const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
@@ -91,7 +92,7 @@ export const Header: React.FC = () => {
             >
               <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 transition-transform">
                 <img
-                  src="/renkon-logo.jpg"
+                  src={logo}
                   alt="RENKON STONE Logo"
                   className="w-full h-full object-cover rounded-xl"
                   onError={(e) => {
