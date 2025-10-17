@@ -230,17 +230,16 @@ export const ServicesSection: React.FC = () => {
               <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-10">
                 <div className="flex-shrink-0">
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-2xl shadow-lg">
-                    <i className="fas fa-award text-white text-4xl" />
+                    <i className="fas fa-lightbulb text-white text-4xl" />
                   </div>
                 </div>
                 
                 <div className="flex-grow text-center md:text-left">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                    Dlaczego <span className="text-renkon-orange">Warto?</span>
+                    Jak <span className="text-renkon-orange">Pracujemy?</span>
                   </h3>
                   <p className="text-renkon-beige/90 leading-relaxed">
-                    Łączymy <span className="text-white font-medium">wieloletnie doświadczenie</span> z <span className="text-white font-medium">najnowocześniejszymi technologiami</span>, 
-                    aby zapewnić najwyższą jakość każdej realizacji.
+                    Profesjonalne podejście na każdym etapie - od <span className="text-white font-medium">bezpłatnej wyceny</span> po <span className="text-white font-medium">gwarancję wykonanych prac</span>.
                   </p>
                 </div>
               </div>
@@ -250,15 +249,15 @@ export const ServicesSection: React.FC = () => {
                 <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
-                      <i className="fas fa-certificate text-renkon-orange text-xl" />
+                      <i className="fas fa-calculator text-renkon-orange text-xl" />
                     </div>
                   </div>
                   <div>
                     <h4 className="text-base font-semibold text-white mb-1.5">
-                      Ponad 15 Lat Doświadczenia
+                      Bezpłatna Wycena
                     </h4>
                     <p className="text-sm text-renkon-beige/80 leading-relaxed">
-                      Setki zrealizowanych projektów dla firm i instytucji
+                      Szczegółowa analiza i transparentna kalkulacja kosztów
                     </p>
                   </div>
                 </div>
@@ -266,15 +265,15 @@ export const ServicesSection: React.FC = () => {
                 <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
-                      <i className="fas fa-tools text-renkon-orange text-xl" />
+                      <i className="fas fa-clock text-renkon-orange text-xl" />
                     </div>
                   </div>
                   <div>
                     <h4 className="text-base font-semibold text-white mb-1.5">
-                      Profesjonalny Sprzęt
+                      Terminowość
                     </h4>
                     <p className="text-sm text-renkon-beige/80 leading-relaxed">
-                      Najnowocześniejsze maszyny do szlifowania i polerowania
+                      Dotrzymujemy ustalonych terminów realizacji projektów
                     </p>
                   </div>
                 </div>
@@ -282,15 +281,15 @@ export const ServicesSection: React.FC = () => {
                 <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
-                      <i className="fas fa-shield-alt text-renkon-orange text-xl" />
+                      <i className="fas fa-broom text-renkon-orange text-xl" />
                     </div>
                   </div>
                   <div>
                     <h4 className="text-base font-semibold text-white mb-1.5">
-                      Gwarancja Jakości
+                      Pełna Obsługa
                     </h4>
                     <p className="text-sm text-renkon-beige/80 leading-relaxed">
-                      Każda realizacja objęta gwarancją na wykonane usługi
+                      Od przygotowania powierzchni po końcowe sprzątanie
                     </p>
                   </div>
                 </div>
