@@ -167,36 +167,47 @@ export const TestimonialsSection: React.FC = () => {
         )}
 
         {/* Google Reviews CTA */}
-        <div className="max-w-3xl mx-auto">
-          <div className="relative p-8 md:p-10 rounded-2xl bg-gradient-to-br from-renkon-orange/10 via-renkon-dark-2 to-renkon-orange/5 border border-renkon-orange/30 text-center">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-renkon-orange to-transparent" />
-            
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 bg-renkon-orange/20 rounded-2xl flex items-center justify-center">
-                <i className="fab fa-google text-renkon-orange text-3xl" />
+        <Card className="relative overflow-hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-renkon-orange/30 max-w-5xl mx-auto">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-renkon-orange/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-renkon-orange/5 rounded-full blur-3xl" />
+          
+          <div className="relative p-8 md:p-12">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              
+              {/* Left side - Icon */}
+              <div className="flex-shrink-0">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-2xl shadow-lg">
+                  <i className="fab fa-google text-white text-4xl" />
+                </div>
               </div>
+
+              {/* Center - Content */}
+              <div className="flex-grow text-center md:text-left">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  Więcej opinii na <span className="text-renkon-orange">Google</span>
+                </h3>
+                <p className="text-renkon-beige/90 leading-relaxed">
+                  Zobacz pełne recenzje naszych klientów. Ich satysfakcja jest naszą najlepszą rekomendacją
+                </p>
+              </div>
+
+              {/* Right side - CTA Button */}
+              <div className="flex-shrink-0">
+                <a
+                  href="https://share.google/Cb3nwU8ytIxrLxpqP"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-3 bg-renkon-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl transition-all duration-300 font-bold text-base shadow-lg hover:shadow-xl hover:scale-105 group whitespace-nowrap"
+                >
+                  <span>Zobacz Opinie</span>
+                  <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+              </div>
+
             </div>
-
-            <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
-              Przeczytaj pozostałe opinie w Google
-            </h3>
-            
-            <p className="text-base md:text-lg text-renkon-beige mb-8 leading-relaxed">
-              Zobacz, co jeszcze mówią o nas nasi klienci. Ich satysfakcja jest naszą najlepszą rekomendacją.
-            </p>
-
-            <a
-              href="https://share.google/Cb3nwU8ytIxrLxpqP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-3 bg-renkon-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl transition-all duration-300 text-base font-semibold shadow-lg hover:shadow-xl hover:scale-105 group"
-            >
-              <i className="fab fa-google text-xl" />
-              <span>Zobacz Opinie</span>
-              <i className="fas fa-external-link-alt text-sm group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
           </div>
-        </div>
+        </Card>
       </div>
     </Section>
   );

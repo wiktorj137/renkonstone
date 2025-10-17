@@ -220,61 +220,80 @@ export const ServicesSection: React.FC = () => {
 
         {/* Bottom CTA */}
         <div className="max-w-6xl mx-auto">
-          <Card className="relative p-8 md:p-12 bg-gradient-to-br from-renkon-dark-2 via-renkon-dark-3 to-renkon-dark-2 border-renkon-orange/30">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-renkon-orange to-transparent" />
+          <Card className="relative overflow-hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-renkon-orange/30">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-renkon-orange/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-renkon-orange/5 rounded-full blur-3xl" />
             
-            {/* Header */}
-            <div className="text-center mb-10">
-              <div className="flex items-center justify-center mb-6">
-                <div className="w-16 h-16 bg-renkon-orange/20 rounded-2xl flex items-center justify-center">
-                  <i className="fas fa-award text-renkon-orange text-3xl" />
+            <div className="relative p-8 md:p-12">
+              {/* Header Section */}
+              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-10">
+                <div className="flex-shrink-0">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-2xl shadow-lg">
+                    <i className="fas fa-award text-white text-4xl" />
+                  </div>
+                </div>
+                
+                <div className="flex-grow text-center md:text-left">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                    Dlaczego <span className="text-renkon-orange">Warto?</span>
+                  </h3>
+                  <p className="text-renkon-beige/90 leading-relaxed">
+                    Łączymy <span className="text-white font-medium">wieloletnie doświadczenie</span> z <span className="text-white font-medium">najnowocześniejszymi technologiami</span>, 
+                    aby zapewnić najwyższą jakość każdej realizacji.
+                  </p>
                 </div>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Dlaczego <span className="text-renkon-orange">Warto?</span>
-              </h3>
-              <p className="text-base md:text-lg text-renkon-beige leading-relaxed max-w-3xl mx-auto">
-                Łączymy <span className="text-white font-medium">wieloletnie doświadczenie</span> z <span className="text-white font-medium">najnowocześniejszymi technologiami</span>, 
-                aby zapewnić najwyższą jakość każdej realizacji.
-              </p>
-            </div>
 
-            {/* Key Benefits Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              <div className="flex flex-col items-center text-center p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300">
-                <div className="w-14 h-14 bg-renkon-orange/20 rounded-xl flex items-center justify-center mb-4">
-                  <i className="fas fa-certificate text-renkon-orange text-2xl" />
+              {/* Key Benefits - Horizontal Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
+                      <i className="fas fa-certificate text-renkon-orange text-xl" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-base font-semibold text-white mb-1.5">
+                      Ponad 15 Lat Doświadczenia
+                    </h4>
+                    <p className="text-sm text-renkon-beige/80 leading-relaxed">
+                      Setki zrealizowanych projektów dla firm i instytucji
+                    </p>
+                  </div>
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  Ponad 15 Lat<br />Doświadczenia
-                </h4>
-                <p className="text-sm text-renkon-beige/90">
-                  Setki zrealizowanych projektów dla firm i instytucji
-                </p>
-              </div>
 
-              <div className="flex flex-col items-center text-center p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300">
-                <div className="w-14 h-14 bg-renkon-orange/20 rounded-xl flex items-center justify-center mb-4">
-                  <i className="fas fa-tools text-renkon-orange text-2xl" />
+                <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
+                      <i className="fas fa-tools text-renkon-orange text-xl" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-base font-semibold text-white mb-1.5">
+                      Profesjonalny Sprzęt
+                    </h4>
+                    <p className="text-sm text-renkon-beige/80 leading-relaxed">
+                      Najnowocześniejsze maszyny do szlifowania i polerowania
+                    </p>
+                  </div>
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  Profesjonalny<br />Sprzęt
-                </h4>
-                <p className="text-sm text-renkon-beige/90">
-                  Najnowocześniejsze maszyny do szlifowania i polerowania
-                </p>
-              </div>
 
-              <div className="flex flex-col items-center text-center p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300">
-                <div className="w-14 h-14 bg-renkon-orange/20 rounded-xl flex items-center justify-center mb-4">
-                  <i className="fas fa-shield-alt text-renkon-orange text-2xl" />
+                <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
+                      <i className="fas fa-shield-alt text-renkon-orange text-xl" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-base font-semibold text-white mb-1.5">
+                      Gwarancja Jakości
+                    </h4>
+                    <p className="text-sm text-renkon-beige/80 leading-relaxed">
+                      Każda realizacja objęta gwarancją na wykonane usługi
+                    </p>
+                  </div>
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  Gwarancja<br />Jakości
-                </h4>
-                <p className="text-sm text-renkon-beige/90">
-                  Każda realizacja objęta gwarancją na wykonane usługi
-                </p>
               </div>
             </div>
           </Card>
