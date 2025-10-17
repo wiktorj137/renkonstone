@@ -84,6 +84,28 @@ export const Footer: React.FC = () => {
                   kontakt@renkonstone.pl
                 </a>
               </li>
+              <li className="flex items-start space-x-3">
+                <i className="fab fa-facebook text-renkon-orange mt-1" />
+                <a
+                  href="https://www.facebook.com/people/RenKon-Stone/61577829164588/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-renkon-orange transition-colors"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li className="flex items-start space-x-3">
+                <i className="fab fa-youtube text-renkon-orange mt-1" />
+                <a
+                  href="https://www.youtube.com/channel/UCZIDLqS_lvQrDb15rDPKqow"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-renkon-orange transition-colors"
+                >
+                  YouTube
+                </a>
+              </li>
             </ul>
           </div>
         </div>
