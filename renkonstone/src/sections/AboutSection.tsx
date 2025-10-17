@@ -3,20 +3,8 @@ import { Section, SectionHeader, Card } from '@/components/ui';
 
 export const AboutSection: React.FC = () => {
   return (
-    <Section id="about" gradient>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div
-          className="absolute top-0 left-0 w-full h-full"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 25% 25%, #dd8500 2px, transparent 2px), radial-gradient(circle at 75% 75%, #dd8500 2px, transparent 2px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <Section id="about">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           icon="fa-building"
           title={

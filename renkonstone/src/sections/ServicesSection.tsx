@@ -102,7 +102,7 @@ export const ServicesSection: React.FC = () => {
   };
 
   return (
-    <Section id="services" className="bg-renkon-dark-2">
+    <Section id="services">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-3 pointer-events-none">
         <div

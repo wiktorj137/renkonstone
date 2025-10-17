@@ -70,7 +70,7 @@ export const ProjectsSection: React.FC = () => {
 
   return (
     <>
-      <Section id="projects" className="bg-renkon-dark">
+      <Section id="projects">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             icon="fa-images"

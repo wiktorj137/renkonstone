@@ -140,7 +140,7 @@ export const TestimonialsSection: React.FC = () => {
   const isDesktop = useIsDesktop();
 
   return (
-    <Section id="references" gradient>
+    <Section id="references">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <SectionHeader
           icon="fa-quote-right"

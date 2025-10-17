@@ -5,21 +5,18 @@ interface SectionProps {
   children: React.ReactNode;
   id?: string;
   className?: string;
-  gradient?: boolean;
 }
 
 export const Section: React.FC<SectionProps> = ({
   children,
   id,
   className,
-  gradient = false,
 }) => {
   return (
     <section
       id={id}
       className={cn(
-        'py-20 md:py-32 relative overflow-hidden',
-        gradient && 'bg-gradient-to-br from-renkon-dark via-renkon-dark-2 to-renkon-dark',
+        'py-12 md:py-20 relative',
         className
       )}
     >
@@ -40,18 +37,17 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   subtitle,
 }) => {
   return (
-    <div className="text-center mb-16 md:mb-24">
+    <div className="text-center mb-10 md:mb-14">
       {icon && (
-        <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-renkon-orange/15 to-renkon-orange/25 rounded-2xl md:rounded-3xl mb-6 md:mb-8 border border-renkon-orange/20 shadow-lg">
-          <i className={`fas ${icon} text-renkon-orange text-2xl md:text-3xl`} />
+        <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-renkon-orange/15 to-renkon-orange/25 rounded-xl mb-4 border border-renkon-orange/20">
+          <i className={`fas ${icon} text-renkon-orange text-lg`} />
         </div>
       )}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 md:mb-8 tracking-tight">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white mb-4 tracking-tight">
         {title}
       </h2>
-      <div className="w-24 md:w-32 h-px bg-gradient-to-r from-transparent via-renkon-orange to-transparent mx-auto mb-8 md:mb-10" />
       {subtitle && (
-        <p className="text-lg md:text-xl text-renkon-beige/90 max-w-3xl mx-auto leading-relaxed font-light px-4">
+        <p className="text-base md:text-lg text-renkon-beige/80 max-w-3xl mx-auto leading-relaxed px-4 mt-3">
           {subtitle}
         </p>
       )}
