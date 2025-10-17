@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors */
+  --color-renkon-orange: #dd8500;
+  --color-renkon-beige: #dbe0b8;
+  --color-renkon-dark: #111111;
+  --color-renkon-dark-2: #2d2d2d;
+  --color-renkon-dark-3: #3f3f3f;
+  --color-renkon-dark-4: #232323;
+  --color-renkon-dark-5: #383838;
+
+  /* Font family */
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.6s ease-in-out;
+  --animate-slide-in-bottom: slide-in-bottom 0.5s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-renkon-dark);
+  color: white;
+  font-family: var(--font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fix for iOS viewport height */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+@layer components {
+  /* Hero gradient */
+  .hero-gradient {
+    background: linear-gradient(135deg, #111111 0%, #2d2d2d 50%, #3f3f3f 100%);
+  }
+
+  /* Navigation link hover effect */
+  .nav-link {
+    @apply relative transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute w-0 h-0.5 bottom-0 left-0 bg-renkon-orange transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Service card hover effects */
+  .service-card {
+    @apply transition-all duration-700;
+  }
+
+  .service-card:hover {
+    @apply -translate-y-2 shadow-2xl shadow-renkon-orange/5;
+  }
+
+  /* Scrollbar styling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Snap scroll for carousels */
+  .snap-x {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  /* Touch action for mobile */
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+}
