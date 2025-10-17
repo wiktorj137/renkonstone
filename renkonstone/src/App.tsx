@@ -34,8 +34,8 @@ function App() {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <TestimonialsSection />
         <ProjectsSection />
+        <TestimonialsSection />
         <ContactSection />
       </main>
       

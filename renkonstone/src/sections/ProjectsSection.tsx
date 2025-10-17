@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { projects } from '@/constants/data';
 import { Section, SectionHeader, Card, Modal } from '@/components/ui';
+import { ProjectDetails } from '@/components/projects';
 import { Project } from '@/types';
 
 interface ProjectCardProps {
@@ -99,48 +100,9 @@ export const ProjectsSection: React.FC = () => {
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}
         title={selectedProject?.title}
-        size="lg"
+        size="xl"
       >
-        {selectedProject && (
-          <div className="space-y-6">
-            {/* Image Placeholder */}
-            <div className="h-96 bg-gradient-to-br from-renkon-dark-4 to-renkon-dark-5 rounded-xl flex items-center justify-center">
-              <i className="fas fa-image text-6xl text-renkon-beige/30" />
-            </div>
-
-            {/* Details */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-renkon-dark-4 p-4 rounded-lg">
-                <i className="fas fa-map-marker-alt text-renkon-orange mb-2 text-xl" />
-                <p className="text-xs text-renkon-beige/60 mb-1">Lokalizacja</p>
-                <p className="text-white font-medium">{selectedProject.location}</p>
-              </div>
-              <div className="bg-renkon-dark-4 p-4 rounded-lg">
-                <i className="fas fa-ruler-combined text-renkon-orange mb-2 text-xl" />
-                <p className="text-xs text-renkon-beige/60 mb-1">Powierzchnia</p>
-                <p className="text-white font-medium">{selectedProject.area}</p>
-              </div>
-              <div className="bg-renkon-dark-4 p-4 rounded-lg">
-                <i className="fas fa-clock text-renkon-orange mb-2 text-xl" />
-                <p className="text-xs text-renkon-beige/60 mb-1">Czas realizacji</p>
-                <p className="text-white font-medium">{selectedProject.duration}</p>
-              </div>
-              <div className="bg-renkon-dark-4 p-4 rounded-lg">
-                <i className="fas fa-tag text-renkon-orange mb-2 text-xl" />
-                <p className="text-xs text-renkon-beige/60 mb-1">Kategoria</p>
-                <p className="text-white font-medium">{selectedProject.category}</p>
-              </div>
-            </div>
-
-            {/* Description */}
-            <div>
-              <h4 className="text-white font-semibold mb-3">Opis projektu</h4>
-              <p className="text-renkon-beige leading-relaxed">
-                {selectedProject.description}
-              </p>
-            </div>
-          </div>
-        )}
+        {selectedProject && <ProjectDetails project={selectedProject} />}
       </Modal>
     </>
   );
