@@ -8,6 +8,7 @@ export const Header: React.FC = () => {
   const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
   const [scrolled, setScrolled] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
+  const [dropdownTimeout, setDropdownTimeout] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,10 +19,33 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (id: string, serviceId?: number) => {
     scrollToSection(`#${id}`);
     closeMenu();
     setShowServicesDropdown(false);
+    
+    // If a specific service is clicked, expand it
+    if (serviceId !== undefined) {
+      setTimeout(() => {
+        // Dispatch custom event to expand the service
+        window.dispatchEvent(new CustomEvent('expandService', { detail: { serviceId } }));
+      }, 500);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setShowServicesDropdown(true);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = window.setTimeout(() => {
+      setShowServicesDropdown(false);
+    }, 300); // 300ms delay before hiding
+    setDropdownTimeout(timeout);
   };
 
   return (
@@ -65,20 +89,24 @@ export const Header: React.FC = () => {
                   <div
                     key={link.id}
                     className="relative group"
-                    onMouseEnter={() => setShowServicesDropdown(true)}
-                    onMouseLeave={() => setShowServicesDropdown(false)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     <button className="nav-link text-white hover:text-renkon-orange flex items-center px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50">
                       {link.label}
                       <i className="fas fa-chevron-down ml-2 text-sm transition-transform duration-300 group-hover:rotate-180" />
                     </button>
                     {showServicesDropdown && (
-                      <div className="absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border border-renkon-dark-4 rounded-xl shadow-2xl">
+                      <div 
+                        className="absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border border-renkon-dark-4 rounded-xl shadow-2xl"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                      >
                         <div className="p-2">
-                          {services.slice(0, 6).map((service) => (
+                          {services.map((service) => (
                             <button
                               key={service.id}
-                              onClick={() => handleNavClick('services')}
+                              onClick={() => handleNavClick('services', service.id)}
                               className="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-200 w-full"
                             >
                               <i className={`fas ${service.icon} text-renkon-orange w-4`} />

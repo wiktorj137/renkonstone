@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { services } from '@/constants/data';
 import { Section, SectionHeader, Card } from '@/components/ui';
 import { Service } from '@/types';
@@ -76,6 +76,26 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isExpanded, onToggle
 
 export const ServicesSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleExpandService = (event: CustomEvent<{ serviceId: number }>) => {
+      const serviceId = event.detail.serviceId;
+      setExpandedId(serviceId);
+      
+      // Scroll to the specific service card after a short delay
+      setTimeout(() => {
+        const serviceCard = document.querySelector(`[data-service-id="${serviceId}"]`);
+        if (serviceCard) {
+          serviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 600);
+    };
+
+    window.addEventListener('expandService', handleExpandService as EventListener);
+    return () => {
+      window.removeEventListener('expandService', handleExpandService as EventListener);
+    };
+  }, []);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -185,6 +205,7 @@ export const ServicesSection: React.FC = () => {
           {services.map((service, index) => (
             <div
               key={service.id}
+              data-service-id={service.id}
               className="animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >

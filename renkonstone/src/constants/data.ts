@@ -224,10 +224,8 @@ export const projects: Project[] = [
 ];
 
 export const navLinks = [
-  { id: 'home', label: 'Strona Główna' },
-  { id: 'services', label: 'Usługi' },
   { id: 'about', label: 'O Nas' },
-  { id: 'references', label: 'Referencje' },
+  { id: 'services', label: 'Usługi' },
   { id: 'projects', label: 'Realizacje' },
-  { id: 'contact', label: 'Kontakt' },
+  { id: 'references', label: 'Referencje' },
 ];
