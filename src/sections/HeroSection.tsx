@@ -17,16 +17,16 @@ export const HeroSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight animate-fade-in">
-            Profesjonalne<br />
-            <span className="text-renkon-orange inline-block mt-2">Szlifowanie i Renowacja</span><br />
-            <span className="text-white/90 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mt-2 inline-block">Powierzchni Kamiennych</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-[1.1] tracking-tight animate-fade-in">
+            <span className="text-white inline-block">Szlifowanie i Renowacja</span><br />
+            <span className="text-renkon-orange inline-block mt-2">Marmuru i Lastryko</span>
           </h1>
 
           {/* Business Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-renkon-beige/80 mb-10 md:mb-12 leading-relaxed max-w-3xl mx-auto font-light animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Specjalizujemy się w kompleksowej renowacji marmuru, granitu i innych powierzchni kamiennych.
-            Zaufali nam klienci biznesowi, instytucje publiczne oraz właściciele prestiżowych nieruchomości.
+            Specjalizujemy się w kompleksowej renowacji powierzchni kamiennych tj. marmur, lastryko, konglomerat. 
+            Czyścimy daną powierzchnię poprzez szlifowanie. 
+            Zaufali nam klienci biznesowi, instytucje publiczne oraz właściciele nieruchomości.
           </p>
 
           {/* CTA Buttons */}

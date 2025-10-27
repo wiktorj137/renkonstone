@@ -26,7 +26,10 @@ export const Footer: React.FC = () => {
                 />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">RENKON STONE</h3>
+                <h3 className="text-lg font-bold">
+                  <span className="text-white">RenKon</span>{' '}
+                  <span className="text-renkon-orange">STONE</span>
+                </h3>
                 <p className="text-sm text-renkon-beige">Jacek Jarosz</p>
               </div>
             </div>

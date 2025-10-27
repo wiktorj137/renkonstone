@@ -5,7 +5,7 @@ export const services: Service[] = [
   {
     id: 1,
     icon: 'fa-gem',
-    title: 'Szlifowanie Marmuru',
+    title: 'Szlifowanie <span class="text-renkon-orange">Marmuru</span>',
     description: 'Profesjonalne szlifowanie marmuru przywracające naturalny blask i intensywność koloru.',
     features: [
       'Niwelacja klawiszowania - szlif agresywny posadzki na mokro niweluje uskoki między płytkami',
@@ -17,7 +17,7 @@ export const services: Service[] = [
   {
     id: 2,
     icon: 'fa-layer-group',
-    title: 'Szlifowanie Lastryko',
+    title: 'Szlifowanie <span class="text-renkon-orange">Lastryko</span>',
     description: 'Specjalistyczne czyszczenie lastryka z wykorzystaniem nowoczesnych technologii.',
     features: [
       'Szlifowanie agresywne - często powodujące odsłonięcie kruszywa oraz wypoziomowanie powierzchni',
@@ -29,7 +29,7 @@ export const services: Service[] = [
   {
     id: 3,
     icon: 'fa-tools',
-    title: 'Naprawa Powierzchni Lastriko',
+    title: 'Naprawa Powierzchni <span class="text-renkon-orange">Lastriko</span>',
     description: 'Odbudowa uszkodzonego lastryka ze scaleniem kolorystycznym.',
     features: [
       'Ubicia stopni – flekowanie polegające na naprawie krawędzi stopni z ujednoliceniem koloru',

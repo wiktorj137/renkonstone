@@ -9,7 +9,8 @@ export const AboutSection: React.FC = () => {
           icon="fa-building"
           title={
             <>
-              <span className="text-renkon-orange font-medium">RenKon STONE</span>
+              <span className="text-white">RenKon</span>{' '}
+              <span className="text-renkon-orange font-medium">STONE</span>
             </>
           }
           subtitle="Specjaliści z ponad 15 letnim doświadczeniem międzynarodowym w szlifowaniu i konserwacji powierzchni z lastryka i marmuru"
@@ -32,7 +33,8 @@ export const AboutSection: React.FC = () => {
                 </div>
                 
                 <p className="text-base md:text-lg lg:text-xl text-renkon-beige leading-relaxed font-light mb-6">
-                  <span className="font-medium text-white">RenKon STONE</span> to firma która od{' '}
+                  <span className="text-white">RenKon</span>{' '}
+                  <span className="text-renkon-orange font-medium">STONE</span> to firma która od{' '}
                   <span className="text-renkon-orange font-medium">2008</span> roku specjalizuje się w profesjonalnym{' '}
                   <span className="text-white">szlifowaniu, renowacji, czyszczeniu i konserwacji marmuru oraz lastryko</span>.
                 </p>
@@ -54,7 +56,8 @@ export const AboutSection: React.FC = () => {
             <Card className="p-6 md:p-8">
               <h4 className="text-xl md:text-2xl font-semibold text-white mb-6 flex items-center">
                 <i className="fas fa-star text-renkon-orange mr-3" />
-                Dlaczego RenKon STONE
+                Dlaczego <span className="text-white ml-1">RenKon</span>{' '}
+                <span className="text-renkon-orange ml-1">STONE</span>
               </h4>
               <div className="space-y-5">
                 <div className="flex items-start space-x-4 p-4 bg-renkon-dark-3/50 rounded-lg border border-renkon-dark-4 hover:border-renkon-orange/30 transition-colors duration-300">

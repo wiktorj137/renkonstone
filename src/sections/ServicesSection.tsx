@@ -29,11 +29,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isExpanded, onToggle
             <i className={`fas ${service.icon} text-xl md:text-2xl`} />
           </div>
           <div className="flex-1">
-            <h3 className={`text-xl md:text-2xl font-semibold mb-2 transition-colors duration-300 ${
-              isExpanded ? 'text-renkon-orange' : 'text-white group-hover:text-renkon-orange'
-            }`}>
-              {service.title}
-            </h3>
+            <h3 
+              className={`text-xl md:text-2xl font-semibold mb-2 transition-colors duration-300 ${
+                isExpanded ? 'text-renkon-orange' : 'text-white group-hover:text-renkon-orange'
+              }`}
+              dangerouslySetInnerHTML={{ __html: service.title }}
+            />
             <p className="text-sm md:text-base text-renkon-beige">
               {service.description}
             </p>
@@ -136,7 +137,9 @@ export const ServicesSection: React.FC = () => {
                   <i className="fas fa-info-circle text-renkon-orange text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">Zakres Usług</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    Zakres <span className="text-renkon-orange">Usług</span>
+                  </h3>
                   <p className="text-base text-renkon-beige leading-relaxed">
                     Wykonuję kompleksowe usługi w zakresie <span className="text-white font-medium">szlifowania posadzek, schodów oraz ścian</span> wykonanych w technologii lastriko lub z okładziny marmurowej.
                   </p>
@@ -151,7 +154,9 @@ export const ServicesSection: React.FC = () => {
                   <i className="fas fa-cogs text-renkon-orange text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">Proces Renowacji</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    Proces <span className="text-renkon-orange">Renowacji</span>
+                  </h3>
                   <p className="text-base text-renkon-beige leading-relaxed">
                     Renowacja to <span className="text-white font-medium">czasochłonny proces</span>, który polega na kilkukrotnym szlifowaniu lastryka lub marmuru padami diamentowymi.
                   </p>

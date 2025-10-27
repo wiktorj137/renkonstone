@@ -101,8 +101,9 @@ export const Header: React.FC = () => {
                 />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white tracking-tight">
-                  RENKON STONE
+                <h1 className="text-2xl font-bold tracking-tight">
+                  <span className="text-white">RenKon</span>{' '}
+                  <span className="text-renkon-orange">STONE</span>
                 </h1>
                 <p className="text-sm text-renkon-beige font-medium">Jacek Jarosz</p>
               </div>
