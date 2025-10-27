@@ -3,6 +3,7 @@ export interface Service {
   id: number;
   icon: string;
   title: string;
+  titlePlain?: string; // Plain text version for dropdowns/menus
   description: string;
   features: string[];
 }

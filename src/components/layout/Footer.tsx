@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold mb-4">Nasze Usługi</h4>
             <ul className="space-y-2 text-sm text-renkon-beige/80">
               {services.map((service) => (
-                <li key={service.id}>{service.title}</li>
+                <li key={service.id}>{service.titlePlain || service.title}</li>
               ))}
             </ul>
           </div>

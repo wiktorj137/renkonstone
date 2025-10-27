@@ -137,7 +137,7 @@ export const Header: React.FC = () => {
                               className="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-200 w-full"
                             >
                               <i className={`fas ${service.icon} text-renkon-orange w-4`} />
-                              <span>{service.title}</span>
+                              <span>{service.titlePlain || service.title}</span>
                             </button>
                           ))}
                         </div>

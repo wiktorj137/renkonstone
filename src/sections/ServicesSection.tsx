@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { services } from '@/constants/data';
-import { Section, SectionHeader, Card } from '@/components/ui';
+import { Section, SectionHeader, Card, AccordionCard } from '@/components/ui';
 import { Service } from '@/types';
 
 interface ServiceCardProps {
@@ -11,72 +11,36 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, isExpanded, onToggle }) => {
   return (
-    <Card
-      className={`overflow-hidden transition-all duration-500 ${
-        isExpanded ? 'bg-renkon-dark-2 border-renkon-orange/40' : 'bg-renkon-dark-3 border-renkon-dark-4'
-      }`}
+    <AccordionCard
+      isExpanded={isExpanded}
+      onToggle={onToggle}
+      title={service.title}
+      description={service.description}
+      icon={service.icon}
     >
-      <button
-        onClick={onToggle}
-        className="w-full text-left p-6 md:p-8 flex items-center justify-between group"
-      >
-        <div className="flex items-center space-x-4 md:space-x-6 flex-1">
-          <div className={`w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-all duration-300 ${
-            isExpanded 
-              ? 'bg-renkon-orange text-white' 
-              : 'bg-renkon-orange/10 text-renkon-orange group-hover:bg-renkon-orange/20'
-          }`}>
-            <i className={`fas ${service.icon} text-xl md:text-2xl`} />
-          </div>
-          <div className="flex-1">
-            <h3 
-              className={`text-xl md:text-2xl font-semibold mb-2 transition-colors duration-300 ${
-                isExpanded ? 'text-renkon-orange' : 'text-white group-hover:text-renkon-orange'
-              }`}
-              dangerouslySetInnerHTML={{ __html: service.title }}
-            />
-            <p className="text-sm md:text-base text-renkon-beige">
-              {service.description}
-            </p>
-          </div>
-        </div>
-        <div className={`ml-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-          <i className="fas fa-chevron-down text-renkon-orange text-xl" />
-        </div>
-      </button>
-
-      <div
-        className={`overflow-hidden transition-all duration-500 ${
-          isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-2">
-          <div className="border-t border-renkon-orange/20 pt-6">
-            <ul className="space-y-4">
-              {service.features.map((feature, index) => (
-                <li
-                  key={index}
-                  className="flex items-start space-x-3 md:space-x-4 animate-fade-in"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <div className="mt-1.5 flex-shrink-0">
-                    <i className="fas fa-check-circle text-renkon-orange text-base md:text-lg" />
-                  </div>
-                  <span className="text-sm md:text-base text-renkon-beige leading-relaxed">
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </Card>
+      <ul className="space-y-4">
+        {service.features.map((feature, index) => (
+          <li
+            key={index}
+            className="flex items-start space-x-3 md:space-x-4 animate-fade-in"
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
+            <div className="mt-1.5 flex-shrink-0">
+              <i className="fas fa-check-circle text-renkon-orange text-base md:text-lg" />
+            </div>
+            <span className="text-sm md:text-base text-renkon-beige leading-relaxed">
+              {feature}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </AccordionCard>
   );
 };
 
 export const ServicesSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [expandedStepId, setExpandedStepId] = useState<number | null>(null);
 
   useEffect(() => {
     const handleExpandService = (event: CustomEvent<{ serviceId: number }>) => {
@@ -100,6 +64,10 @@ export const ServicesSection: React.FC = () => {
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
+  };
+
+  const toggleStepExpand = (id: number) => {
+    setExpandedStepId(expandedStepId === id ? null : id);
   };
 
   return (
@@ -167,40 +135,112 @@ export const ServicesSection: React.FC = () => {
 
           {/* Process Steps */}
           <div className="mt-6 lg:mt-8 grid sm:grid-cols-3 gap-4 lg:gap-6">
-            <div className="relative p-5 md:p-6 rounded-xl bg-renkon-dark-3 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-8 bg-renkon-orange/20 rounded-lg flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors">
-                  <span className="text-renkon-orange font-bold text-sm">1</span>
-                </div>
-                <h4 className="text-white font-semibold text-sm md:text-base">Naprawa</h4>
+            {/* Step 1 - Naprawa */}
+            <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 1 ? '' : 'h-[140px] md:h-[160px]'}`}>
+              <div className="h-full">
+                <AccordionCard
+                  isExpanded={expandedStepId === 1}
+                  onToggle={() => toggleStepExpand(1)}
+                  title="Naprawa"
+                  description="Uzupełnienie ubytków odpowiednio dobraną kolorystycznie szpachlą z właściwym kruszywem"
+                  badge={1}
+                  className="h-full"
+                  compact
+                >
+                  <ul className="space-y-3">
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Dobór odpowiedniego kruszywa pasującego do istniejącej powierzchni
+                      </span>
+                    </li>
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Scalenie kolorystyczne z otoczeniem
+                      </span>
+                    </li>
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Wypełnienie szczelin i pęknięć specjalistycznymi masami
+                      </span>
+                    </li>
+                  </ul>
+                </AccordionCard>
               </div>
-              <p className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                Uzupełnienie ubytków odpowiednio dobraną kolorystycznie szpachlą z właściwym kruszywem
-              </p>
             </div>
 
-            <div className="relative p-5 md:p-6 rounded-xl bg-renkon-dark-3 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-8 bg-renkon-orange/20 rounded-lg flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors">
-                  <span className="text-renkon-orange font-bold text-sm">2</span>
-                </div>
-                <h4 className="text-white font-semibold text-sm md:text-base">Wykończenie</h4>
+            {/* Step 2 - Wykończenie */}
+            <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 2 ? '' : 'h-[140px] md:h-[160px]'}`}>
+              <div className="h-full">
+                <AccordionCard
+                  isExpanded={expandedStepId === 2}
+                  onToggle={() => toggleStepExpand(2)}
+                  title="Wykończenie"
+                  description="Końcowy etap w różnych stopniach połysku – w zależności od potrzeb klienta"
+                  badge={2}
+                  className="h-full"
+                  compact
+                >
+                  <ul className="space-y-3">
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Polerowanie do pełnego połysku lustrzanego
+                      </span>
+                    </li>
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Wykończenie półmatowe dla efektu naturalnego
+                      </span>
+                    </li>
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Krystalizacja powierzchni dla zwiększenia twardości
+                      </span>
+                    </li>
+                  </ul>
+                </AccordionCard>
               </div>
-              <p className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                Końcowy etap w różnych stopniach połysku – w zależności od potrzeb klienta
-              </p>
             </div>
 
-            <div className="relative p-5 md:p-6 rounded-xl bg-renkon-dark-3 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-8 h-8 bg-renkon-orange/20 rounded-lg flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors">
-                  <span className="text-renkon-orange font-bold text-sm">3</span>
-                </div>
-                <h4 className="text-white font-semibold text-sm md:text-base">Impregnacja</h4>
+            {/* Step 3 - Impregnacja */}
+            <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 3 ? '' : 'h-[140px] md:h-[160px]'}`}>
+              <div className="h-full">
+                <AccordionCard
+                  isExpanded={expandedStepId === 3}
+                  onToggle={() => toggleStepExpand(3)}
+                  title="Impregnacja"
+                  description="Cała powierzchnia zostaje zaimpregnowana, co zapewnia trwałość i estetyczny wygląd"
+                  badge={3}
+                  className="h-full"
+                  compact
+                >
+                  <ul className="space-y-3">
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Zabezpieczenie przed wchłanianiem zabrudzeń
+                      </span>
+                    </li>
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Ochrona przed plamami z płynów i tłuszczów
+                      </span>
+                    </li>
+                    <li className="flex items-start space-x-3 transform transition-all duration-200">
+                      <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
+                      <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
+                        Ułatwienie codziennego czyszczenia powierzchni
+                      </span>
+                    </li>
+                  </ul>
+                </AccordionCard>
               </div>
-              <p className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                Cała powierzchnia zostaje zaimpregnowana, co zapewnia trwałość i estetyczny wygląd
-              </p>
             </div>
           </div>
         </div>
