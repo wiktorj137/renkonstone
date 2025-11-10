@@ -1,5 +1,5 @@
 import React from 'react';
-import { navLinks, services } from '@/constants/data';
+import { navLinks } from '@/constants/data';
 import { scrollToSection } from '@/utils';
 import logo from '/renkon-logo.jpg';
 
@@ -59,10 +59,39 @@ export const Footer: React.FC = () => {
           {/* Services */}
           <div>
             <h4 className="text-white font-semibold mb-4">Nasze Usługi</h4>
-            <ul className="space-y-2 text-sm text-renkon-beige/80">
-              {services.map((service) => (
-                <li key={service.id}>{service.titlePlain || service.title}</li>
-              ))}
+            <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={() => handleNavClick('services')}
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                >
+                  Szlifowanie Marmuru
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNavClick('services')}
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                >
+                  Szlifowanie Lastryko
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNavClick('services')}
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                >
+                  Naprawa Powierzchni Lastriko
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNavClick('services')}
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                >
+                  Paski Antypoślizgowe
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -108,6 +137,17 @@ export const Footer: React.FC = () => {
                   className="hover:text-renkon-orange transition-colors"
                 >
                   YouTube
+                </a>
+              </li>
+              <li className="flex items-start space-x-3">
+                <i className="fas fa-globe text-renkon-orange mt-1" />
+                <a
+                  href="https://www.renkonstone.pl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-renkon-orange transition-colors"
+                >
+                  www.renkonstone.pl
                 </a>
               </li>
             </ul>

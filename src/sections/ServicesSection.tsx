@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { services } from '@/constants/data';
-import { Section, SectionHeader, Card, AccordionCard } from '@/components/ui';
+import { Section, SectionHeader, Card, AccordionCard, ProcessGallery } from '@/components/ui';
 import { Service } from '@/types';
 
 interface ServiceCardProps {
@@ -97,8 +97,8 @@ export const ServicesSection: React.FC = () => {
 
         {/* Introduction */}
         <div className="mb-12 lg:mb-16">
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {/* Left - Main Description */}
+          <div className="max-w-3xl mx-auto mb-6 lg:mb-8">
+            {/* Main Description */}
             <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-2 border border-renkon-orange/20">
               <div className="flex items-start space-x-4 mb-4">
                 <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -109,24 +109,7 @@ export const ServicesSection: React.FC = () => {
                     Zakres <span className="text-renkon-orange">Usług</span>
                   </h3>
                   <p className="text-base text-renkon-beige leading-relaxed">
-                    Wykonuję kompleksowe usługi w zakresie <span className="text-white font-medium">szlifowania posadzek, schodów oraz ścian</span> wykonanych w technologii lastriko lub z okładziny marmurowej.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right - Process Highlight */}
-            <div className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-br from-renkon-orange/10 to-renkon-dark-2 border border-renkon-orange/30">
-              <div className="flex items-start space-x-4 mb-4">
-                <div className="w-12 h-12 bg-renkon-orange/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-cogs text-renkon-orange text-xl" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    Proces <span className="text-renkon-orange">Renowacji</span>
-                  </h3>
-                  <p className="text-base text-renkon-beige leading-relaxed">
-                    Renowacja to <span className="text-white font-medium">czasochłonny proces</span>, który polega na kilkukrotnym szlifowaniu lastryka lub marmuru padami diamentowymi.
+                    Wykonuję kompleksowe usługi renowacji polegające na kilkukrotnym szlifowaniu i polerowanie powierzchni wykonanych w technologii lastryko oraz okładziny marmurowej.
                   </p>
                 </div>
               </div>
@@ -134,7 +117,7 @@ export const ServicesSection: React.FC = () => {
           </div>
 
           {/* Process Steps */}
-          <div className="mt-6 lg:mt-8 grid sm:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid sm:grid-cols-3 gap-4 lg:gap-6">
             {/* Step 1 - Naprawa */}
             <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 1 ? '' : 'h-[140px] md:h-[160px]'}`}>
               <div className="h-full">
@@ -157,7 +140,7 @@ export const ServicesSection: React.FC = () => {
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
                       <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
                       <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                        Scalenie kolorystyczne z otoczeniem
+                        Scalenie kolorystyczne z daną powierzchnią
                       </span>
                     </li>
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
@@ -171,14 +154,14 @@ export const ServicesSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Step 2 - Wykończenie */}
+            {/* Step 2 - Szlifowanie */}
             <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 2 ? '' : 'h-[140px] md:h-[160px]'}`}>
               <div className="h-full">
                 <AccordionCard
                   isExpanded={expandedStepId === 2}
                   onToggle={() => toggleStepExpand(2)}
-                  title="Wykończenie"
-                  description="Końcowy etap w różnych stopniach połysku – w zależności od potrzeb klienta"
+                  title="Szlifowanie"
+                  description="Czasochłonny proces, który polega na kilkukrotnym szlifowaniu lastryka lub marmuru padami diamentowymi."
                   badge={2}
                   className="h-full"
                   compact
@@ -187,19 +170,19 @@ export const ServicesSection: React.FC = () => {
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
                       <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
                       <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                        Polerowanie do pełnego połysku lustrzanego
+                        Wykończenie matowe
                       </span>
                     </li>
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
                       <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
                       <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                        Wykończenie półmatowe dla efektu naturalnego
+                        Szlif do półpołysku - efekt satyny
                       </span>
                     </li>
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
                       <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
                       <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                        Krystalizacja powierzchni dla zwiększenia twardości
+                        Połysk lustrzany - krystalizacja i polerowanie
                       </span>
                     </li>
                   </ul>
@@ -229,7 +212,7 @@ export const ServicesSection: React.FC = () => {
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
                       <i className="fas fa-check-circle text-renkon-orange text-sm mt-1 flex-shrink-0" />
                       <span className="text-xs md:text-sm text-renkon-beige leading-relaxed">
-                        Ochrona przed plamami z płynów i tłuszczów
+                        Ochrona hydrofobowa
                       </span>
                     </li>
                     <li className="flex items-start space-x-3 transform transition-all duration-200">
@@ -248,18 +231,104 @@ export const ServicesSection: React.FC = () => {
         {/* Services Accordion */}
         <div className="space-y-4 mb-12 lg:mb-16">
           {services.map((service, index) => (
-            <div
-              key={service.id}
-              data-service-id={service.id}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <ServiceCard
-                service={service}
-                isExpanded={expandedId === service.id}
-                onToggle={() => toggleExpand(service.id)}
-              />
-            </div>
+            <React.Fragment key={service.id}>
+              <div
+                data-service-id={service.id}
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <ServiceCard
+                  service={service}
+                  isExpanded={expandedId === service.id}
+                  onToggle={() => toggleExpand(service.id)}
+                />
+              </div>
+
+              {/* Process Gallery between Marble and Lastryko services */}
+              {service.id === 1 && (
+                <div className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                  <ProcessGallery
+                    images={[
+                      {
+                        src: 'assets/images/services/marble-grinding-2.webp',
+                        alt: 'Szlifowanie marmuru - przed',
+                        title: 'Przed',
+                      },
+                      {
+                        src: 'assets/images/services/marble-grinding-1.webp',
+                        alt: 'Szlifowanie marmuru - po',
+                        title: 'Po',
+                      },
+                    ]}
+                  />
+                </div>
+              )}
+
+              {/* Process Gallery after Lastryko service */}
+              {service.id === 2 && (
+                <div className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                  <ProcessGallery
+                    images={[
+                      {
+                        src: 'assets/images/services/terrazzo-grinding-1.webp',
+                        alt: 'Szlifowanie lastryko - przed',
+                        title: 'Przed',
+                      },
+                      {
+                        src: 'assets/images/services/terrazzo-grinding-2.webp',
+                        alt: 'Szlifowanie lastryko - po',
+                        title: 'Po',
+                      },
+                    ]}
+                  />
+                </div>
+              )}
+
+              {/* Process Gallery after Terrazzo Repair service */}
+              {service.id === 3 && (
+                <div className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                  <ProcessGallery
+                    images={[
+                      {
+                        src: 'assets/images/services/terrazzo-repair-1.webp',
+                        alt: 'Naprawa powierzchni lastryko - przed',
+                        title: 'Przed',
+                      },
+                      {
+                        src: 'assets/images/services/terrazzo-repair-2.webp',
+                        alt: 'Naprawa powierzchni lastryko - po',
+                        title: 'Po',
+                      },
+                    ]}
+                  />
+                </div>
+              )}
+
+              {/* Process Gallery after Anti-slip service */}
+              {service.id === 4 && (
+                <div className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                  <ProcessGallery
+                    images={[
+                      {
+                        src: 'assets/images/services/anti-slip-1.webp',
+                        alt: 'Paski antypoślizgowe - efekt końcowy',
+                        title: 'Efekt Końcowy',
+                      },
+                      {
+                        src: 'assets/images/services/anti-slip-2.webp',
+                        alt: 'Paski antypoślizgowe - przykład realizacji',
+                        title: 'Realizacja',
+                      },
+                      {
+                        src: 'assets/images/services/anti-slip-3.webp',
+                        alt: 'Paski antypoślizgowe - detale wykonania',
+                        title: 'Detale',
+                      },
+                    ]}
+                  />
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
 

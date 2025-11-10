@@ -3,6 +3,7 @@ import { projects } from '@/constants/data';
 import { Section, SectionHeader, Card, Modal } from '@/components/ui';
 import { ProjectDetails } from '@/components/projects';
 import { Project } from '@/types';
+import { getAssetPath } from '@/utils/helpers';
 
 interface ProjectCardProps {
   project: Project;
@@ -16,18 +17,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       className="cursor-pointer group overflow-hidden p-0 h-full flex flex-col"
       onClick={onClick}
     >
-      {/* Image Placeholder */}
+      {/* Image Section */}
       <div className="h-56 bg-gradient-to-br from-renkon-dark-4 to-renkon-dark-5 flex items-center justify-center relative overflow-hidden flex-shrink-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-renkon-orange/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <i className="fas fa-image text-5xl text-renkon-beige/30 relative z-10" />
+        {project.image ? (
+          <>
+            <img
+              src={getAssetPath(project.image)}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-renkon-dark/60 via-transparent to-transparent" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-renkon-orange/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <i className="fas fa-image text-5xl text-renkon-beige/30 relative z-10" />
+          </>
+        )}
         
         {/* Category Badge */}
-        <div className="absolute top-4 left-4 bg-renkon-orange text-white px-3 py-1 rounded-lg text-xs font-semibold">
+        <div className="absolute top-4 left-4 bg-renkon-orange text-white px-3 py-1 rounded-lg text-xs font-semibold z-10">
           {project.category}
         </div>
 
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
           <div className="text-white text-center">
             <i className="fas fa-search-plus text-3xl mb-2" />
             <p className="text-sm">Zobacz szczegóły</p>
@@ -52,7 +67,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             <span>{project.area}</span>
           </div>
           <div className="flex items-center space-x-2">
-            <i className="fas fa-clock text-renkon-orange" />
+            <i className="fas fa-calendar text-renkon-orange" />
             <span>{project.duration}</span>
           </div>
           <div className="flex items-center space-x-2">
@@ -87,22 +102,8 @@ export const ProjectsSection: React.FC = () => {
             <Card className="overflow-hidden bg-gradient-to-br from-renkon-dark-3 to-renkon-dark-2 border-renkon-orange/20">
               <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 p-6 lg:p-8">
                 
-                {/* Left side - Video */}
-                <div className="lg:col-span-3">
-                  <div className="relative w-full bg-black rounded-xl overflow-hidden shadow-2xl" style={{ paddingBottom: '56.25%' }}>
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full"
-                      src="https://www.youtube.com/embed/lLb18S0l8to"
-                      title="RENKON STONE - Efekt Przed i Po"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                </div>
-
                 {/* Right side - Description */}
-                <div className="lg:col-span-2 flex flex-col justify-center">
+                <div className="lg:col-span-2 lg:order-2 flex flex-col justify-center">
                   <div className="inline-flex items-center justify-center w-14 h-14 bg-renkon-orange/20 rounded-xl mb-4">
                     <i className="fab fa-youtube text-renkon-orange text-2xl" />
                   </div>
@@ -110,7 +111,7 @@ export const ProjectsSection: React.FC = () => {
                     Efekt Przed i Po
                   </h3>
                   <p className="text-renkon-beige leading-relaxed mb-6">
-                    Film prezentuje spektakularne efekty naszej pracy - zobacz różnicę przed i po renowacji marmuru i lastryka. 
+                    Film prezentuje efekty naszej pracy - zobacz różnicę przed i po renowacji lastryka. 
                     Przekonaj się, jak profesjonalne szlifowanie przywraca naturalny blask.
                   </p>
                   
@@ -126,14 +127,34 @@ export const ProjectsSection: React.FC = () => {
                       <div className="w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                         <i className="fas fa-check text-renkon-orange text-xs" />
                       </div>
-                      <p className="text-sm text-renkon-beige/90">Profesjonalne techniki szlifowania</p>
+                      <p className="text-sm text-renkon-beige/90">Profesjonalne techniki naprawy lastriko</p>
                     </div>
                     <div className="flex items-start space-x-3">
                       <div className="w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                         <i className="fas fa-check text-renkon-orange text-xs" />
                       </div>
-                      <p className="text-sm text-renkon-beige/90">Przywrócenie naturalnego blasku kamienia</p>
+                      <p className="text-sm text-renkon-beige/90">Przywrócenie naturalnego blasku</p>
                     </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i className="fas fa-check text-renkon-orange text-xs" />
+                      </div>
+                      <p className="text-sm text-renkon-beige/90">Śledź nas: <a href="https://www.renkonstone.pl" target="_blank" rel="noopener noreferrer" className="text-renkon-orange hover:underline">www.renkonstone.pl</a></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Left side - Video */}
+                <div className="lg:col-span-3 lg:order-1">
+                  <div className="relative w-full bg-black rounded-xl overflow-hidden shadow-2xl" style={{ paddingBottom: '56.25%' }}>
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src="https://www.youtube.com/embed/lLb18S0l8to"
+                      title="RENKON STONE - Efekt Przed i Po"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                   </div>
                 </div>
 
@@ -152,8 +173,8 @@ export const ProjectsSection: React.FC = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-            {projects.slice(0, 3).map((project, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12 max-w-5xl mx-auto">
+            {projects.slice(0, 4).map((project, index) => (
               <div key={project.id} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                 <ProjectCard
                   project={project}

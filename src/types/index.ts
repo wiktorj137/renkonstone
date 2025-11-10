@@ -30,11 +30,12 @@ export interface Project {
   category: string;
   location: string;
   area: string;
-  duration: string;
+  duration: string; // Can be duration or year
   description: string;
   image?: string;
   beforeImage?: string;
   afterImage?: string;
+  images?: string[];
 }
 
 // Stat types
