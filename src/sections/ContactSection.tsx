@@ -135,7 +135,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 flex-grow">
+                <div className="grid grid-cols-2 gap-4 mb-6 flex-shrink-0">
                   <a
                     href="https://www.facebook.com/people/RenKon-Stone/61577829164588/"
                     target="_blank"
@@ -155,6 +155,12 @@ export const ContactSection: React.FC = () => {
                     <i className="fab fa-youtube text-renkon-orange text-3xl group-hover:scale-110 transition-transform" />
                     <span className="font-semibold text-sm">YouTube</span>
                   </a>
+                </div>
+                
+                <div className="mt-auto pt-4 border-t border-renkon-dark-4">
+                  <p className="text-sm text-renkon-beige/90 text-center">
+                    Sprawdź też: <a href="https://www.renkonstone.pl" target="_blank" rel="noopener noreferrer" className="text-renkon-orange hover:underline">www.renkonstone.pl</a>
+                  </p>
                 </div>
               </div>
             </Card>

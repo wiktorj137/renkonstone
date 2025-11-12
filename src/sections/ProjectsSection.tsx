@@ -63,7 +63,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             <span>{project.location}</span>
           </div>
           <div className="flex items-center space-x-2">
-            <i className="fas fa-ruler-combined text-renkon-orange" />
+            {project.area?.includes('mb') || project.area?.includes('sztuk') ? (
+              <i className="fas fa-sort-numeric-up text-renkon-orange" />
+            ) : (
+              <i className="fas fa-ruler-combined text-renkon-orange" />
+            )}
             <span>{project.area}</span>
           </div>
           <div className="flex items-center space-x-2">
@@ -135,12 +139,6 @@ export const ProjectsSection: React.FC = () => {
                       </div>
                       <p className="text-sm text-renkon-beige/90">Przywrócenie naturalnego blasku</p>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-6 h-6 bg-renkon-orange/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <i className="fas fa-check text-renkon-orange text-xs" />
-                      </div>
-                      <p className="text-sm text-renkon-beige/90">Śledź nas: <a href="https://www.renkonstone.pl" target="_blank" rel="noopener noreferrer" className="text-renkon-orange hover:underline">www.renkonstone.pl</a></p>
-                    </div>
                   </div>
                 </div>
 
@@ -165,7 +163,7 @@ export const ProjectsSection: React.FC = () => {
           {/* Projects Grid Header */}
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-white mb-2">
-              Portfolio Projektów
+              Portfolio <span className="text-renkon-orange">Projektów</span>
             </h3>
             <p className="text-renkon-beige/80">
               Od prywatnych rezydencji po prestiżowe obiekty publiczne
@@ -174,7 +172,7 @@ export const ProjectsSection: React.FC = () => {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12 max-w-5xl mx-auto">
-            {projects.slice(0, 4).map((project, index) => (
+            {projects.slice(0, 6).map((project, index) => (
               <div key={project.id} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                 <ProjectCard
                   project={project}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Project } from '@/types';
 import { getAssetPath } from '@/utils/helpers';
 
@@ -18,6 +18,35 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
     setSelectedImage(null);
     document.body.style.overflow = 'unset';
   };
+
+  const nextImage = () => {
+    if (selectedImage !== null && project.images) {
+      setSelectedImage((selectedImage + 1) % project.images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedImage !== null && project.images) {
+      setSelectedImage((selectedImage - 1 + project.images.length) % project.images.length);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage === null) return;
+      
+      if (e.key === 'ArrowRight') {
+        nextImage();
+      } else if (e.key === 'ArrowLeft') {
+        prevImage();
+      } else if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, project.images]);
 
   return (
     <>
@@ -39,10 +68,16 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
         <div className="bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 p-5 rounded-xl border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300">
           <div className="flex items-center space-x-3 mb-3">
             <div className="w-10 h-10 bg-renkon-orange/20 rounded-lg flex items-center justify-center">
-              <i className="fas fa-ruler-combined text-renkon-orange text-lg" />
+              {project.area?.includes('mb') || project.area?.includes('sztuk') ? (
+                <i className="fas fa-sort-numeric-up text-renkon-orange text-lg" />
+              ) : (
+                <i className="fas fa-ruler-combined text-renkon-orange text-lg" />
+              )}
             </div>
             <div>
-              <p className="text-xs text-renkon-beige/60 mb-1">Powierzchnia</p>
+              <p className="text-xs text-renkon-beige/60 mb-1">
+                {project.area?.includes('mb') || project.area?.includes('sztuk') ? 'Ilość' : 'Powierzchnia'}
+              </p>
               <p className="text-white font-semibold">{project.area}</p>
             </div>
           </div>
@@ -159,6 +194,34 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-renkon-dark/80 backdrop-blur-sm rounded-full text-white text-sm font-medium z-10">
             {selectedImage + 1} / {project.images.length}
           </div>
+
+          {/* Previous Button */}
+          {project.images.length > 1 && (
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-renkon-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-renkon-orange transition-colors duration-300 z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              aria-label="Poprzednie zdjęcie"
+            >
+              <i className="fas fa-chevron-left text-xl" />
+            </button>
+          )}
+
+          {/* Next Button */}
+          {project.images.length > 1 && (
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-renkon-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-renkon-orange transition-colors duration-300 z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              aria-label="Następne zdjęcie"
+            >
+              <i className="fas fa-chevron-right text-xl" />
+            </button>
+          )}
 
           {/* Image */}
           <div

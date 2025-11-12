@@ -63,12 +63,16 @@ export const ProcessGallery: React.FC<ProcessGalleryProps> = ({
             ? 'grid-cols-1 max-w-2xl mx-auto' 
             : images.length === 2 
             ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto' 
+            : images.length === 3
+            ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-3xl lg:max-w-none mx-auto'
             : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
         }`}>
           {images.map((image, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-2xl bg-renkon-dark-3 border border-renkon-dark-4 hover:border-renkon-orange/50 transition-all duration-300 cursor-pointer"
+              className={`group relative overflow-hidden rounded-2xl bg-renkon-dark-3 border border-renkon-dark-4 hover:border-renkon-orange/50 transition-all duration-300 cursor-pointer ${
+                images.length === 3 && index === 2 ? 'sm:col-span-2 lg:col-span-1 sm:max-w-md sm:mx-auto' : ''
+              }`}
               onClick={() => openLightbox(index)}
             >
               {/* Image Container */}

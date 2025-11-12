@@ -106,10 +106,10 @@ export const ServicesSection: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-3">
-                    Zakres <span className="text-renkon-orange">Usług</span>
+                    Kompleksowa <span className="text-renkon-orange">Renowacja</span>
                   </h3>
                   <p className="text-base text-renkon-beige leading-relaxed">
-                    Wykonuję kompleksowe usługi renowacji polegające na kilkukrotnym szlifowaniu i polerowanie powierzchni wykonanych w technologii lastryko oraz okładziny marmurowej.
+                    Wykonuję kompleksowe usługi renowacji. Powierzchnie wykonane w technologii lastryko i okładziny marmurowej naprawiam, szlifuje kilkukrotnie oraz poleruje do wcześniej uzgodnionego rodzaju wykończenia.
                   </p>
                 </div>
               </div>
@@ -250,12 +250,12 @@ export const ServicesSection: React.FC = () => {
                   <ProcessGallery
                     images={[
                       {
-                        src: 'assets/images/services/marble-grinding-2.webp',
+                        src: 'assets/images/services/marble-grinding-1.webp',
                         alt: 'Szlifowanie marmuru - przed',
                         title: 'Przed',
                       },
                       {
-                        src: 'assets/images/services/marble-grinding-1.webp',
+                        src: 'assets/images/services/marble-grinding-2.webp',
                         alt: 'Szlifowanie marmuru - po',
                         title: 'Po',
                       },
@@ -311,18 +311,18 @@ export const ServicesSection: React.FC = () => {
                     images={[
                       {
                         src: 'assets/images/services/anti-slip-1.webp',
-                        alt: 'Paski antypoślizgowe - efekt końcowy',
-                        title: 'Efekt Końcowy',
+                        alt: 'Paski antypoślizgowe - estetyczny wygląd',
+                        title: 'Estetyczny Wygląd',
                       },
                       {
                         src: 'assets/images/services/anti-slip-2.webp',
-                        alt: 'Paski antypoślizgowe - przykład realizacji',
-                        title: 'Realizacja',
+                        alt: 'Paski antypoślizgowe - odtworzenie detalu',
+                        title: 'Odtworzenie Detalu',
                       },
                       {
                         src: 'assets/images/services/anti-slip-3.webp',
-                        alt: 'Paski antypoślizgowe - detale wykonania',
-                        title: 'Detale',
+                        alt: 'Paski antypoślizgowe - bezpieczeństwo',
+                        title: 'Bezpieczeństwo',
                       },
                     ]}
                   />
@@ -359,53 +359,53 @@ export const ServicesSection: React.FC = () => {
               </div>
 
               {/* Key Benefits - Horizontal Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
-                      <i className="fas fa-calculator text-renkon-orange text-xl" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                <div className="flex flex-col items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
+                  <div className="flex items-center gap-4 w-full">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
+                        <i className="fas fa-calculator text-renkon-orange text-xl" />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-semibold text-white mb-1.5">
+                    <h4 className="text-base font-semibold text-white">
                       Bezpłatna Wycena
                     </h4>
-                    <p className="text-sm text-renkon-beige/80 leading-relaxed">
-                      Szczegółowa analiza i transparentna kalkulacja kosztów
-                    </p>
                   </div>
+                  <p className="text-sm text-renkon-beige/80 leading-relaxed">
+                    Szczegółowa analiza i transparentna kalkulacja kosztów
+                  </p>
                 </div>
 
-                <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
-                      <i className="fas fa-clock text-renkon-orange text-xl" />
+                <div className="flex flex-col items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
+                  <div className="flex items-center gap-4 w-full">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
+                        <i className="fas fa-clock text-renkon-orange text-xl" />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-semibold text-white mb-1.5">
+                    <h4 className="text-base font-semibold text-white">
                       Terminowość
                     </h4>
-                    <p className="text-sm text-renkon-beige/80 leading-relaxed">
-                      Dotrzymujemy ustalonych terminów realizacji projektów
-                    </p>
                   </div>
+                  <p className="text-sm text-renkon-beige/80 leading-relaxed">
+                    Dotrzymujemy ustalonych terminów realizacji projektów
+                  </p>
                 </div>
 
-                <div className="flex items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
-                      <i className="fas fa-broom text-renkon-orange text-xl" />
+                <div className="flex flex-col items-start gap-4 p-6 rounded-xl bg-renkon-dark-3/50 border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300 group sm:col-span-2 lg:col-span-1">
+                  <div className="flex items-center gap-4 w-full">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-renkon-orange/20 rounded-xl flex items-center justify-center group-hover:bg-renkon-orange/30 transition-colors duration-300">
+                        <i className="fas fa-broom text-renkon-orange text-xl" />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-semibold text-white mb-1.5">
+                    <h4 className="text-base font-semibold text-white">
                       Pełna Obsługa
                     </h4>
-                    <p className="text-sm text-renkon-beige/80 leading-relaxed">
-                      Od przygotowania powierzchni po końcowe sprzątanie
-                    </p>
                   </div>
+                  <p className="text-sm text-renkon-beige/80 leading-relaxed">
+                    Od przygotowania powierzchni po końcowe sprzątanie
+                  </p>
                 </div>
               </div>
             </div>
