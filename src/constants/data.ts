@@ -133,7 +133,7 @@ export const projects: Project[] = [
     area: '500m²',
     duration: '2021',
     description: 'Kompleksowa renowacja posadzki marmurowej oraz ścian na holach windowych w szpitalu "Rydygiera"',
-    image: 'assets/images/projects/project-1-6.webp',
+    image: 'assets/images/projects/project-1-4.webp',
     images: [
       'assets/images/projects/project-1-1.webp',
       'assets/images/projects/project-1-2.webp',
