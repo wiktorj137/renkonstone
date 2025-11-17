@@ -171,7 +171,7 @@ export const projects: Project[] = [
     area: '250m²',
     duration: '2020',
     description: 'Posadzka była przykryta wykładziną która została usunięta. Odkryty marmur został wszlifowany, wykrystalizowany oraz zaimpregnowany. Zamontowano też wycieraczkę systemową.',
-    image: 'assets/images/projects/project-3-3.webp',
+    image: 'assets/images/projects/project-3-2.webp',
     images: [
       'assets/images/projects/project-3-1.webp',
       'assets/images/projects/project-3-2.webp',
@@ -189,7 +189,7 @@ export const projects: Project[] = [
     area: '340m²',
     duration: '2022',
     description: 'Wykonano szlifowanie schodów wraz z groszkowaniem pasków antypoślizgowych. Odświeżono ściany z lastriko oraz wejście główne.',
-    image: 'assets/images/projects/project-4-1.webp',
+    image: 'assets/images/projects/project-4-4.webp',
     images: [
       'assets/images/projects/project-4-1.webp',
       'assets/images/projects/project-4-2.webp',
@@ -228,6 +228,9 @@ export const projects: Project[] = [
       'assets/images/projects/project-6-1.webp',
       'assets/images/projects/project-6-2.webp',
       'assets/images/projects/project-6-3.webp',
+      'assets/images/projects/project-6-4.webp',
+      'assets/images/projects/project-6-5.webp',
+      'assets/images/projects/project-6-6.webp',
     ],
   },
 ];

@@ -22,23 +22,23 @@ export const ContactSection: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-6">
             
             {/* Phone Contact */}
-            <Card className="relative overflow-hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-renkon-orange/30 h-full">
+            <Card className="relative overflow-hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-renkon-orange/30 h-full p-6 sm:p-8">
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-renkon-orange/5 rounded-full blur-3xl" />
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-renkon-orange/5 rounded-full blur-3xl" />
               
-              <div className="relative p-8 h-full flex flex-col">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="relative h-full flex flex-col">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
                     <i className="fas fa-phone-alt text-white text-xl" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-3">Telefon</h3>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Telefon</h3>
                     <a 
-                      href="tel:+48503298623"
-                      className="text-2xl font-bold text-renkon-orange hover:text-orange-400 transition-all duration-300 inline-block mb-3 hover:scale-105"
+                      href="tel:+48504298623"
+                      className="font-bold text-renkon-orange hover:text-orange-400 transition-all duration-300 inline-block mb-3 hover:scale-105 whitespace-nowrap leading-none text-[clamp(0.875rem,4.6vw,1.25rem)]"
                     >
-                      +48 503 298 623
+                      +48 504 298 623
                     </a>
                     <p className="text-renkon-beige/90 text-sm leading-relaxed">
                       Zadzwoń, aby umówić się na bezpłatną wycenę lub uzyskać profesjonalne doradztwo techniczne.
@@ -49,21 +49,21 @@ export const ContactSection: React.FC = () => {
             </Card>
 
             {/* Email Contact */}
-            <Card className="relative overflow-hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-renkon-orange/30 h-full">
+            <Card className="relative overflow-hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-renkon-orange/30 h-full p-6 sm:p-8">
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-renkon-orange/5 rounded-full blur-3xl" />
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-renkon-orange/5 rounded-full blur-3xl" />
               
-              <div className="relative p-8 h-full flex flex-col">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="relative h-full flex flex-col">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-renkon-orange to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
                     <i className="fas fa-envelope text-white text-xl" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-3">Email</h3>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Email</h3>
                     <a 
                       href="mailto:kontakt@renkonstone.pl"
-                      className="text-xl font-bold text-renkon-orange hover:text-orange-400 transition-all duration-300 inline-block mb-3 hover:scale-105"
+                      className="font-bold text-renkon-orange hover:text-orange-400 transition-all duration-300 inline-block mb-3 hover:scale-105 whitespace-nowrap leading-none text-[clamp(0.8125rem,4.2vw,1.125rem)]"
                     >
                       kontakt@renkonstone.pl
                     </a>
@@ -106,7 +106,7 @@ export const ContactSection: React.FC = () => {
 
                 {/* CTA Button */}
                 <a
-                  href="tel:+48503298623"
+                  href="tel:+48504298623"
                   className="flex items-center justify-center gap-3 w-full bg-renkon-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 group"
                 >
                   <i className="fas fa-phone group-hover:rotate-12 transition-transform duration-300" />

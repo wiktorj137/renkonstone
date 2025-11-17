@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
                 />
               </div>
               <div>
-                <h3 className="text-lg font-bold">
+                <h3 className="text-lg font-bold whitespace-nowrap">
                   <span className="text-white">RenKon</span>{' '}
                   <span className="text-renkon-orange">STONE</span>
                 </h3>
@@ -102,10 +102,10 @@ export const Footer: React.FC = () => {
               <li className="flex items-start space-x-3">
                 <i className="fas fa-phone text-renkon-orange mt-1" />
                 <a 
-                  href="tel:+48503298623"
-                  className="hover:text-renkon-orange transition-colors"
+                  href="tel:+48504298623"
+                  className="hover:text-renkon-orange transition-colors whitespace-nowrap"
                 >
-                  +48 503 298 623
+                  +48 504 298 623
                 </a>
               </li>
               <li className="flex items-start space-x-3">

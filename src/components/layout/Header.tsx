@@ -101,7 +101,7 @@ export const Header: React.FC = () => {
                 />
               </div>
               <div>
-                <h1 className="text-2xl font-bold tracking-tight">
+                <h1 className="text-2xl font-bold tracking-tight whitespace-nowrap">
                   <span className="text-white">RenKon</span>{' '}
                   <span className="text-renkon-orange">STONE</span>
                 </h1>
