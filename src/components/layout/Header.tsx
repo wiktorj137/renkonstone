@@ -77,6 +77,7 @@ export const Header: React.FC = () => {
   return (
     <>
       <nav
+        aria-label="Główna nawigacja"
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
             ? 'bg-gradient-to-r from-renkon-dark/98 via-renkon-dark-2/98 to-renkon-dark/98 backdrop-blur-md shadow-lg'
@@ -95,6 +96,9 @@ export const Header: React.FC = () => {
                   src={logo}
                   alt="RENKON STONE Logo"
                   className="w-full h-full object-cover rounded-xl"
+                  width={48}
+                  height={48}
+                  loading="eager"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
@@ -119,15 +123,16 @@ export const Header: React.FC = () => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <button className="nav-link text-white hover:text-renkon-orange flex items-center px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50">
+                    <button className="nav-link text-white hover:text-renkon-orange flex items-center px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark" aria-haspopup="true" aria-expanded={showServicesDropdown} aria-controls="services-dropdown">
                       {link.label}
-                      <i className="fas fa-chevron-down ml-2 text-sm transition-transform duration-300 group-hover:rotate-180" />
+                      <i className="fas fa-chevron-down ml-2 text-sm transition-transform duration-300 group-hover:rotate-180" aria-hidden="true" />
                     </button>
                     {showServicesDropdown && (
                       <div 
                         className="absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border border-renkon-dark-4 rounded-xl shadow-2xl"
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
+                        id="services-dropdown"
                       >
                         <div className="p-2">
                           {services.map((service) => (
@@ -136,7 +141,7 @@ export const Header: React.FC = () => {
                               onClick={() => handleNavClick('services', service.id)}
                               className="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-200 w-full"
                             >
-                              <i className={`fas ${service.icon} text-renkon-orange w-4`} />
+                              <i className={`fas ${service.icon} text-renkon-orange w-4`} aria-hidden="true" />
                               <span>{service.titlePlain || service.title}</span>
                             </button>
                           ))}
@@ -148,7 +153,7 @@ export const Header: React.FC = () => {
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className="nav-link text-white hover:text-renkon-orange px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50"
+                    className="nav-link text-white hover:text-renkon-orange px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark"
                   >
                     {link.label}
                   </button>
@@ -170,23 +175,26 @@ export const Header: React.FC = () => {
             <button
               onClick={toggleMenu}
               className="lg:hidden text-white hover:text-renkon-orange p-2 rounded-lg hover:bg-renkon-dark-3/50 transition-all duration-300"
+              aria-label={isOpen ? 'Zamknij menu' : 'Otwórz menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
-              <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-xl`} />
+              <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-xl`} aria-hidden="true" />
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-t border-renkon-dark-4">
+          <div className="lg:hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-t border-renkon-dark-4" id="mobile-menu" role="region" aria-label="Menu mobilne">
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  className="flex items-center space-x-3 py-3 px-4 text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-300 w-full"
+                  className="flex items-center space-x-3 py-3 px-4 text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-300 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark"
                 >
-                  <i className={`fas fa-${link.id === 'home' ? 'home' : link.id === 'services' ? 'cogs' : link.id === 'about' ? 'building' : link.id === 'references' ? 'quote-right' : link.id === 'projects' ? 'images' : 'envelope'} text-renkon-orange w-5`} />
+                  <i className={`fas fa-${link.id === 'home' ? 'home' : link.id === 'services' ? 'cogs' : link.id === 'about' ? 'building' : link.id === 'references' ? 'quote-right' : link.id === 'projects' ? 'images' : 'envelope'} text-renkon-orange w-5`} aria-hidden="true" />
                   <span>{link.label}</span>
                 </button>
               ))}

@@ -26,7 +26,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
 
       {/* Author Info */}
       <div className="mb-4">
-        <h5 className="text-lg md:text-xl font-semibold text-white mb-2">{testimonial.name}</h5>
+        <h3 className="text-lg md:text-xl font-semibold text-white mb-2">{testimonial.name}</h3>
         <p className="text-sm text-renkon-beige/80 mb-3">{testimonial.company}</p>
         
         {/* Details List */}
@@ -123,13 +123,17 @@ const TestimonialsCarousel: React.FC = () => {
           <button
             key={index}
             onClick={() => scrollToCard(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeIndex
-                ? 'bg-renkon-orange w-8'
-                : 'bg-renkon-dark-5'
-            }`}
+            className="w-10 h-10 flex items-center justify-center group focus:outline-none"
             aria-label={`Go to testimonial ${index + 1}`}
-          />
+          >
+            <span 
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === activeIndex
+                  ? 'bg-renkon-orange w-8'
+                  : 'bg-renkon-dark-5 w-2 group-hover:bg-renkon-dark-4'
+              }`} 
+            />
+          </button>
         ))}
       </div>
     </>

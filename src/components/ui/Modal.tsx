@@ -64,6 +64,8 @@ export const Modal: React.FC<ModalProps> = ({
             <button
               onClick={onClose}
               className="text-renkon-beige hover:text-white transition-colors"
+              aria-label="Zamknij modal"
+              title="Zamknij"
             >
               <i className="fas fa-times text-2xl" />
             </button>

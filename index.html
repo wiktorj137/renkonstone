@@ -18,15 +18,27 @@
     
     <title>RenKon STONE - Szlifowanie i Renowacja Marmuru oraz Lastryko | Jacek Jarosz</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts (non-blocking load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
+
+    <!-- Font Awesome (non-blocking load) -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    </noscript>
+
+    <!-- Helpful preconnects for embeds -->
+    <link rel="preconnect" href="https://www.youtube.com" crossorigin />
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
   </head>
   <body>
+    <!-- Skip Link for keyboard navigation -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-renkon-orange text-white px-4 py-2 rounded shadow-lg transition-all">Przejdź do treści głównej</a>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

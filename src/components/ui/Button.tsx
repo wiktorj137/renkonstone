@@ -19,7 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'font-semibold rounded-lg transition-all duration-300 inline-flex items-center justify-center';
+  const baseStyles = 'font-semibold rounded-lg transition-all duration-300 inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark';
   
   const variantStyles = {
     primary: 'bg-gradient-to-r from-renkon-orange to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105',
@@ -46,9 +46,9 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {loading ? (
-        <i className="fas fa-spinner fa-spin mr-2" />
+        <i className="fas fa-spinner fa-spin mr-2" aria-hidden="true" />
       ) : icon ? (
-        <i className={`fas ${icon} mr-2`} />
+        <i className={`fas ${icon} mr-2`} aria-hidden="true" />
       ) : null}
       {children}
     </button>

@@ -39,8 +39,8 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   return (
     <div className="text-center mb-10 md:mb-14">
       {icon && (
-        <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-renkon-orange/15 to-renkon-orange/25 rounded-xl mb-4 border border-renkon-orange/20">
-          <i className={`fas ${icon} text-renkon-orange text-lg`} />
+        <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-renkon-orange/15 to-renkon-orange/25 rounded-xl mb-4 border border-renkon-orange/20" aria-hidden="true">
+          <i className={`fas ${icon} text-renkon-orange text-lg`} aria-hidden="true" />
         </div>
       )}
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-white mb-4 tracking-tight">

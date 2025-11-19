@@ -37,7 +37,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
         )}
         
         {/* Category Badge */}
-        <div className="absolute top-4 left-4 bg-renkon-orange text-white px-3 py-1 rounded-lg text-xs font-semibold z-10">
+        <div className="absolute top-4 left-4 bg-renkon-orange text-black px-3 py-1 rounded-lg text-xs font-semibold z-10">
           {project.category}
         </div>
 
@@ -86,6 +86,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
 
 export const ProjectsSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [playVideo, setPlayVideo] = useState(false);
 
   return (
     <>
@@ -142,17 +143,46 @@ export const ProjectsSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Left side - Video */}
+                {/* Left side - Video (lazy YouTube facade) */}
                 <div className="lg:col-span-3 lg:order-1">
                   <div className="relative w-full bg-black rounded-xl overflow-hidden shadow-2xl" style={{ paddingBottom: '56.25%' }}>
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full"
-                      src="https://www.youtube.com/embed/lLb18S0l8to"
-                      title="RENKON STONE - Efekt Przed i Po"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                    {playVideo ? (
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/lLb18S0l8to?autoplay=1"
+                        title="RENKON STONE - Efekt Przed i Po"
+                        frameBorder={0}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        className="absolute inset-0 w-full h-full group"
+                        onClick={() => setPlayVideo(true)}
+                        aria-label="Odtwórz film na YouTube"
+                      >
+                        {/* Thumbnail */}
+                        <img
+                          src="https://i.ytimg.com/vi/lLb18S0l8to/hqdefault.jpg"
+                          alt="Miniatura filmu: Efekt Przed i Po"
+                          className="absolute top-0 left-0 w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        {/* Dark overlay */}
+                        <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/30" />
+                        {/* Play button */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 group-hover:bg-white text-renkon-orange shadow-xl transition-transform group-hover:scale-105">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="ml-1">
+                              <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                          </span>
+                        </div>
+                      </button>
+                    )}
                   </div>
                 </div>
 

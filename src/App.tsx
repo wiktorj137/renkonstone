@@ -30,7 +30,7 @@ function App() {
       
       <Header />
       
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <HeroSection />
         <AboutSection />
         <ServicesSection />
