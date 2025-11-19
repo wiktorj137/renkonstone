@@ -17,6 +17,7 @@ export const AboutSection: React.FC = () => {
           }
           subtitle="Specjaliści z ponad 15 letnim doświadczeniem międzynarodowym w szlifowaniu i konserwacji powierzchni z lastryka i marmuru"
         />
+        
 
   <div className="grid w-full lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 justify-items-center lg:justify-items-stretch">
           {/* Left Column - Main Content */}

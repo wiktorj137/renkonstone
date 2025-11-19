@@ -205,7 +205,7 @@ export const projects: Project[] = [
     area: '30mb',
     duration: '2023/2024',
     description: 'Wykonałem uzupełnienie lastryka ze scaleniem kolorystycznym w miejscach brakujących oraz powstałych po przesunięciu drzwi. Odtworzyłem posadzkę z 1906 zgodnie z zaleceniami konserwatora.',
-    image: 'assets/images/projects/project-5-2.webp',
+    image: 'assets/images/projects/project-5-6.webp',
     images: [
       'assets/images/projects/project-5-1.webp',
       'assets/images/projects/project-5-2.webp',
