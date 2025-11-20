@@ -40,7 +40,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isExpanded, onToggle
 
 export const ServicesSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
-  const [expandedStepId, setExpandedStepId] = useState<number | null>(null);
+  // Allow multiple process step cards to stay open simultaneously
+  const [expandedStepIds, setExpandedStepIds] = useState<number[]>([]);
 
   useEffect(() => {
     const handleExpandService = (event: CustomEvent<{ serviceId: number }>) => {
@@ -67,7 +68,9 @@ export const ServicesSection: React.FC = () => {
   };
 
   const toggleStepExpand = (id: number) => {
-    setExpandedStepId(expandedStepId === id ? null : id);
+    setExpandedStepIds(prev =>
+      prev.includes(id) ? prev.filter(stepId => stepId !== id) : [...prev, id]
+    );
   };
 
   return (
@@ -119,10 +122,10 @@ export const ServicesSection: React.FC = () => {
           {/* Process Steps */}
           <div className="grid sm:grid-cols-3 gap-4 lg:gap-6">
             {/* Step 1 - Naprawa */}
-            <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 1 ? '' : 'h-[140px] md:h-[160px]'}`}>
+            <div className={`transition-all duration-300 ease-in-out ${expandedStepIds.includes(1) ? '' : 'h-[140px] md:h-[160px]'}`}>
               <div className="h-full">
                 <AccordionCard
-                  isExpanded={expandedStepId === 1}
+                  isExpanded={expandedStepIds.includes(1)}
                   onToggle={() => toggleStepExpand(1)}
                   title="Naprawa"
                   description="Uzupełnienie ubytków odpowiednio dobraną kolorystycznie szpachlą z właściwym kruszywem"
@@ -155,10 +158,10 @@ export const ServicesSection: React.FC = () => {
             </div>
 
             {/* Step 2 - Szlifowanie */}
-            <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 2 ? '' : 'h-[140px] md:h-[160px]'}`}>
+            <div className={`transition-all duration-300 ease-in-out ${expandedStepIds.includes(2) ? '' : 'h-[140px] md:h-[160px]'}`}>
               <div className="h-full">
                 <AccordionCard
-                  isExpanded={expandedStepId === 2}
+                  isExpanded={expandedStepIds.includes(2)}
                   onToggle={() => toggleStepExpand(2)}
                   title="Szlifowanie"
                   description="Czasochłonny proces, który polega na kilkukrotnym szlifowaniu lastryka lub marmuru padami diamentowymi."
@@ -191,10 +194,10 @@ export const ServicesSection: React.FC = () => {
             </div>
 
             {/* Step 3 - Impregnacja */}
-            <div className={`transition-all duration-300 ease-in-out ${expandedStepId === 3 ? '' : 'h-[140px] md:h-[160px]'}`}>
+            <div className={`transition-all duration-300 ease-in-out ${expandedStepIds.includes(3) ? '' : 'h-[140px] md:h-[160px]'}`}>
               <div className="h-full">
                 <AccordionCard
-                  isExpanded={expandedStepId === 3}
+                  isExpanded={expandedStepIds.includes(3)}
                   onToggle={() => toggleStepExpand(3)}
                   title="Impregnacja"
                   description="Cała powierzchnia zostaje zaimpregnowana, co zapewnia trwałość i estetyczny wygląd"
