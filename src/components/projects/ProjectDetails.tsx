@@ -50,7 +50,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
 
   return (
     <>
-      <div className="space-y-8">
+      <div className="space-y-8 pb-12">
       {/* Project Info Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 p-5 rounded-xl border border-renkon-dark-4 hover:border-renkon-orange/30 transition-all duration-300">

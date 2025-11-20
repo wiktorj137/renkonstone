@@ -4,6 +4,7 @@ import { Section, SectionHeader, Card, Modal } from '@/components/ui';
 import { ProjectDetails } from '@/components/projects';
 import { Project } from '@/types';
 import { getAssetPath } from '@/utils/helpers';
+import logo from '/renkon-logo.jpg';
 
 interface ProjectCardProps {
   project: Project;
@@ -165,7 +166,7 @@ export const ProjectsSection: React.FC = () => {
                       >
                         {/* Thumbnail */}
                         <img
-                          src="https://i.ytimg.com/vi/lLb18S0l8to/hqdefault.jpg"
+                          src={logo}
                           alt="Miniatura filmu: Efekt Przed i Po"
                           className="absolute top-0 left-0 w-full h-full object-cover"
                           loading="lazy"
