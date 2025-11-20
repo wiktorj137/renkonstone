@@ -155,9 +155,20 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-renkon-dark-4 mt-12 pt-8">
-          <p className="text-renkon-beige/60 text-sm text-center">
+        <div className="border-t border-renkon-dark-4 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-renkon-beige/60 text-sm text-center md:text-left">
             © {new Date().getFullYear()} RENKON STONE. Wszelkie prawa zastrzeżone.
+          </p>
+          <p className="text-renkon-beige/60 text-sm text-center md:text-right">
+            Realizacja:{' '}
+            <a
+              href="https://jaworskidev.pl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-renkon-orange transition-colors"
+            >
+              JaworskiDev.pl
+            </a>
           </p>
         </div>
       </div>
