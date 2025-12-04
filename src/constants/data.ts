@@ -4,10 +4,22 @@ import { getAssetPath } from '@/utils/helpers';
 export const services: Service[] = [
   {
     id: 1,
+    slug: 'szlifowanie-marmuru',
     icon: 'fa-gem',
     title: 'Szlifowanie <span class="text-renkon-orange">Marmuru</span>',
     titlePlain: 'Szlifowanie Marmuru',
     description: 'Profesjonalne szlifowanie marmuru przywracające naturalny blask i intensywność koloru.',
+    image: getAssetPath('assets/images/services/marble-grinding-1.webp'),
+    gallery: [
+      {
+        image: getAssetPath('assets/images/services/marble-grinding-1.webp'),
+        description: 'Przed'
+      },
+      {
+        image: getAssetPath('assets/images/services/marble-grinding-2.webp'),
+        description: 'Po'
+      }
+    ],
     features: [
       'Niwelacja klawiszowania - szlif agresywny posadzki na mokro niweluje uskoki między płytkami',
       'Usuwanie zarysowań - kolejne etapy szlifowania zmniejszające głębokość rys',
@@ -17,10 +29,22 @@ export const services: Service[] = [
   },
   {
     id: 2,
+    slug: 'szlifowanie-lastryko',
     icon: 'fa-layer-group',
     title: 'Szlifowanie <span class="text-renkon-orange">Lastryko</span>',
     titlePlain: 'Szlifowanie Lastryko',
     description: 'Specjalistyczne czyszczenie lastryka z wykorzystaniem nowoczesnych technologii.',
+    image: getAssetPath('assets/images/services/terrazzo-grinding-1.webp'),
+    gallery: [
+      {
+        image: getAssetPath('assets/images/services/terrazzo-grinding-1.webp'),
+        description: 'Przed'
+      },
+      {
+        image: getAssetPath('assets/images/services/terrazzo-grinding-2.webp'),
+        description: 'Po'
+      }
+    ],
     features: [
       'Szlifowanie agresywne - często powodujące odsłonięcie kruszywa oraz wypoziomowanie powierzchni',
       'Naprawa pęknięć i ubytków – uzupełnienie masami żywicznymi jak i zarówno cementowymi z odpowiednim kruszywem oraz dopasowanym odcieniem',
@@ -30,10 +54,22 @@ export const services: Service[] = [
   },
   {
     id: 3,
+    slug: 'naprawa-lastryko',
     icon: 'fa-tools',
     title: 'Naprawa Powierzchni <span class="text-renkon-orange">Lastriko</span>',
     titlePlain: 'Naprawa Powierzchni Lastriko',
     description: 'Odbudowa uszkodzonego lastryka ze scaleniem kolorystycznym.',
+    image: getAssetPath('assets/images/services/terrazzo-repair-1.webp'),
+    gallery: [
+      {
+        image: getAssetPath('assets/images/services/terrazzo-repair-1.webp'),
+        description: 'Przed'
+      },
+      {
+        image: getAssetPath('assets/images/services/terrazzo-repair-2.webp'),
+        description: 'Po'
+      }
+    ],
     features: [
       'Ubicia stopni – flekowanie polegające na naprawie krawędzi stopni z ujednoliceniem koloru',
       'Pęknięcia, szczeliny – niwelacja głębokich rys (pęknięć) przez rozcięcie i uzupełnienie z scaleniem koloru',
@@ -43,9 +79,25 @@ export const services: Service[] = [
   },
   {
     id: 4,
+    slug: 'paski-antyposlizgowe',
     icon: 'fa-shoe-prints',
     title: 'Paski Antypoślizgowe',
     description: 'Wykonywanie pasków antypoślizgowych za pomocą groszkowania dla bezpieczeństwa użytkowników.',
+    image: getAssetPath('assets/images/services/anti-slip-1.webp'),
+    gallery: [
+      {
+        image: getAssetPath('assets/images/services/anti-slip-1.webp'),
+        description: 'Estetyczny wygląd'
+      },
+      {
+        image: getAssetPath('assets/images/services/anti-slip-2.webp'),
+        description: 'Odtworzenie Detalu'
+      },
+      {
+        image: getAssetPath('assets/images/services/anti-slip-3.webp'),
+        description: 'Bezpieczeństwo'
+      }
+    ],
     features: [
       'Bezpieczeństwo w ruchu pieszym',
       'Zgodność z normami BHP',
@@ -236,8 +288,8 @@ export const projects: Project[] = [
 ];
 
 export const navLinks = [
-  { id: 'about', label: 'O Nas' },
-  { id: 'services', label: 'Usługi' },
-  { id: 'projects', label: 'Realizacje' },
-  { id: 'references', label: 'Referencje' },
+  { id: 'about', label: 'O Nas', path: '/o-nas' },
+  { id: 'services', label: 'Usługi', path: '/uslugi' },
+  { id: 'projects', label: 'Realizacje', path: '/realizacje' },
+  { id: 'contact', label: 'Kontakt', path: '/kontakt' },
 ];

@@ -1,13 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { navLinks } from '@/constants/data';
-import { scrollToSection } from '@/utils';
 import logo from '/renkon-logo.jpg';
 
 export const Footer: React.FC = () => {
-  const handleNavClick = (id: string) => {
-    scrollToSection(`#${id}`);
-  };
-
   return (
     <footer className="bg-gradient-to-br from-renkon-dark via-renkon-dark-2 to-renkon-dark-3 border-t border-renkon-dark-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -45,12 +41,12 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.id}>
-                  <button
-                    onClick={() => handleNavClick(link.id)}
+                  <Link
+                    to={link.path}
                     className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -61,36 +57,36 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-semibold mb-4">Nasze Usługi</h4>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => handleNavClick('services')}
-                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                <Link
+                  to="/uslugi"
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left block"
                 >
                   Szlifowanie Marmuru
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavClick('services')}
-                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                <Link
+                  to="/uslugi"
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left block"
                 >
                   Szlifowanie Lastryko
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavClick('services')}
-                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                <Link
+                  to="/uslugi"
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left block"
                 >
                   Naprawa Powierzchni Lastriko
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavClick('services')}
-                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left"
+                <Link
+                  to="/uslugi"
+                  className="text-renkon-beige/80 hover:text-renkon-orange transition-colors text-sm text-left block"
                 >
                   Paski Antypoślizgowe
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

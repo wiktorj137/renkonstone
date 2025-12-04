@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui';
-import { scrollToSection } from '@/utils';
 
 export const HeroSection: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <section
       id="home"
@@ -32,7 +34,7 @@ export const HeroSection: React.FC = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <Button
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => navigate('/kontakt')}
               variant="primary"
               size="md"
               icon="fa-phone"
@@ -40,7 +42,7 @@ export const HeroSection: React.FC = () => {
               Zamów Wycenę
             </Button>
             <Button
-              onClick={() => scrollToSection('#services')}
+              onClick={() => navigate('/uslugi')}
               variant="outline"
               size="md"
               icon="fa-list"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { navLinks, services } from '@/constants/data';
-import { scrollToSection } from '@/utils';
 import { useMobileMenu } from '@/hooks';
 import { Button } from '@/components/ui';
 import logo from '/renkon-logo.jpg';
@@ -10,6 +10,7 @@ export const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState<number | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,18 +46,16 @@ export const Header: React.FC = () => {
     };
   }, [isOpen, closeMenu]);
 
-  const handleNavClick = (id: string, serviceId?: number) => {
-    scrollToSection(`#${id}`);
+  const handleNavClick = () => {
     closeMenu();
     setShowServicesDropdown(false);
-    
-    // If a specific service is clicked, expand it
-    if (serviceId !== undefined) {
-      setTimeout(() => {
-        // Dispatch custom event to expand the service
-        window.dispatchEvent(new CustomEvent('expandService', { detail: { serviceId } }));
-      }, 500);
-    }
+  };
+
+  const handleServiceClick = (serviceId: number) => {
+    handleNavClick();
+    // If we are already on services page, we might want to scroll to specific service
+    // But for now, just navigating to services page is enough as per new structure
+    // Ideally, we could pass state to location to scroll to specific service
   };
 
   const handleMouseEnter = () => {
@@ -87,8 +86,9 @@ export const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <button
-              onClick={() => handleNavClick('home')}
+            <Link
+              to="/"
+              onClick={handleNavClick}
               className="flex items-center space-x-4 group"
             >
               <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg overflow-hidden group-hover:scale-105 transition-transform">
@@ -111,7 +111,7 @@ export const Header: React.FC = () => {
                 </h1>
                 <p className="text-sm text-renkon-beige font-medium">Jacek Jarosz</p>
               </div>
-            </button>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
@@ -123,10 +123,16 @@ export const Header: React.FC = () => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <button className="nav-link text-white hover:text-renkon-orange flex items-center px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark" aria-haspopup="true" aria-expanded={showServicesDropdown} aria-controls="services-dropdown">
+                    <Link
+                      to={link.path}
+                      className={`nav-link text-white hover:text-renkon-orange flex items-center px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark ${location.pathname === link.path ? 'text-renkon-orange' : ''}`}
+                      aria-haspopup="true"
+                      aria-expanded={showServicesDropdown}
+                      aria-controls="services-dropdown"
+                    >
                       {link.label}
                       <i className="fas fa-chevron-down ml-2 text-sm transition-transform duration-300 group-hover:rotate-180" aria-hidden="true" />
-                    </button>
+                    </Link>
                     {showServicesDropdown && (
                       <div 
                         className="absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border border-renkon-dark-4 rounded-xl shadow-2xl"
@@ -136,39 +142,42 @@ export const Header: React.FC = () => {
                       >
                         <div className="p-2">
                           {services.map((service) => (
-                            <button
+                            <Link
                               key={service.id}
-                              onClick={() => handleNavClick('services', service.id)}
+                              to={`/uslugi/${service.slug}`}
+                              onClick={handleNavClick}
                               className="flex items-center space-x-3 px-4 py-3 text-sm text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-200 w-full"
                             >
                               <i className={`fas ${service.icon} text-renkon-orange w-4`} aria-hidden="true" />
                               <span>{service.titlePlain || service.title}</span>
-                            </button>
+                            </Link>
                           ))}
                         </div>
                       </div>
                     )}
                   </div>
                 ) : (
-                  <button
+                  <Link
                     key={link.id}
-                    onClick={() => handleNavClick(link.id)}
-                    className="nav-link text-white hover:text-renkon-orange px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark"
+                    to={link.path}
+                    onClick={handleNavClick}
+                    className={`nav-link text-white hover:text-renkon-orange px-4 py-2 rounded-lg transition-all duration-300 hover:bg-renkon-dark-3/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark ${location.pathname === link.path ? 'text-renkon-orange' : ''}`}
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 )
               )}
 
-              <Button
-                onClick={() => handleNavClick('contact')}
-                variant="primary"
-                size="sm"
-                icon="fa-phone"
-                className="ml-4"
-              >
-                Kontakt
-              </Button>
+              <Link to="/kontakt">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  icon="fa-phone"
+                  className="ml-4"
+                >
+                  Kontakt
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -189,25 +198,27 @@ export const Header: React.FC = () => {
           <div className="lg:hidden bg-gradient-to-br from-renkon-dark-2 to-renkon-dark-3 border-t border-renkon-dark-4" id="mobile-menu" role="region" aria-label="Menu mobilne">
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.id}
-                  onClick={() => handleNavClick(link.id)}
-                  className="flex items-center space-x-3 py-3 px-4 text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-300 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark"
+                  to={link.path}
+                  onClick={handleNavClick}
+                  className={`flex items-center space-x-3 py-3 px-4 text-white hover:text-renkon-orange hover:bg-renkon-dark-4/50 rounded-lg transition-all duration-300 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-renkon-orange focus-visible:ring-offset-2 focus-visible:ring-offset-renkon-dark ${location.pathname === link.path ? 'text-renkon-orange' : ''}`}
                 >
                   <i className={`fas fa-${link.id === 'home' ? 'home' : link.id === 'services' ? 'cogs' : link.id === 'about' ? 'building' : link.id === 'references' ? 'quote-right' : link.id === 'projects' ? 'images' : 'envelope'} text-renkon-orange w-5`} aria-hidden="true" />
                   <span>{link.label}</span>
-                </button>
+                </Link>
               ))}
               <div className="border-t border-renkon-dark-4 my-2" />
-              <Button
-                onClick={() => handleNavClick('contact')}
-                variant="primary"
-                size="md"
-                icon="fa-phone"
-                className="w-full"
-              >
-                Kontakt
-              </Button>
+              <Link to="/kontakt" onClick={handleNavClick} className="block w-full">
+                <Button
+                  variant="primary"
+                  size="md"
+                  icon="fa-phone"
+                  className="w-full"
+                >
+                  Kontakt
+                </Button>
+              </Link>
             </div>
           </div>
         )}

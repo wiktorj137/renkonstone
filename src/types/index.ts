@@ -1,10 +1,16 @@
 // Service types
 export interface Service {
   id: number;
+  slug: string;
   icon: string;
   title: string;
   titlePlain?: string; // Plain text version for dropdowns/menus
   description: string;
+  image: string;
+  gallery: {
+    image: string;
+    description: string;
+  }[];
   features: string[];
 }
 
