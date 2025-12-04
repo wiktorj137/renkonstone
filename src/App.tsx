@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Header, Footer } from '@/components/layout';
+import { SEO } from '@/components/SEO';
 import {
   HeroSection,
   ServicesSection,
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">
+      <SEO />
       {/* Scroll Progress Bar */}
       <div className="scroll-progress fixed top-0 left-0 h-1 bg-renkon-orange z-50 transition-all duration-150" />
       
